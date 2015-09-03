@@ -1,0 +1,13 @@
+.clear {
+  clear: both; }
+
+header {
+  background: url(custom/img/green_fibers.png) repeat center; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font: 1em Verdana;
+  background: #efefef url(custom/img/white_carbonfiber.png) repeat center; }
+
+/*# sourceMappingURL=style.css.map */

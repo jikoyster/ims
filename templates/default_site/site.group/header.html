@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<script type="text/javascript" src="{path='custom/js/jquery.min.js'}"></script>
+        <script type="text/javascript" src="{path='custom/js/angular.min.js'}"></script>
+
+		<link rel="stylesheet" href="{path='custom/css/bootstrap.min.css'}" media="all">
+
+        <link rel="stylesheet" type="text/css" href="{stylesheet='site/style'}" media="all">
+        <link rel="stylesheet" href="{path='custom/css/font-awesome.min.css'}" media="all">
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        
+		<header>
+        <div class="container">
+
+        <div class="row">
+            <div class="span3">
+                <div id="sitelogo">
+                    <a href="{path='site_index'}">Inventory<br>Management<br>System</a>
+                </div>
+            </div>
+            <div class="span9">
+                <nav>
+                    <ul>
+                        <li><a href="{path='site_index'}">HOME</a></li>
+                        <li><a href="{path='invoice'}">Invoice</a></li>
+                        <li><a href="{path='warehouse'}">WAREHOUSE MANAGEMENT</a>
+                            <ul>
+                                <li><a href="{path='product'}">Product</a></li>
+                                <li><a href="{path='purchase_order'}">Purchase Order</a>
+                                    <ul>
+                                        <li><a href="{path='purchase_order/receive'}">Receive</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{path='supplier'}">Supplier</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{path='customer'}">Customer</a></li>
+                        <li><a href="#">Reports</a>
+                            <ul>
+                                <li><a href="#">Sales Report</a></li>
+                                <li><a href="#">Inventory</a>
+                                    <ul>
+                                        <li><a href="#">Individual Product</a></li>
+                                        <li><a href="#">Monthly</a></li>
+                                        <li><a href="#">Quarterly</a></li>
+                                        <li><a href="#">Annual</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
+        <div class="clear"></div>
+        </div> <!-- container -->
+	
+        </header>
+        
+        <div class="container">
