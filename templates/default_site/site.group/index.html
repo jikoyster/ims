@@ -1,5 +1,18 @@
 {embed ='site/header'}
-<!-- Add your site or application content here -->
-<p>Hello world! This is HTML5 Boilerplate.</p>
+
+<script src="{path='site/script'}"></script>
+
+<div ng-app="home">
+	<div class="row" ng-controller="homeController as hc">
+		
+		<div class="span6">
+			{{hc.row1}}
+		</div>
+		
+		<div class="span6">
+			{{hc.row2}}
+		</div>
+	</div>
+</div>
 
 {embed ='site/footer'}

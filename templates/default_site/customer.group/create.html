@@ -1,0 +1,42 @@
+{embed="site/header"}
+
+{if logged_in}
+
+{exp:channel:form channel="customer" return="customer"}
+
+	<div>
+		<label for="Name">Customer Name</label>
+		<input type="text" name="title">
+	</div>
+
+	<div>
+		<label for="Address">Address</label>
+		{field:customer_address}
+	</div>
+	<div>
+		<label for="Contact">Contact<br> <small>{instructions:contact}</small></label>
+		{field:customer_contact}
+	</div>
+
+<hr>
+
+<p>Date <br> <input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25"></p>
+
+{status_menu}
+<p>Status<br>
+	<select name="status">
+		{select_options}
+	</select>
+</p>
+{/status_menu}
+
+<input type="submit" value="Submit" class="btn btn-danger">
+
+{/exp:channel:form}
+
+
+{if:else}
+	{embed='site/not_logged'}
+{/if}
+
+{embed="site/footer"}

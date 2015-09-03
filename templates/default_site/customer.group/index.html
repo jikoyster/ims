@@ -1,0 +1,33 @@
+{embed ='site/header'}
+<script src="{path='customer/script'}"></script>
+
+<section ng-app="customer">
+	
+{if logged_in}
+<h5><a class="btn btn-new" href="{path='customer/create'}">Add New Customer</a></h5>
+{/if}
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Customer Name</th>
+      <th class="alignLeft">Address</th>
+      <th class="alignLeft">Contact</th>
+      <th>Total Purchases</th>
+    </tr>
+  </thead>
+  <tbody>
+    {exp:channel:entries channel="customer"}
+    <tr>
+      <td class="alignLeft"><a href="{path='customer/update/{entry_id}'}">{title}</a></td>
+      <td class="alignLeft">{customer_address}</td>
+      <td class="alignLeft">{customer_contact}</td>
+      <td>{total_purchases}</td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+</table>
+
+</section>
+
+{embed ='site/footer'}

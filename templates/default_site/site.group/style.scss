@@ -6,11 +6,69 @@ $secondaryColor-hover: #344A58;
 $lightColor: #efefef;
 
 .clear{
-	clear: both;
+	clear: both
+}
+a:active, a:focus{
+	text-decoration: none;
+	color: $baseColor;
+}
+.btn{
+	margin-bottom: 10px;
+}
+small{
+	font-size: .7em;
+	font-style: italic;
+}
+input[type=radio]{
+	margin-top: 0;
+}
+.floatRight{
+	float: right;
+}
+.floatLeft{
+	float: left;
+}
+.ta--right, .alignRight, .inputRight input{
+	text-align: right !important;
+}
+.ta--left, .alignLeft, .inputLeft input{
+	text-align: left !important;
+}
+.widthBig{
+	width: 300px;
+	min-width: 300px;
+}
+.widthMedium{
+	width: 150px;
+	min-width: 150px;
+}
+.widthSmall{
+	width: 100px;
+	min-width: 100px;
+}
+.widthTiny{
+	width: 50px;
+	min-width: 50px;
+}
+.fontWeightBold{
+	font-weight: bold;
 }
 
-header{
-	background: url(custom/img/green_fibers.png) repeat center;
+.btn-new{
+	margin-bottom: 10px;
+	float: right;
+
+	a{
+		color: $secondaryColor;
+	}
+	a:hover{
+		text-decoration: none;
+	}
+}
+label{
+	display: inline-block;
+	width: 150px;
+	vertical-align: top;
 }
 
 html, body{
@@ -19,3 +77,143 @@ html, body{
 	font: 1em $mainFont;
 	background: $lightColor url(custom/img/white_carbonfiber.png) repeat center;
 }
+
+header{
+	background: $baseColor url(custom/img/green_fibers.png) repeat center;
+	margin-bottom: 20px;
+	padding: 10px;
+	color: white;
+
+	a{ 
+		color: white;
+	}
+	a:hover{ 
+		color: white; 
+		text-decoration: none; 
+	}
+
+	#sitelogo{
+		font-size: 1.5em;
+		font-weight: bold;
+
+		a:hover{ 
+			color: #ccc;
+			text-decoration: none;
+			}
+	}
+
+	nav{
+		margin: 0;
+		padding: 10px;
+
+		ul{
+			margin: 0;
+			padding: 0;
+			transition: all 500ms;
+
+
+			li{
+				display: inline-block;
+				vertical-align: top;
+				
+				position: relative;
+
+				a{
+					text-transform: uppercase;
+					background: $secondaryColor;
+					padding: 5px;
+					border-radius: 5px;
+				}
+
+				ul{
+					position: absolute;
+					top: 24px;
+					visibility: hidden;
+					opacity: 0;
+
+					li{
+						a{
+							display: block;
+							width: 150px;
+							background: $secondaryColor-hover;
+							border-radius: 0;
+						}
+
+						ul{
+							top: 0;
+							left: 160px;
+						}
+					}//li:lvl2
+					li:hover > a{
+						background: $secondaryColor;
+					}
+				}//ul:lvl2
+			}//li
+			li:hover{
+				a{
+					background: $secondaryColor-hover;
+				}
+			}
+			li:hover > ul{
+				visibility: visible;
+				opacity: 1;
+			}
+		}//ul
+
+	}//nav
+}//header
+
+footer{
+	margin: 50px 0 10px;
+
+	.footer--text{
+		text-align: center;
+	}
+}//footer
+
+//*********************
+table.tbl_display{
+	clear: both;
+	width: 100%;
+	overflow: auto;
+	background: white;
+	border-color: $lightColor;
+
+	input[type=checkbox]{
+		float: none;
+		margin: 0;
+	}
+
+	thead{
+		th{
+			padding: 10px;
+			border-color: $lightColor;
+		}
+		th.checkbox{
+			width: 30px;
+		}
+		th.product_name{
+			width: 180px;
+		}
+	}//thead
+
+	tbody{
+		tr{
+			td{
+				padding: 5px;
+				text-align: center;
+				border-color: $lightColor;
+			}
+			td.checkbox{
+				width: 30px;
+			}
+			td.product_name{
+				text-align: left;
+				width: 400px;
+			}
+		}
+		tr:hover{
+			background: $lightColor;
+		}
+	}
+}//table

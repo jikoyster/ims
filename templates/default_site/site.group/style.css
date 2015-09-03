@@ -1,13 +1,154 @@
 .clear {
   clear: both; }
 
-header {
-  background: url(custom/img/green_fibers.png) repeat center; }
+a:active, a:focus {
+  text-decoration: none;
+  color: #303d3f; }
+
+.btn {
+  margin-bottom: 10px; }
+
+small {
+  font-size: .7em;
+  font-style: italic; }
+
+input[type=radio] {
+  margin-top: 0; }
+
+.floatRight {
+  float: right; }
+
+.floatLeft {
+  float: left; }
+
+.ta--right, .alignRight, .inputRight input {
+  text-align: right !important; }
+
+.ta--left, .alignLeft, .inputLeft input {
+  text-align: left !important; }
+
+.widthBig {
+  width: 300px;
+  min-width: 300px; }
+
+.widthMedium {
+  width: 150px;
+  min-width: 150px; }
+
+.widthSmall {
+  width: 100px;
+  min-width: 100px; }
+
+.widthTiny {
+  width: 50px;
+  min-width: 50px; }
+
+.fontWeightBold {
+  font-weight: bold; }
+
+.btn-new {
+  margin-bottom: 10px;
+  float: right; }
+  .btn-new a {
+    color: #122736; }
+  .btn-new a:hover {
+    text-decoration: none; }
+
+label {
+  display: inline-block;
+  width: 150px;
+  vertical-align: top; }
 
 html, body {
   margin: 0;
   padding: 0;
   font: 1em Verdana;
   background: #efefef url(custom/img/white_carbonfiber.png) repeat center; }
+
+header {
+  background: #303d3f url(custom/img/green_fibers.png) repeat center;
+  margin-bottom: 20px;
+  padding: 10px;
+  color: white; }
+  header a {
+    color: white; }
+  header a:hover {
+    color: white;
+    text-decoration: none; }
+  header #sitelogo {
+    font-size: 1.5em;
+    font-weight: bold; }
+    header #sitelogo a:hover {
+      color: #ccc;
+      text-decoration: none; }
+  header nav {
+    margin: 0;
+    padding: 10px; }
+    header nav ul {
+      margin: 0;
+      padding: 0;
+      transition: all 500ms; }
+      header nav ul li {
+        display: inline-block;
+        vertical-align: top;
+        position: relative; }
+        header nav ul li a {
+          text-transform: uppercase;
+          background: #122736;
+          padding: 5px;
+          border-radius: 5px; }
+        header nav ul li ul {
+          position: absolute;
+          top: 24px;
+          visibility: hidden;
+          opacity: 0; }
+          header nav ul li ul li a {
+            display: block;
+            width: 150px;
+            background: #344A58;
+            border-radius: 0; }
+          header nav ul li ul li ul {
+            top: 0;
+            left: 160px; }
+          header nav ul li ul li:hover > a {
+            background: #122736; }
+      header nav ul li:hover a {
+        background: #344A58; }
+      header nav ul li:hover > ul {
+        visibility: visible;
+        opacity: 1; }
+
+footer {
+  margin: 50px 0 10px; }
+  footer .footer--text {
+    text-align: center; }
+
+table.tbl_display {
+  clear: both;
+  width: 100%;
+  overflow: auto;
+  background: white;
+  border-color: #efefef; }
+  table.tbl_display input[type=checkbox] {
+    float: none;
+    margin: 0; }
+  table.tbl_display thead th {
+    padding: 10px;
+    border-color: #efefef; }
+  table.tbl_display thead th.checkbox {
+    width: 30px; }
+  table.tbl_display thead th.product_name {
+    width: 180px; }
+  table.tbl_display tbody tr td {
+    padding: 5px;
+    text-align: center;
+    border-color: #efefef; }
+  table.tbl_display tbody tr td.checkbox {
+    width: 30px; }
+  table.tbl_display tbody tr td.product_name {
+    text-align: left;
+    width: 400px; }
+  table.tbl_display tbody tr:hover {
+    background: #efefef; }
 
 /*# sourceMappingURL=style.css.map */
