@@ -1,0 +1,47 @@
+{embed="site/header"}
+
+<section class="cellpad" ng-app>
+
+{if logged_in}
+
+{exp:channel:form channel="price_code" return="{segment_1}"}
+<div>
+
+<h1 class="pagetitle">New Price Code</h1>
+
+	<div>
+		<label for="Price Code">Price Code</label>
+		<input type="text" name="title" ng-model="urlTitle">
+		<input type="hidden" name="url_title" value="{{'pc_'+urlTitle}}">
+	</div>
+
+	<div>
+		<label for="Actual Price">Actual Price</label>
+		{field:actual_price}
+	</div>
+	
+
+<hr>
+
+<p>Date <br> <input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25"></p>
+
+{status_menu}
+<p>Status<br>
+	<select name="status">
+		{select_options}
+	</select>
+</p>
+{/status_menu}
+
+<input type="submit" value="Submit" class="btn btn-danger">
+
+</div>
+{/exp:channel:form}
+
+
+{if:else}
+	{embed='site/not_logged'}
+{/if}
+
+</section>
+{embed="site/footer"}

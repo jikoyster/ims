@@ -1,0 +1,137 @@
+{embed="site/header"}
+<script src="{path='product/script'}"></script>
+<link rel="stylesheet" href="{path='product/style'}">
+
+<section ng-app="product">
+
+{if logged_in}
+
+{exp:channel:form channel="product" return="{segment_1}" entry_id="{segment_3}"}
+<div>
+
+<h1 class="pagetitle cellpad">New Product</h1>
+
+<div class="row">
+	<div class="span6"><div class="cellpad">
+		<div>
+			<label for="Name">Product Name</label>
+			<input type="text" name="product_name" value="{product_name}">
+			<input type="hidden" name="title" value="{title}">
+		</div>
+
+		<div>
+			<label for="Product Code">Product Code</label>
+			{field:product_code}
+		</div>
+		<div>
+			<label for="In Stock">In Stock</label>
+			{field:in_stock}
+		</div>
+		<div>
+			<label for="Critical Level">Critical Level</label>
+			{field:critical_level}
+		</div>
+	</div></div>
+	<!-- col1 -->
+	<div class="span6 category_option"><div class="cellpad">
+		
+		<div class="cat_section">
+			<label for="Product Category">Product Category</label>
+			{categories show_group="1"}
+	           <label class="option_label"><input type="checkbox" name="category[]" 
+	           	value="{category_id}"{checked}>{category_name}</label>
+	        {/categories}
+		</div>
+
+		<div class="cat_section">
+			<label for="Warehouse">Warehouse</label>
+			{field:warehouse}
+		</div>
+
+	</div></div>
+	<!-- col2 -->
+</div>
+<!--  end of first block -->
+
+<hr>
+<div class="row" ng-controller="priceController as priceCtrl">
+	<div class="span6"><div class="cellpad">
+		
+		<div>
+			<label for="Company Price">Company Price</label>
+			<input type="text" name="company_price" 
+				ng-keyup="priceCtrl.set_prices()"
+				ng-click="priceCtrl.checkDefault('company_price')"
+				value="{company_price}">
+		</div>
+		<div>
+			<label for="Less">Less <small>({instructions:less})</small> </label>
+			<input type="text" name="less" 
+				ng-keyup="priceCtrl.set_net_price()"
+				value="{less}">
+		</div>
+		<div>
+			<label for="Wholesale Rate">Wholesale Rate <small>({instructions:wholesale_rate})</small></label>
+			<input type="text" name="wholesale_rate" 
+				ng-keyup="priceCtrl.set_wholesale_price()"
+				value="{wholesale_rate}">
+		</div>
+		<div>
+			<label for="Retail Rate">Retail Rate <small>({instructions:retail_rate})</small></label>
+			<input type="text" name="retail_rate" 
+				ng-keyup="priceCtrl.set_retail_price()"
+				value="{retail_rate}">
+		</div>
+
+	</div></div>
+	<!-- col1 -->
+	<div class="span6"><div class="cellpad">
+
+		<div> <br><br> </div>
+		<div ng-init="priceCtrl.net_price = ('{net_price}'  | num )">
+			<label for="Net Price">Net Price</label>
+			<input type="text" name="net_price" 
+				ng-value="(priceCtrl.net_price | number:2)">
+		</div> 
+		<div ng-init="priceCtrl.wholesale_price = ('{wholesale_price}' | num)">
+			<label for="Wholesale Price">Wholesale Price</label>
+			<input type="text" name="wholesale_price" 
+				ng-value="(priceCtrl.wholesale_price | number:2)">
+		</div>
+		<div ng-init="priceCtrl.retail_price = ('{retail_price}' | num)">
+			<label for="Retail Price">Retail Price</label>
+			<input type="text" name="retail_price" 
+				ng-value="(priceCtrl.retail_price | number:2)">
+		</div>
+
+	</div></div>
+	<!-- col2 -->
+</div>
+<!-- end of 2nd block -->
+
+	<hr>
+	<div class="cellpad">
+		
+		<p>Date <br> <input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25"></p>
+
+		{status_menu}
+		<p>Status<br>
+			<select name="status">
+				{select_options}
+			</select>
+		</p>
+		{/status_menu}
+
+		<input type="submit" value="Submit" class="btn btn-danger">	
+	</div>
+
+</div>
+{/exp:channel:form}
+
+
+{if:else}
+	{embed='site/not_logged'}
+{/if}
+
+</section>
+{embed="site/footer"}

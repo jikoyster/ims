@@ -1,0 +1,23 @@
+.category_option .cat_section {
+  margin-bottom: 20px; }
+  .category_option .cat_section label:first-child {
+    display: block;
+    font-size: 1.2em !important;
+    width: 100%;
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    text-align: left; }
+.category_option .option_label {
+  width: 130px;
+  display: inline-block;
+  font-size: 1em !important;
+  text-align: left; }
+.category_option input[type=checkbox], .category_option input[type=radio] {
+  margin-right: 5px;
+  margin-bottom: 7px; }
+.category_option input[type=radio] {
+  height: 25px;
+  float: left; }
+
+/*# sourceMappingURL=style.css.map */

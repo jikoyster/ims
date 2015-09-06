@@ -1,3 +1,80 @@
+body.off-alert header {
+  margin-top: 0; }
+
+body.on-alert header {
+  margin-top: 60px; }
+
+.alertmsg {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+  background: red;
+  padding: 10px;
+  color: yellow;
+  font-weight: bold;
+  animation: alertmsg 3s infinite; }
+  .alertmsg .fa-exclamation-triangle {
+    color: yellow; }
+
+@keyframes alertmsg {
+  0% {
+    background: #f00; }
+  50% {
+    background: #600; }
+  100% {
+    background: #f00; } }
+.ui-datepicker-header,
+.ui-datepicker-calendar {
+  background: white;
+  padding: 10px;
+  display: block;
+  border: 1px solid #303d3f;
+  text-align: center; }
+
+.ui-datepicker-header {
+  border-width: 1px 1px 0 1px; }
+
+.ui-datepicker-calendar {
+  border-width: 0 1px 1px 1px; }
+
+.ui-datepicker-prev {
+  float: left; }
+
+.ui-datepicker-next {
+  float: right; }
+
+.ui-datepicker-prev, .ui-datepicker-next {
+  font-size: 11px; }
+
+.ui-datepicker-title {
+  text-align: center; }
+
+.ui-state-highlight {
+  background: #ccc;
+  padding: 3px;
+  border-radius: 5px;
+  color: white; }
+
+.WysiHat-editor {
+  font-family: Verdana;
+  font-size: 1.2em !important;
+  font-weight: 100; }
+
+.container-inner {
+  background: white;
+  padding: 10px 0; }
+
+.pagetitle {
+  font-size: 2em;
+  color: #122736;
+  border-bottom: 3px solid #122736;
+  margin-bottom: 50px;
+  padding-bottom: 10px; }
+
+.cellpad {
+  padding: 5px; }
+
 .clear {
   clear: both; }
 
@@ -48,7 +125,8 @@ input[type=radio] {
 
 .btn-new {
   margin-bottom: 10px;
-  float: right; }
+  float: right;
+  font-weight: bold; }
   .btn-new a {
     color: #122736; }
   .btn-new a:hover {
@@ -56,8 +134,8 @@ input[type=radio] {
 
 label {
   display: inline-block;
-  width: 150px;
-  vertical-align: top; }
+  width: 180px;
+  vertical-align: middle; }
 
 html, body {
   margin: 0;
@@ -67,7 +145,6 @@ html, body {
 
 header {
   background: #303d3f url(custom/img/green_fibers.png) repeat center;
-  margin-bottom: 20px;
   padding: 10px;
   color: white; }
   header a {
@@ -75,6 +152,8 @@ header {
   header a:hover {
     color: white;
     text-decoration: none; }
+  header a:active, header a:focus {
+    color: white; }
   header #sitelogo {
     font-size: 1.5em;
     font-weight: bold; }
@@ -91,6 +170,7 @@ header {
       header nav ul li {
         display: inline-block;
         vertical-align: top;
+        margin-bottom: 15px;
         position: relative; }
         header nav ul li a {
           text-transform: uppercase;
@@ -102,14 +182,16 @@ header {
           top: 24px;
           visibility: hidden;
           opacity: 0; }
-          header nav ul li ul li a {
-            display: block;
-            width: 150px;
-            background: #344A58;
-            border-radius: 0; }
-          header nav ul li ul li ul {
-            top: 0;
-            left: 160px; }
+          header nav ul li ul li {
+            margin-bottom: 0; }
+            header nav ul li ul li a {
+              display: block;
+              width: 150px;
+              background: #344A58;
+              border-radius: 0; }
+            header nav ul li ul li ul {
+              top: 0;
+              left: 160px; }
           header nav ul li ul li:hover > a {
             background: #122736; }
       header nav ul li:hover a {
@@ -119,7 +201,7 @@ header {
         opacity: 1; }
 
 footer {
-  margin: 50px 0 10px; }
+  margin: 10px auto; }
   footer .footer--text {
     text-align: center; }
 
@@ -143,6 +225,9 @@ table.tbl_display {
     padding: 5px;
     text-align: center;
     border-color: #efefef; }
+    table.tbl_display tbody tr td .remove-icon {
+      font-size: 1.2em !important;
+      color: red; }
   table.tbl_display tbody tr td.checkbox {
     width: 30px; }
   table.tbl_display tbody tr td.product_name {
@@ -150,5 +235,20 @@ table.tbl_display {
     width: 400px; }
   table.tbl_display tbody tr:hover {
     background: #efefef; }
+  table.tbl_display tfoot.note td {
+    font-size: .9em;
+    text-align: right;
+    padding-left: 10px;
+    color: brown; }
+
+section label, section input, section table {
+  font-size: 1em !important; }
+
+section label {
+  float: left;
+  margin-right: 10px;
+  margin-top: 5px;
+  text-align: right;
+  line-height: 13px; }
 
 /*# sourceMappingURL=style.css.map */

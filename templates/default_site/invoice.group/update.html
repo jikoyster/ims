@@ -1,0 +1,82 @@
+{embed="site/header"}
+<script src="{path='invoice/script'}"></script>
+<section ng-app="invoice">
+
+{if logged_in}
+
+{exp:channel:form channel="invoice" return="{segment_1}" entry_id="{segment_3}"}
+<div>
+	<h1 class="pagetitle cellpad">New Invoice</h1>
+	
+	<div>
+		<label for="Type">Type</label>
+		{field:invoice_type}
+	</div>
+
+	<div ng-init="inv_title = '{title}'">
+		<label for="Name">Invoice Number</label>
+		<input type="text" name="title" ng-model="inv_title">
+		<input type="hidden" name="url_title" value="{{'inv_'+inv_title}}">
+	</div>
+
+	<div>
+		<label for="Customer">Customer</label>
+		{field:customer}
+	</div>
+	<div class="cellpad">
+		{field:invoice_product_list}
+	</div>
+
+<hr>
+<div class="cellpad alignRight" ng-controller="computationController as ctrl">
+	<div ng-init="ctrl.subtotal = {invoice_subtotal}">
+		Subtotal 
+		<input class="alignRight" type="text" name="invoice_subtotal" 
+			value="{{ctrl.subtotal | number:2}}">
+	</div>
+	<div ng-init="ctrl.tax_rate = {invoice_tax_rate}">
+		Tax Rate ({instructions:invoice_tax_rate}) 
+		<input class="alignRight" type="text" name="invoice_tax_rate" 
+			value="{{ctrl.tax_rate}}"
+			ng-keyup="ctrl.compute_tax_amount(); ctrl.compute_total_amount()">
+	</div>
+	<div ng-init="ctrl.tax_amount = {invoice_tax_amount}">
+		Tax Amount 
+		<input class="alignRight" type="text" name="invoice_tax_amount" 
+			value="{{ctrl.tax_amount | number:2}}"
+			ng-keyup="ctrl.compute_total_amount()">
+	</div>
+	<div ng-init="ctrl.total_amount = {invoice_total_amount}">
+		Total Amount 
+		<input class="alignRight" type="text" name="invoice_total_amount" 
+			value="{{ctrl.total_amount | number:2}}">
+	</div>
+</div>
+<hr>
+
+<div class="cellpad">
+	
+	<p>Date <br> <input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25"></p>
+
+	{status_menu}
+	<p>Status<br>
+		<select name="status">
+			{select_options}
+		</select>
+	</p>
+	{/status_menu}
+
+	<input type="submit" value="Submit" class="btn btn-danger">
+
+</div>
+
+</div>
+{/exp:channel:form}
+
+
+{if:else}
+	{embed='site/not_logged'}
+{/if}
+
+</section>
+{embed="site/footer"}

@@ -1,0 +1,51 @@
+{embed ='site/header'}
+<script src="{path='warehouse/script'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
+
+<section class="cellpad" ng-app="warehouse">
+  
+{if logged_in}
+<a class="btn btn-new" href="{path='warehouse/create'}">Add New Warehouse</a>
+{/if}
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Warehouse Name</th>
+      <th class="alignLeft">Address</th>
+      <th class="alignLeft">Contact</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="warehouseController as sc">
+    {exp:channel:entries channel="warehouse"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='warehouse/update/{entry_id}'}">{title}</a></td>
+      <td class="alignLeft">{warehouse_address}</td>
+      <td class="alignLeft">{warehouse_contact}</td>
+      <td class="alignCenter widthSmall ">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="sc.buttonOn('row-{entry_id}')"
+                        ng-mouseout="sc.buttonOff('row-{entry_id}')"
+                        ng-click="sc.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='5'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+
+{embed ='site/footer'}

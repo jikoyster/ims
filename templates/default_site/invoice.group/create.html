@@ -1,25 +1,30 @@
 {embed="site/header"}
 
-<section>
+<section ng-app>
 
 {if logged_in}
 
-{exp:channel:form channel="customer" return="{segment_1}"}
+{exp:channel:form channel="invoice" return="{segment_1}"}
 <div>
-	<h1 class="pagetitle cellpad">New Customer</h1>
-
+	<h1 class="pagetitle cellpad">New Invoice</h1>
+	
 	<div>
-		<label for="Name">Customer Name</label>
-		<input type="text" name="title">
+		<label for="Type">Type</label>
+		{field:invoice_type}
 	</div>
 
 	<div>
-		<label for="Address">Address</label>
-		{field:customer_address}
+		<label for="Name">Invoice Number</label>
+		<input type="text" name="title" ng-model="urlTitle">
+		<input type="hidden" name="url_title" value="{{'inv_'+urlTitle}}">
 	</div>
+
 	<div>
-		<label for="Contact">Contact<br> <small>{instructions:customer_contact}</small></label>
-		{field:customer_contact}
+		<label for="Customer">Customer</label>
+		{field:customer}
+	</div>
+	<div class="cellpad">
+		{field:invoice_product_list}
 	</div>
 
 <hr>

@@ -1,0 +1,67 @@
+<!-- adding libraries -->
+<script src="{path='custom/js/jquery.min.js'}"></script>
+<!-- the styles -->
+<style>
+	.customConfirm-bg{
+		background: rgba(0,0,0,.5);
+		min-width: 100%;
+		min-height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+	.customConfirm{
+		position: fixed;
+		transition: all 500ms;
+		opacity: 0;
+		min-height: 10px;
+		padding: 10px;
+		background: white;
+		font-size: 1em;
+		box-shadow: 0 0 10px rgba(0,0,0,0.3);
+		border-radius: 3px;
+	}
+	.close-icon{
+		position: absolute;
+		right: -5px;
+		top: -10px;
+		font-size: 2em;
+		color: red;
+	}
+	.alignCenter{
+		text-align: center;
+	}
+	.alignCenter > button{
+		margin-top: 10px;
+	}
+</style>
+<!-- the script -->
+<script type="text/javascript">
+	$('.customConfirm').css({
+		top 	: ( $(document).height() - $('.customConfirm').height() ) /2 + 'px',
+		left	: ( $(document).width() - $('.customConfirm').width() ) /2 + 'px',
+		opacity	: 1
+	});
+	$('.close-icon, .close-button').bind('click', function(){
+		closeThisDialog();
+	});
+	$('.customConfirm-bg').bind('click', function(){
+		closeThisDialog();
+	});
+	function closeThisDialog(){
+		$('.customConfirm-bg').hide('fast'); 
+		$('.customConfirm').hide('fast');
+	}
+</script>
+
+
+
+<div class="customConfirm-bg"></div>
+<div class="customConfirm">
+	<a href="#close" class="close-icon"><i class="fa fa-times-circle"></i></a>
+	<br>
+	<div class="msg">
+		<?php echo $_GET['msg']; ?>
+	</div>
+	<div class="alignCenter close-button"><button class="btn">OK</button></div>
+</div>

@@ -1,0 +1,59 @@
+{embed ='site/header'}
+<script src="{path='invoice/script'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
+
+<section class="cellpad" ng-app="invoice">
+	
+{if logged_in}
+<a class="btn btn-new" href="{path='invoice/create'}">Add New Invoice</a>
+{/if}
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Invoice Name</th>
+      <th class="alignLeft">Type</th>
+      <th class="alignLeft">Customer</th>
+      <th class="alignRight">Total Amount</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="invoiceController as ctrl">
+    {exp:channel:entries channel="invoice"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='invoice/update/{entry_id}'}">{title}</a></td>
+      <td class="alignLeft">{invoice_type}</td>
+      <td class="alignLeft">{customer:title}</td>
+      <td class="alignRight">
+        {if invoice_total_amount == ''} 
+          {{0 | number:2 }} 
+        {if:else} 
+          {{ ('{invoice_total_amount}' | num ) | number:2}}
+        {/if}
+      </td>
+      <td class="alignCenter widthSmall">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="ctrl.buttonOn('row-{entry_id}')"
+                        ng-mouseout="ctrl.buttonOff('row-{entry_id}')"
+                        ng-click="ctrl.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='5'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+
+{embed ='site/footer'}

@@ -1,0 +1,47 @@
+{embed="site/header"}
+
+<section class="cellpad">
+
+{if logged_in}
+
+{exp:channel:form channel="supplier" entry_id="{segment_3}" return="{segment_1}"}
+<div>
+	<h1 class="pagetitle">Supplier Update</h1>
+	
+	<div>
+		<label for="Name">Supplier Name</label>
+		<input type="text" name="title" value="{title}">
+	</div>
+
+	<div>
+		<label for="Address">Address</label>
+		{field:supplier_address}
+	</div>
+	<div>
+		<label for="Contact">Contact<br> <small>{instructions:contact}</small></label>
+		{field:supplier_contact}
+	</div>
+
+<hr>
+
+<p>Date <br> <input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25"></p>
+
+{status_menu}
+<p>Status<br>
+	<select name="status">
+		{select_options}
+	</select>
+</p>
+{/status_menu}
+
+<input type="submit" value="Submit" class="btn btn-danger">
+</div>
+{/exp:channel:form}
+
+
+{if:else}
+	{embed='site/not_logged'}
+{/if}
+
+</section>
+{embed="site/footer"}

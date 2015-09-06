@@ -4,22 +4,22 @@
 
 {if logged_in}
 
-{exp:channel:form channel="customer" return="{segment_1}"}
+{exp:channel:form channel="warehouse" return="{segment_1}" entry_id="{segment_3}"}
 <div>
-	<h1 class="pagetitle cellpad">New Customer</h1>
+	<h1 class="pagetitle cellpad">New Warehouse</h1>
 
 	<div>
-		<label for="Name">Customer Name</label>
-		<input type="text" name="title">
+		<label for="Name">Warehouse Name</label>
+		<input type="text" name="title" value="{title}">
 	</div>
 
 	<div>
 		<label for="Address">Address</label>
-		{field:customer_address}
+		{field:warehouse_address}
 	</div>
 	<div>
-		<label for="Contact">Contact<br> <small>{instructions:customer_contact}</small></label>
-		{field:customer_contact}
+		<label for="Contact">Contact<br> <small>{instructions:contact}</small></label>
+		{field:warehouse_contact}
 	</div>
 
 <hr>

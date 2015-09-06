@@ -1,0 +1,99 @@
+{embed="site/header"}
+
+<section class="critical_level_page" ng-app>
+  
+<?php $ctr = 0; ?>
+<h1 class="pagetitle cellpad">Critical Level Products:</h1>
+
+<form id="Critical_Products_Form" action="{path='purchase_order/create'}" method="post">
+<!-- form expiration -->
+<input type="hidden" name="XID" value="{XID_HASH}" /> 
+<!-- form expiration -->
+
+<div class="cellpad">
+<table class="tbl_display" border='1'>
+  <thead>
+    <th class="checkbox"></th>
+    <th class="alignLeft">Product Name</th>
+    <th>Product Code</th>
+    <th>Critical Level</th>
+    <th>In Stock</th>
+    <th>Company Price</th>
+  </thead>
+  <tbody>
+    {exp:channel:entries channel="product"}
+
+      <?php if( {in_stock} <= {critical_level} ):
+        $ctr++; ?>
+        <tr class="critical_level_row">
+          <td class="checkbox">
+            <input type="checkbox" name="addToPO">
+            <input type="hidden" name="entry_id" value="{entry_id}">
+          </td>
+          <td class="product_name alignLeft">{product_name}</td>
+          <td class="product_code">{product_code}</td>
+          <td class="critical_level">{critical_level}</td>
+          <td class="in_stock">{in_stock}</td>
+          <td class="company_price alignRight">{{ {company_price} | number:2}}</td>
+        </tr>
+      <?php endif; ?>
+
+    {/exp:channel:entries}
+  </tbody>
+</table>
+</div>
+
+<input type="hidden" name="final_critical_products">
+<div class="floatRight cellpad">
+  <input type="submit" class="btn btn-addToPO" value="Add To PO">
+</div>
+<!-- <button class="btn btn-addToPO" onclick="make_order()">Add To PO</button> -->
+
+</form>
+</section><!-- /critical_level_page -->
+
+<script>
+var critical_level_products = [];
+
+  $('tr').click(function(){
+    $(this).find('input[type=checkbox]').attr('checked', function(){
+      if( $(this).attr('checked') ){
+        $(this).prop('checked', false);
+        $(this).closest('tr').removeClass('setToPO');
+      }else{
+        $(this).prop('checked', true);
+        $(this).closest('tr').addClass('setToPO');
+      }
+      return !$(this).attr('checked');  
+    });
+  });
+
+  $('#Critical_Products_Form').submit(function(){
+    make_order();
+    console.log( $('input[name=final_critical_products]').val() );
+    return false;
+  });
+
+
+  function make_order(){
+    nRows = $('.critical_level_page table tbody tr.setToPO').size();
+    // console.log('size: '+ nRows);
+    critical_level_products = [];
+
+    for(var i=0; i<nRows; i++){
+      critical_level_products[i] = {
+        entry_id    : $('.critical_level_page tbody tr.setToPO:eq('+i+')').find('input[name=entry_id]').val(),
+        product_name  : $('.critical_level_page tbody tr.setToPO:eq('+i+')').find('.product_name').html(),
+        product_code  : $('.critical_level_page tbody tr.setToPO:eq('+i+')').find('.product_code').html(),
+        in_stock    : $('.critical_level_page tbody tr.setToPO:eq('+i+')').find('.in_stock').html(),
+        critical_level  : $('.critical_level_page tbody tr.setToPO:eq('+i+')').find('.critical_level').html(),
+        company_price : $('.critical_level_page tbody tr.setToPO:eq('+i+')').find('.company_price').html(),
+      };
+    }
+
+    criticals = JSON.stringify( critical_level_products );
+    $('input[name=final_critical_products]').val(criticals);
+  }
+</script>
+
+{embed="site/footer"}

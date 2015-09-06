@@ -1,0 +1,55 @@
+{embed ='site/header'}
+<script src="{path='product/script'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
+
+<section class="cellpad" ng-app="product">
+  
+{if logged_in}
+<a class="btn btn-new" href="{path='product/create'}">Add New Product</a>
+{/if}
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Product Name</th>
+      <th class="alignLeft">Product Code</th>
+      <th class="alignLeft">Warehouse</th>
+      <th class="alignLeft">In Stock</th>
+      <th class="alignLeft">Critical Level</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="productController as sc">
+    {exp:channel:entries channel="product"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='product/update/{entry_id}'}">{title}</a></td>
+      <td class="alignLeft widthMedium">{product_code}</td>
+      <td class="alignLeft widthMedium"><a href="{path='warehouse/update/{warehouse:entry_id}'}">{warehouse:title}</a></td>
+      <td class="alignLeft widthSmall">{in_stock}</td>
+      <td class="alignLeft widthSmall">{critical_level}</td>
+      <td class="alignCenter widthSmall ">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="sc.buttonOn('row-{entry_id}')"
+                        ng-mouseout="sc.buttonOff('row-{entry_id}')"
+                        ng-click="sc.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='6'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+
+{embed ='site/footer'}

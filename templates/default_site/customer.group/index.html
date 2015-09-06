@@ -1,10 +1,14 @@
 {embed ='site/header'}
 <script src="{path='customer/script'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
 
-<section ng-app="customer">
+<section class="cellpad" ng-app="customer">
 	
 {if logged_in}
-<h5><a class="btn btn-new" href="{path='customer/create'}">Add New Customer</a></h5>
+<a class="btn btn-new" href="{path='customer/create'}">Add New Customer</a>
 {/if}
 
 <table border='1' class="tbl_display">
@@ -13,19 +17,41 @@
       <th class="alignLeft">Customer Name</th>
       <th class="alignLeft">Address</th>
       <th class="alignLeft">Contact</th>
-      <th>Total Purchases</th>
+      <th class="alignRight">Total Purchases</th>
+      <th class="widthSmall"></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody ng-controller="customerController as cc">
     {exp:channel:entries channel="customer"}
-    <tr>
+    <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='customer/update/{entry_id}'}">{title}</a></td>
       <td class="alignLeft">{customer_address}</td>
       <td class="alignLeft">{customer_contact}</td>
-      <td>{total_purchases}</td>
+      <td class="alignRight">
+        {if total_purchases == ''} 
+          {{0 | currency:cc.currencySymbol }} 
+        {if:else} 
+          {{ {total_purchases} | number:2}} 
+        {/if}
+      </td>
+      <td class="alignCenter widthSmall ">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="cc.buttonOn('row-{entry_id}')"
+                        ng-mouseout="cc.buttonOff('row-{entry_id}')"
+                        ng-click="cc.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
     </tr>
     {/exp:channel:entries}
   </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='5'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
 </table>
 
 </section>

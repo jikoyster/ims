@@ -5,6 +5,91 @@ $secondaryColor: #122736;
 $secondaryColor-hover: #344A58;
 $lightColor: #efefef;
 
+body.off-alert header{
+	margin-top: 0;
+}
+body.on-alert header{
+	margin-top: 60px;
+}
+.alertmsg{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 999;
+
+	background: red;
+	padding: 10px;
+	color: yellow;
+	font-weight: bold;
+	animation: alertmsg 3s infinite;
+
+	.fa-exclamation-triangle{
+		color: yellow;
+	}
+}
+	@keyframes alertmsg{
+		0%{ background: #f00; }
+		// 25%{ background: #900; }
+		50%{ background: #600; }
+		// 75%{ background: #900; }
+		100%{ background: #f00; }
+	}
+
+//DEFAULT EE DATEPICKER
+.ui-datepicker{
+	// background: white;
+	// border: 1px solid black;
+	// padding: 10px;
+	// font-size: .9em;
+}
+.ui-datepicker-header,
+.ui-datepicker-calendar{
+	background: white;
+	padding: 10px;
+	display: block;
+	border: 1px solid $baseColor;
+	text-align: center;
+}
+.ui-datepicker-header{
+	border-width: 1px 1px 0 1px;
+}
+.ui-datepicker-calendar{
+	border-width: 0 1px 1px 1px;
+}
+.ui-datepicker-prev{ float: left; }
+.ui-datepicker-next{ float: right; }
+.ui-datepicker-prev, .ui-datepicker-next{
+	font-size: 11px;
+}
+.ui-datepicker-title{
+	text-align: center;
+}
+.ui-state-highlight{
+	background: #ccc;
+	padding: 3px;
+	border-radius: 5px;
+	color: white;
+}
+//****************************************DEFAULT EE DATEPICKER
+.WysiHat-editor{
+	font-family: $mainFont;
+	font-size: 1.2em !important;	
+	font-weight: 100;
+}
+.container-inner{
+	background: white;
+	padding: 10px 0;
+}
+.pagetitle{
+	font-size: 2em;
+	color: $secondaryColor;
+	border-bottom: 3px solid $secondaryColor;
+	margin-bottom: 50px;
+	padding-bottom: 10px;
+}
+.cellpad{
+	padding: 5px;
+}
 .clear{
 	clear: both
 }
@@ -57,6 +142,7 @@ input[type=radio]{
 .btn-new{
 	margin-bottom: 10px;
 	float: right;
+	font-weight: bold;
 
 	a{
 		color: $secondaryColor;
@@ -67,8 +153,8 @@ input[type=radio]{
 }
 label{
 	display: inline-block;
-	width: 150px;
-	vertical-align: top;
+	width: 180px;
+	vertical-align: middle;
 }
 
 html, body{
@@ -80,7 +166,6 @@ html, body{
 
 header{
 	background: $baseColor url(custom/img/green_fibers.png) repeat center;
-	margin-bottom: 20px;
 	padding: 10px;
 	color: white;
 
@@ -90,6 +175,9 @@ header{
 	a:hover{ 
 		color: white; 
 		text-decoration: none; 
+	}
+	a:active, a:focus{
+		color: white;
 	}
 
 	#sitelogo{
@@ -115,6 +203,7 @@ header{
 			li{
 				display: inline-block;
 				vertical-align: top;
+				margin-bottom: 15px;
 				
 				position: relative;
 
@@ -132,6 +221,8 @@ header{
 					opacity: 0;
 
 					li{
+						margin-bottom: 0;
+						
 						a{
 							display: block;
 							width: 150px;
@@ -164,7 +255,7 @@ header{
 }//header
 
 footer{
-	margin: 50px 0 10px;
+	margin: 10px auto;
 
 	.footer--text{
 		text-align: center;
@@ -203,6 +294,11 @@ table.tbl_display{
 				padding: 5px;
 				text-align: center;
 				border-color: $lightColor;
+
+				.remove-icon{
+					font-size: 1.2em !important;
+					color: red;
+				}
 			}
 			td.checkbox{
 				width: 30px;
@@ -216,4 +312,22 @@ table.tbl_display{
 			background: $lightColor;
 		}
 	}
+	tfoot.note{
+		td{
+			font-size: .9em;
+			text-align: right;
+			padding-left: 10px;
+			color: brown;
+		}	
+	}
 }//table
+section label, section input, section table{
+	font-size: 1em !important;
+}
+section label{
+	float: left;
+	margin-right: 10px;
+	margin-top: 5px;
+	text-align: right;
+	line-height: 13px;
+}

@@ -1,0 +1,27 @@
+<?php 
+ee()->load->library('api');
+ee()->api->instantiate('channel_entries');
+ ?>
+
+{exp:channel:entries channel="invoice" entry_id={segment_3} }
+<?php 
+
+$data = array(
+    'entry_id'		=> "{segment_3}",
+    'title' 		=> "{title}",
+    'url_title' 	=> "{url_title}",
+    'field_id_20' 	=> "{invoice_type}",
+    'field_id_22' 	=> "{customer}",
+    'field_id_23' 	=> "{invoice_product_list}",
+    'field_id_24' 	=> {invoice_subtotal},
+    'field_id_25' 	=> {invoice_tax_rate},
+    'field_id_26' 	=> {invoice_tax_amount},
+    'field_id_27' 	=> {invoice_total_amount},
+    'status'		=> 'closed'
+);
+ ?>
+{/exp:channel:entries}
+
+<?php 
+ee()->api_channel_entries->save_entry($data, 6, {segment_3}, FALSE);
+ ?>
