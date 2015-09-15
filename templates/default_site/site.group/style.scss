@@ -9,7 +9,7 @@ body.off-alert header{
 	margin-top: 0;
 }
 body.on-alert header{
-	margin-top: 60px;
+	margin-top: 59px;
 }
 .alertmsg{
 	position: fixed;
@@ -118,6 +118,9 @@ input[type=radio]{
 }
 .ta--left, .alignLeft, .inputLeft input{
 	text-align: left !important;
+}
+.alignCenter{
+	text-align: center;
 }
 .widthBig{
 	width: 300px;
@@ -330,4 +333,8 @@ section label{
 	margin-top: 5px;
 	text-align: right;
 	line-height: 13px;
+}
+
+#CriticalLevel tr{
+	cursor: pointer;
 }

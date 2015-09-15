@@ -1,0 +1,118 @@
+{embed="site/header"}
+<link rel="stylesheet" href="{path='purchase_order/style'}" media="all">
+
+<?php 
+$noprod = true;
+echo '<script>var products = [];</script>';
+
+if(isset($_POST['final_critical_products'])):
+	$noprod = false;
+	$final = $_POST['final_critical_products'];
+	$final = json_decode($final);
+
+	// print_r($final[0]->product_code);
+	
+	foreach ($final as $product) {
+		echo 	'<script>'.
+				'product = {'. 
+					'entry_id			: '.$product->entry_id.','. 
+					'product_name		: "'.$product->product_name.'",'.
+					'price				: "'.$product->company_price.'",'.
+					'};'.
+				'products.push(product);'.
+				'</script>';
+	}
+endif;
+?>
+
+<script src="{path='purchase_order/script'}"></script>
+
+
+<section ng-app="po" id="PO">
+
+
+{if logged_in}
+
+{exp:channel:form channel="purchase_order" return="{segment_1}"}
+<div>
+
+<h1 class="pagetitle cellpad">New Purchase Order</h1>
+
+<div class="row">
+	<div class="span12"><div class="cellpad">
+		<div>
+			<label for="Name">PO#</label>
+			<input type="text" name="po_num" ng-model="po_num">
+			<input type="hidden" name="title" value="{{+po_num}}">
+			<input type="hidden" name="url_title" value="{{'po_'+po_num}}">
+		</div>
+		<div>
+			<label for="Date">Date</label> 
+			<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
+		</div>
+		<div>
+			<?php if($noprod): ?>
+			{embed="purchase_order/popup-main"}
+			<div class="floatRight">
+				<script>var popup = false;</script>
+				<button class="btn" onclick="togglePopup()">Add Product</button>
+			</div> <br class="clear">
+			<?php endif; ?>
+			<div class="poList">
+				<script>var po_product_list = [], counter = 0;</script>
+				{field:po_product_list}
+			</div>
+		</div>
+	</div></div>
+	<!-- col1 -->
+</div>
+<!--  end of first block -->
+
+<hr>
+<div class="row">
+	<div class="span12"><div class="cellpad floatRight">
+		
+		<div>
+			<label for="Subtotal">Subtotal</label>
+			<input type="text" name="po_subtotal" class="alignRight">
+		</div>
+		<div>
+			<label for="Tax Rate">Tax Rate <small>({instructions:po_tax_rate})</small> </label>
+			<input type="text" name="po_tax_rate" onkeyup="set_tax_amount(this)" class="alignRight">
+		</div>
+		<div>
+			<label for="Tax Amount">Tax Amount</label>
+			<input type="text" name="po_tax_amount" class="alignRight">
+		</div>
+		<div>
+			<label for="Total Amount">Total Amount</label>
+			<input type="text" name="po_total_amount" class="alignRight">
+		</div>
+
+	</div></div>
+	<!-- col1 -->
+</div>
+<!-- end of 2nd block -->
+
+	<hr>
+	<div class="cellpad">
+		
+		<p>
+			PO status <br>
+			{field:po_status}
+		</p>
+		
+		<input type="submit" value="Submit" class="btn btn-danger">	
+	</div>
+
+</div>
+{/exp:channel:form}
+
+
+{if:else}
+	{embed='site/not_logged'}
+{/if}
+
+</section>
+
+{embed="site/footer"}

@@ -1,16 +1,16 @@
 {embed="site/header"}
-
-<section class="critical_level_page" ng-app>
+<script src="{path='critical_level/script'}"></script>
+<section id="CriticalLevel" class="critical_level_page">
   
-<?php $ctr = 0; ?>
 <h1 class="pagetitle cellpad">Critical Level Products:</h1>
 
-<form id="Critical_Products_Form" action="{path='purchase_order/create'}" method="post">
+<form id="Critical_Products_Form" action="{path='purchase_order/create'}" method="post" ng-app="criticalLevel">
 <!-- form expiration -->
 <input type="hidden" name="XID" value="{XID_HASH}" /> 
 <!-- form expiration -->
 
 <div class="cellpad">
+
 <table class="tbl_display" border='1'>
   <thead>
     <th class="checkbox"></th>
@@ -19,12 +19,12 @@
     <th>Critical Level</th>
     <th>In Stock</th>
     <th>Company Price</th>
+    <th>Availability Status</th>
   </thead>
   <tbody>
     {exp:channel:entries channel="product"}
 
-      <?php if( {in_stock} <= {critical_level} ):
-        $ctr++; ?>
+      <?php if( {in_stock} <= {critical_level} ): ?>
         <tr class="critical_level_row">
           <td class="checkbox">
             <input type="checkbox" name="addToPO">
@@ -34,7 +34,8 @@
           <td class="product_code">{product_code}</td>
           <td class="critical_level">{critical_level}</td>
           <td class="in_stock">{in_stock}</td>
-          <td class="company_price alignRight">{{ {company_price} | number:2}}</td>
+          <td class="company_price alignRight">{company_price}</td>
+          <td class="availability_status">{availability_status}</td>
         </tr>
       <?php endif; ?>
 
@@ -71,7 +72,7 @@ var critical_level_products = [];
   $('#Critical_Products_Form').submit(function(){
     make_order();
     console.log( $('input[name=final_critical_products]').val() );
-    return false;
+    // return false;  
   });
 
 

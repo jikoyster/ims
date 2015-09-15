@@ -1,0 +1,44 @@
+a {
+  cursor: pointer; }
+
+.show {
+  display: block !important; }
+
+.popup-wrapper {
+  display: none; }
+  .popup-wrapper .popup-bg {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 990;
+    width: 100%;
+    height: 100%; }
+  .popup-wrapper .addToPO-popup {
+    position: fixed;
+    min-width: 1000px;
+    min-height: 400px;
+    max-width: 1000px;
+    max-height: 600px;
+    overflow: auto;
+    background: white;
+    z-index: 999;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    top: 0px;
+    left: 0; }
+  .popup-wrapper .remove_product i {
+    cursor: pointer; }
+
+.red {
+  color: red; }
+
+.popup_close {
+  font-size: 1.5em;
+  margin: 5px 10px; }
+  .popup_close a {
+    color: red; }
+  .popup_close a:hover {
+    color: #666; }
+
+/*# sourceMappingURL=style.css.map */

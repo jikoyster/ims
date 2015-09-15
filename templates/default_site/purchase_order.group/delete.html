@@ -1,0 +1,27 @@
+<?php 
+ee()->load->library('api');
+ee()->api->instantiate('channel_entries');
+ ?>
+<?php $data = array(); ?>
+{exp:channel:entries channel="purchase_order" entry_id={segment_3} }
+<?php 
+
+$data = array(
+    'entry_id'		=> "{segment_3}",
+    'title' 		=> "{title}",
+    'url_title' 	=> "{url_title}",
+    'field_id_28' 	=> '{po_num}',
+    'field_id_29' 	=> '{po_product_list}',
+    'field_id_30' 	=> '{po_subtotal}',
+    'field_id_31' 	=> '{po_tax_rate}',
+    'field_id_32' 	=> '{po_tax_amount}',
+    'field_id_33' 	=> '{po_total_amount}',
+    'field_id_35' 	=> '{po_status}',
+    'status'		=> 'closed'
+);
+ ?>
+{/exp:channel:entries}
+
+<?php 
+ee()->api_channel_entries->save_entry($data, 7, {segment_3}, FALSE);
+ ?>

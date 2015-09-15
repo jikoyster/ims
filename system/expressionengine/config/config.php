@@ -15,7 +15,7 @@ $config['app_version'] = '2.10.1';
 $config['license_contact'] = '';
 $config['license_number'] = 'CORE LICENSE';
 $config['debug'] = '1';
-$config['cp_url'] = 'http://192.168.56.1/ims/admin.php';
+$config['cp_url'] = 'http://192.168.1.8/ims/admin.php';
 $config['doc_url'] = 'http://ellislab.com/expressionengine/user-guide/';
 $config['is_system_on'] = 'y';
 $config['allow_extensions'] = 'y';
@@ -24,8 +24,10 @@ $config['cookie_prefix'] = '';
 $config['cookie_httponly'] = 'y';
 
 $config['index_page'] = '';
+$config['tz_country'] = 'ph';
 
 // END EE config items
+
 
 
 /*
