@@ -1,6 +1,6 @@
 {embed="site/header"}
 <link rel="stylesheet" href="{path='purchase_order/style'}" media="all">
-<script src="{path='purchase_order/script'}"></script>
+
 <?php 
 $noprod = true;
 echo '<script>var products = [];</script>';
@@ -25,6 +25,8 @@ if(isset($_POST['final_critical_products'])):
 endif;
 ?>
 
+<script src="{path='purchase_order/script'}"></script>
+
 
 <section ng-app="po" id="PO">
 
@@ -38,42 +40,37 @@ endif;
 
 <div class="row">
 	<div class="span12"><div class="cellpad">
-		<h3>Company Name</h3>
-		<div>Address</div>
-	</div></div>
-</div>
-
-<div class="row"> 	
-		<div class="span4"><div class="cellpad">Purchase from:<br>{field:delivered_to}</div></div>
-		<div class="span4"><div class="cellpad">Deliver To:<br>{field:ordered_by}</div></div>
-		<div class="span4"><div class="cellpad">
+		<div>
 			<label for="Name">PO#</label>
 			<input type="text" name="po_num" ng-model="po_num">
 			<input type="hidden" name="title" value="{{+po_num}}">
 			<input type="hidden" name="url_title" value="{{'po_'+po_num}}">
-			<br>
+		</div>
+		<div>
 			<label for="Date">Date</label> 
 			<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
-		</div></div>		
-</div>
-<hr>
-<div class="row">
-	<div class="span12"><div class="cellpadd">
-		<?php //if($noprod): ?>
-		{embed="purchase_order/popup-main"}
-		<div class="alignRight">
-			<script>var popup = false;</script>
-			<button class="btn preventDefault" onclick="togglePopup()">Add Product</button>
 		</div>
-		<?php //endif; ?>
-		<div class="poList">
-			<script>var po_product_list = [], counter = 0;</script>
-			{field:po_product_list}
+		<div class="row">
+			<div class="span5">Ordered By:<br>{field:ordered_by}</div>
+			<div class="span5">Supplier:<br>{field:delivered_to}</div>
+		</div>
+		<div>
+			<?php //if($noprod): ?>
+			{embed="purchase_order/popup-main"}
+			<div class="floatRight">
+				<script>var popup = false;</script>
+				<button class="btn" onclick="togglePopup()">Add Product</button>
+			</div> <br class="clear">
+			<?php //endif; ?>
+			<div class="poList">
+				<script>var po_product_list = [], counter = 0;</script>
+				{field:po_product_list}
+			</div>
 		</div>
 	</div></div>
+	<!-- col1 -->
 </div>
-
-
+<!--  end of first block -->
 
 <hr>
 <div class="row">
@@ -121,13 +118,5 @@ endif;
 {/if}
 
 </section>
-
-
-<script>
-	jQuery('.preventDefault').bind("click", function(event){
-		event.preventDefault();
-	});
-</script>
-
 
 {embed="site/footer"}

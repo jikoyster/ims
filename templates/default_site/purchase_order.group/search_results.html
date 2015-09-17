@@ -2,12 +2,10 @@
 
 <script>
 	po_head = 	'<div class="headlist" style="'+ style.head.borderBottom + style.head.fontWeight +'">' +
-					'<b style="'+ style.common.cellM +'">Product Name</b>' +
+					'<b style="'+ style.common.cellL +'">Product Name</b>' +
 					'<b style="'+ style.common.cellS +'">In Stock</b>' +
 					'<b style="'+ style.common.cellS +'">Critical Level</b>' +
-					'<b style="'+ style.common.cellS + style.common.alignCenter +'">Qty</b>' +
 					'<b style="'+ style.common.cellM + style.common.alignRight +'">Price</b>' +
-					'<b style="'+ style.common.cellM + style.common.alignRight +'">Amount	</b>' +
 					'<b style="'+ style.common.cellXS +'">&nbsp;</b>' +
 					'<b class="clear"></b>'
 				'</div>';
@@ -23,11 +21,7 @@
 		<span class="product_name"><b>{product_name}</b></span>
 		<span class="in_stock">{in_stock}</span>
 		<span class="critical_level">{critical_level}</span>
-		<span class="qty">
-			<input type="text" name="qty" onkeyup="set_amount(this)">
-		</span>
 		<span class="price">{company_price}</span>
-		<span class="amount"></span>
 		<span>
 			<a class="add-button" onclick="addToPO(this)"><i class="fa fa-plus-square"></i></a>
 		</span>
@@ -39,7 +33,7 @@
 <script>
 	x = jQuery.noConflict();
 	x('.listrow').attr('style', style.body.borderBottom);
-	x('.product_name').attr('style', style.common.cellM);
+	x('.product_name').attr('style', style.common.cellL);
 
 	x('.in_stock').attr('style', style.common.cellS);
 	x('.critical_level').attr('style', style.common.cellS);

@@ -40,8 +40,12 @@
 											'</b>'+
 											'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].price+'</b>'+
 											'<b class="amount" style="'+ style.common.cellM + style.common.alignRight +'"> </b>'+
-											'<b style="'+ style.common.cellXS + style.common.alignCenter +'">'+
-												'<a href="#"><i class="fa fa-times-circle"></i></a>' +
+											'<b class="remove_product" style="'+ style.common.cellXS + style.common.alignCenter +'">'+
+												'<a href="#"><i class="fa fa-times-circle"' +
+													'onmouseover="shiftClasses(this)" onmouseout="shiftClasses(this)"'+
+													'onclick="remove_product(\'#row-'+products[i].entry_id+'\')"' +
+													'></i>' +
+												'</a>' +
 											'</b>' +
 										'</div>';
 						}							
@@ -59,15 +63,11 @@
 
 	jQuery('.WysiHat-editor').ready(function(){
 		init_list();
-
-		jQuery('#publishForm').submit(function(){
-			return false;
-		});
 	});
 	
 
 	
-	amounts = [];
+	var amounts = [];
 	set_amount = function(x){
 		curRow = jQuery(x).closest('.listrow');
 		curIndex = jQuery(curRow).index();
@@ -90,6 +90,9 @@
 			subtotal += amounts[i];
 		}
 		jQuery('input[name=po_subtotal]').val( addCommas(subtotal.toFixed(2)) );
+
+		set_tax_amount();
+		set_total_amount();
 	};
 
 	set_tax_amount = function(tax_rate){
@@ -144,7 +147,9 @@
 			po_list += 	'<div class="listrow" id="row-'+products[i].entry_id+'"' +
 						'style="'+ style.body.borderBottom+'">'+
 							'<b style="'+ style.common.cellL +'">'+products[i].product_name+'</b>'+
-							'<b style="'+ style.common.cellS +'">'+products[i].qty+'</b>'+
+							'<b style="'+ style.common.cellS +'">'+
+							'<input type="text" name="qty" onkeyup="set_amount(this)" style="'+ style.common.cellXS +'" />' +
+							'</b>'+
 							'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].price+'</b>'+
 							'<b class="amount" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].amount+'</b>'+
 							'<b class="remove_product" style="'+ style.common.cellXS + style.common.alignCenter +'">'+
