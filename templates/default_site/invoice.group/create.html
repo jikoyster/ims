@@ -1,6 +1,9 @@
 {embed="site/header"}
 
-<section ng-app>
+<link rel="stylesheet" href="{path='invoice/style'}" media="all">
+<script type="text/javascript" src="{path='invoice/script'}"></script>
+
+<section id="CreateInvoice" ng-app="invoice">
 
 {if logged_in}
 
@@ -9,8 +12,17 @@
 	<h1 class="pagetitle cellpad">New Invoice</h1>
 	
 	<div>
+		<script>var invoice_type = "Retail";</script>
 		<label for="Type">Type</label>
 		{field:invoice_type}
+		<script>
+			$ = jQuery.noConflict();
+			$('input:radio[name="invoice_type"]').filter('[value='+ invoice_type +']').attr('checked', true);
+
+			$('input:radio[name="invoice_type"]').bind('click', function(){
+				invoice_type = $(this).val();
+			});
+		</script>
 	</div>
 
 	<div>
@@ -24,8 +36,41 @@
 		{field:customer}
 	</div>
 	<div class="cellpad">
-		{field:invoice_product_list}
+		{embed="invoice/popup-main"}
+		<div class="alignRight">
+			<button class="btn preventDefault" onclick="togglePopup()">Add Product</button>
+		</div>
+		<div id="InvoiceList--create">
+			<script>var invoice_product_list = [], counter = 0;</script>
+			{field:invoice_product_list}
+		</div>
 	</div>
+
+<hr>
+<div class="row">
+	<div class="span12"><div class="cellpad floatRight">
+		
+		<div>
+			<label for="Subtotal">Subtotal</label>
+			<input type="text" name="invoice_subtotal" class="alignRight" value="0" readonly>
+		</div>
+		<div>
+			<label for="Tax Rate">Tax Rate <small>({instructions:invoice_tax_rate})</small> </label>
+			<input type="text" name="invoice_tax_rate" onkeyup="set_tax_amount(this)" class="alignRight" value="0">
+		</div>
+		<div>
+			<label for="Tax Amount">Tax Amount</label>
+			<input type="text" name="invoice_tax_amount" class="alignRight" value="0" readonly>
+		</div>
+		<div>
+			<label for="Total Amount">Total Amount</label>
+			<input type="text" name="invoice_total_amount" class="alignRight" value="0" readonly>
+		</div>
+
+	</div></div>
+	<!-- col1 -->
+</div>
+<!-- end of 2nd block -->
 
 <hr>
 
@@ -54,4 +99,12 @@
 {/if}
 
 </section>
+
+
+<script>
+	jQuery('.preventDefault').bind("click", function(event){
+		event.preventDefault();
+	});
+	init_list();
+</script>
 {embed="site/footer"}

@@ -1,0 +1,26 @@
+{embed='site/header'}
+
+{exp:channel:form channel="sample2"}
+
+edit sample1 with this<br>
+<div class="sample1r">{field:sample1r}</div>
+
+{/exp:channel:form}
+
+<p></p>
+
+
+<script type="text/javascript">
+	jQuery('.sample1r select').on("change", function(){
+		theValue = jQuery('select option:selected').val();
+
+		jQuery.ajax({
+			url: 	"{path='sample2/ajax'}/" + theValue
+		})
+		.done(function( result ){
+			jQuery('p').text( result );
+		});
+	});
+</script>
+
+{embed='site/footer'}

@@ -1,4 +1,5 @@
 {embed="site/header"}
+<link rel="stylesheet" href="{path='purchase_order/style'}" media="all">
 <script src="{path='purchase_order/script'}"></script>
 
 <section ng-app="po">
@@ -8,27 +9,41 @@
 {exp:channel:form channel="purchase_order" return="{segment_1}" entry_id="{segment_3}"}
 <div>
 
-<h1 class="pagetitle cellpad">New Purchase Order</h1>
+<h1 class="pagetitle cellpad">Update Purchase Order</h1>
 
 <div class="row">
 	<div class="span12"><div class="cellpad">
-		<div ng-init="po_num={po_num}">
+		<h3>Company Name</h3>
+		<div>Address</div>
+	</div></div>
+</div>
+
+<div class="row"> 	
+		<div class="span4"><div class="cellpad">Purchase from:<br>{field:delivered_to}</div></div>
+		<div class="span4"><div class="cellpad">Deliver To:<br>{field:ordered_by}</div></div>
+		<div class="span4"><div class="cellpad">
 			<label for="Name">PO#</label>
-			<input type="text" name="po_num" ng-model="po_num" value="{po_num}">
-			<input type="hidden" name="title" value="{{+po_num}}">
-			<input type="hidden" name="url_title" value="{{'po_'+po_num}}">
-		</div>
-		<div>
+			<input type="text" value="{po_num}" readonly>
+			<br>
 			<label for="Date">Date</label> 
 			<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
+		</div></div>		
+</div>
+<hr>
+<div class="row">
+	<div class="span12"><div class="cellpadd">
+		<?php //if($noprod): ?>
+		{embed="purchase_order/popup-main"}
+		<div class="alignRight">
+			<button class="btn preventDefault" onclick="togglePopup()">Add Product</button>
 		</div>
-		<div>
-			<div class="poList">{field:po_product_list}</div>
+		<?php //endif; ?>
+		<div class="poList">
+			<script>var po_product_list = [], counter = 0;</script>
+			{field:po_product_list}
 		</div>
 	</div></div>
-	<!-- col1 -->
 </div>
-<!--  end of first block -->
 
 <hr>
 <div class="row">
@@ -36,7 +51,7 @@
 		
 		<div>
 			<label for="Subtotal">Subtotal</label>
-			<input type="text" name="po_subtotal" class="alignRight" value="{po_subtotal}">
+			<input type="text" name="po_subtotal" class="alignRight" value="{po_subtotal}" readonly>
 		</div>
 		<div>
 			<label for="Tax Rate">Tax Rate <small>({instructions:po_tax_rate})</small> </label>
@@ -44,11 +59,11 @@
 		</div>
 		<div>
 			<label for="Tax Amount">Tax Amount</label>
-			<input type="text" name="po_tax_amount" class="alignRight" value="{po_tax_amount}">
+			<input type="text" name="po_tax_amount" class="alignRight" value="{po_tax_amount}" readonly>
 		</div>
 		<div>
 			<label for="Total Amount">Total Amount</label>
-			<input type="text" name="po_total_amount" class="alignRight" value="{po_total_amount}">
+			<input type="text" name="po_total_amount" class="alignRight" value="{po_total_amount}" readonly>
 		</div>
 
 	</div></div>
@@ -79,4 +94,19 @@
 {/if}
 
 </section>
+
+<script>
+	jQuery('.preventDefault').bind("click", function(event){
+		event.preventDefault();
+	});
+
+	jQuery('.WysiHat-editor').ready(function(){
+		rowlen = $('.listrow').length;
+		for(var i=0; i<rowlen; i++){
+			amounts.push( ($('.listrow:eq('+i+')').find('.amount').text()).replace(/\,/g,'') );
+		}
+		console.log( amounts );
+	});
+</script>
+<script src="{path='purchase_order/update-script'}"></script>
 {embed="site/footer"}

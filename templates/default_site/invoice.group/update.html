@@ -1,57 +1,75 @@
 {embed="site/header"}
-<script src="{path='invoice/script'}"></script>
-<section ng-app="invoice">
+
+<link rel="stylesheet" href="{path='invoice/style'}" media="all">
+
+<script type="text/javascript" src="{path='invoice/script'}"></script>
+
+
+<section id="UpdateInvoice" ng-app>
 
 {if logged_in}
+
 
 {exp:channel:form channel="invoice" return="{segment_1}" entry_id="{segment_3}"}
 <div>
 	<h1 class="pagetitle cellpad">New Invoice</h1>
 	
 	<div>
+		<script>var invoice_type = "Retail";</script>
 		<label for="Type">Type</label>
-		{field:invoice_type}
+		<span class="required">{field:invoice_type}</span>
 	</div>
 
-	<div ng-init="inv_title = '{title}'">
+	<div>
 		<label for="Name">Invoice Number</label>
-		<input type="text" name="title" ng-model="inv_title">
-		<input type="hidden" name="url_title" value="{{'inv_'+inv_title}}">
+		<input type="text" name="title" value="{title}" class="required">
 	</div>
 
 	<div>
 		<label for="Customer">Customer</label>
-		{field:customer}
+		<span class="required">{field:customer}</span>
 	</div>
 	<div class="cellpad">
-		{field:invoice_product_list}
+		{embed="invoice/popup-main"}
+		<div class="alignRight">
+			<button class="btn preventDefault" onclick="togglePopup()">Add Product</button>
+		</div>
+		<div id="InvoiceList--update">
+			<script>var invoice_product_list = [], counter = 0;</script>
+			{field:invoice_product_list}
+		</div>
+		
+			<!-- #first of: add products to product_list array so their in_stock will be updated 
+				# passing only the entry_id, so to update product at updateProduct.html
+				# using $.ajax -->
 	</div>
 
 <hr>
-<div class="cellpad alignRight" ng-controller="computationController as ctrl">
-	<div ng-init="ctrl.subtotal = {invoice_subtotal}">
-		Subtotal 
-		<input class="alignRight" type="text" name="invoice_subtotal" 
-			value="{{ctrl.subtotal | number:2}}">
-	</div>
-	<div ng-init="ctrl.tax_rate = {invoice_tax_rate}">
-		Tax Rate ({instructions:invoice_tax_rate}) 
-		<input class="alignRight" type="text" name="invoice_tax_rate" 
-			value="{{ctrl.tax_rate}}"
-			ng-keyup="ctrl.compute_tax_amount(); ctrl.compute_total_amount()">
-	</div>
-	<div ng-init="ctrl.tax_amount = {invoice_tax_amount}">
-		Tax Amount 
-		<input class="alignRight" type="text" name="invoice_tax_amount" 
-			value="{{ctrl.tax_amount | number:2}}"
-			ng-keyup="ctrl.compute_total_amount()">
-	</div>
-	<div ng-init="ctrl.total_amount = {invoice_total_amount}">
-		Total Amount 
-		<input class="alignRight" type="text" name="invoice_total_amount" 
-			value="{{ctrl.total_amount | number:2}}">
-	</div>
+<div class="row">
+	<div class="span12"><div class="cellpad floatRight">
+		
+		<div>
+			<label for="Subtotal">Subtotal</label>
+			<input type="text" name="invoice_subtotal" class="alignRight" value="{invoice_subtotal}" readonly>
+		</div>
+		<div>
+			<label for="Tax Rate">Tax Rate <small>({instructions:invoice_tax_rate})</small> </label>
+			<input type="text" name="invoice_tax_rate" onkeyup="set_tax_amount(this)" class="alignRight" value="{invoice_tax_rate}">
+		</div>
+		<div>
+			<label for="Tax Amount">Tax Amount</label>
+			<input type="text" name="invoice_tax_amount" class="alignRight" value="{invoice_tax_amount}" readonly>
+		</div>
+		<div>
+			<label for="Total Amount">Total Amount</label>
+			<input type="text" name="invoice_total_amount" class="alignRight" value="{invoice_total_amount}" readonly>
+		</div>
+
+	</div></div>
+	<!-- col1 -->
 </div>
+<!-- end of 2nd block -->
+
 <hr>
 
 <div class="cellpad">
@@ -67,7 +85,9 @@
 	{/status_menu}
 
 	<input type="submit" value="Submit" class="btn btn-danger">
-
+	<!-- #put this on submit onclick="update_products()" 
+		#but first, validate required fields
+	-->
 </div>
 
 </div>
@@ -79,4 +99,22 @@
 {/if}
 
 </section>
+
+<!-- #script below -->
+
+<script>
+	jQuery('.preventDefault').bind("click", function(event){
+		event.preventDefault();
+	});
+
+	jQuery('.WysiHat-editor').ready(function(){
+		rowlen = $('.listrow').length;
+		for(var i=0; i<rowlen; i++){
+			amounts.push( ($('.listrow:eq('+i+')').find('.amount').text()).replace(/\,/g,'') );
+		}
+		console.log( amounts );
+	});
+</script>
+
+<script src="{path='invoice/update-script'}"></script>
 {embed="site/footer"}

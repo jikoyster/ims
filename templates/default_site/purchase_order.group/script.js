@@ -1,4 +1,4 @@
-(function(){
+// (function(){
 	style = {
 		common	:	{
 				'cellL'			: 'display: inline-block; width: 300px;',
@@ -30,25 +30,7 @@
 							'<b style="'+ style.common.cellM + style.common.alignRight +'">Amount</b>' +
 							'<b style="'+ style.common.cellXS + style.common.alignCenter +'">&nbsp;</b>' +
 						'</div>'+
-						'<div class="bodylist">';
-
-						for(var i=0; i<products.length; i++){
-							po_list += 	'<div class="listrow" style="'+ style.body.borderBottom+'">'+
-											'<b style="'+ style.common.cellL +'">'+products[i].product_name+'</b>'+
-											'<b style="'+ style.common.cellS +'">'+
-											'<input type="text" name="qty" onkeyup="set_amount(this)" style="'+ style.common.cellXS +'" />' +
-											'</b>'+
-											'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].price+'</b>'+
-											'<b class="amount" style="'+ style.common.cellM + style.common.alignRight +'"> </b>'+
-											'<b class="remove_product" style="'+ style.common.cellXS + style.common.alignCenter +'">'+
-												'<a href="#"><i class="fa fa-times-circle"' +
-													'onmouseover="shiftClasses(this)" onmouseout="shiftClasses(this)"'+
-													'onclick="remove_product(\'#row-'+products[i].entry_id+'\')"' +
-													'></i>' +
-												'</a>' +
-											'</b>' +
-										'</div>';
-						}							
+						'<div class="bodylist">';					
 
 						po_list +=	'</div>';
 
@@ -61,9 +43,7 @@
 
 	
 
-	jQuery('.WysiHat-editor').ready(function(){
-		init_list();
-	});
+	
 	
 
 	
@@ -81,23 +61,27 @@
 
 		jQuery(curRow).find('.amount').text( addCommas(amount.toFixed(2)) );
 		set_subtotal();
+		set_tax_amount();
 		
 	};//set_amount()
 
 	set_subtotal = function(){
 		subtotal = 0;
 		for(var i=0; i<amounts.length; i++){
-			subtotal += amounts[i];
+			subtotal += parseFloat(amounts[i]);
 		}
-		jQuery('input[name=po_subtotal]').val( addCommas(subtotal.toFixed(2)) );
+		subtotal = parseFloat(subtotal).toFixed(2);
+		jQuery('input[name=po_subtotal]').val( addCommas(subtotal) );
 
 		set_tax_amount();
 		set_total_amount();
 	};
 
 	set_tax_amount = function(tax_rate){
-		subtotal = (jQuery('input[name=po_subtotal]').val()).replace(',','');
-		tax_rate = jQuery(tax_rate).val();
+		subtotal = (jQuery('input[name=po_subtotal]').val()).replace(/\,/g,'');
+		tax_rate = jQuery('input[name=po_tax_rate]').val();
+
+		console.log( "onsettaxamount: "+ subtotal +","+ tax_rate );
 		
 		tax_amount = (tax_rate/100) * subtotal;
 			tax_amount_str = addCommas(tax_amount.toFixed(2));
@@ -139,15 +123,17 @@
 		products = po_product_list;
 		po_list = '';
 		for(var i=0; i<products.length; i++){
-			pname 	= products[i].product_name;
-			qty 	= products[i].qty;
-			price 	= products[i].price;
-			amount 	= products[i].amount;
+			entry_id	= products[i].entry_id;
+			pname 		= products[i].product_name;
+			qty 		= products[i].qty;
+			price 		= products[i].price;
+			amount 		= products[i].amount;
 
 			po_list += 	'<div class="listrow" id="row-'+products[i].entry_id+'"' +
 						'style="'+ style.body.borderBottom+'">'+
-							'<b style="'+ style.common.cellL +'">'+products[i].product_name+'</b>'+
-							'<b style="'+ style.common.cellS +'">'+
+							'<b class="entry_id" style="display: none;">'+products[i].entry_id+'</b>'+
+							'<b class="product_name" style="'+ style.common.cellL +'">'+products[i].product_name+'</b>'+
+							'<b class="qty" style="'+ style.common.cellS +'">'+
 							'<input type="text" name="qty" onkeyup="set_amount(this)" style="'+ style.common.cellXS +'" />' +
 							'</b>'+
 							'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].price+'</b>'+
@@ -162,7 +148,7 @@
 						'</div>';
 			
 			
-			$(".WysiHat-editor .bodylist").html(po_list);
+			$(".WysiHat-editor .bodylist").append(po_list);
 		}//for
 	};
 		
@@ -186,4 +172,4 @@
 	    }
 	    return x1 + x2;
 	}
-})();
+// })();

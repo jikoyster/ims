@@ -55,13 +55,24 @@
             <div class="span9">
                 <nav>
                     <ul>
-                        <li><a href="{path='warehouse'}">WAREHOUSE MANAGEMENT</a></li>
-                        <li><a href="{path='product'}">Product</a></li>
-                        <li><a href="{path='price_code'}">PRICE CODE</a></li>
-                        <li><a href="{path='invoice'}">INVOICE</a></li>
-                        <li><a href="{path='supplier'}">Supplier</a></li>
-                        <li><a href="{path='customer'}">Customer</a></li>
-                        <li><a href="{path=accounts}">Accounts</a></li>
+                        <li><a href="{path='warehouse'}">WAREHOUSE MANAGEMENT</a>
+                            <ul>
+                                <li><a href="{path='product'}">Product</a></li>   
+                                <li><a href="{path='price_code'}">PRICE CODE</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li><a href="#">RECORDS</a>
+                            <ul>
+                                <li><a href="{path='invoice'}">INVOICE</a></li>
+                                <li><a href="{path='purchase_order'}">Purchase Order</a>
+                                    <ul>
+                                        <li><a href="{path='purchase_order/receive'}">Receive</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li><a href="#">Reports</a>
                             <ul>
                                 <li><a href="#">Sales Report</a></li>
@@ -75,11 +86,14 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="{path='purchase_order'}">Purchase Order</a>
+
+                        <li><a href="#">Accounts</a>
                             <ul>
-                                <li><a href="{path='purchase_order/receive'}">Receive</a></li>
+                                <li><a href="{path='supplier'}">Supplier</a></li>
+                                <li><a href="{path='customer'}">Customer</a></li>                                
                             </ul>
                         </li>
+                        
                     </ul>
                 </nav>
             </div>

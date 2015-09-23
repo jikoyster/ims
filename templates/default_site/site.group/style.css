@@ -57,7 +57,7 @@ body.on-alert header {
   color: white; }
 
 .WysiHat-editor {
-  font-family: Verdana;
+  font-family: "Verdana";
   font-size: 1.2em !important;
   font-weight: 100; }
 
@@ -143,7 +143,7 @@ label {
 html, body {
   margin: 0;
   padding: 0;
-  font: 1em Verdana;
+  font: 1em "Verdana";
   background: #efefef url(custom/img/white_carbonfiber.png) repeat center; }
 
 header {

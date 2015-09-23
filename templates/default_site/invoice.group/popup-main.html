@@ -1,0 +1,56 @@
+<div>
+	<div class="popup-wrapper">
+		<div class="popup-bg"></div>
+		<div class="addToPO-popup">
+			<span class="popup_close floatRight"><a href="#close" onclick="togglePopup(); clear_results()"><i class="fa fa-times-circle"></i></a></span>
+			<div class="cellpad">
+				Search Product Name <input type="text" name="search_product">
+			</div>
+			<div id="result" class="cellpad"></div>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	jQuery('input[name=search_product]').keyup(function(){
+		q = jQuery(this).val();
+		if(q != " " && q.length > 0){
+			search_product(q);	
+		}else{
+			clear_results();
+		}
+		popup_position();
+	});
+	var search_product = function(q){
+		//console.log(q);
+		jQuery.ajax({
+			url		: "{path='invoice/search_results'}/"+q,
+		})
+		.done(function(result){
+			jQuery('#result').html(result);
+		});
+	};
+	var clear_results = function(){
+		jQuery('#result').html(' ');
+		jQuery('input[name=search_product]').val('');
+	}
+
+	var addToPO = function(elem){
+		product = {
+			'entry_id'				: x(elem).closest('.listrow').find('.entry_id').text(),
+			'product_name'			: x(elem).closest('.listrow').find('.product_name').text(),
+			'product_code'			: x(elem).closest('.listrow').find('.product_code').text(),
+			'price' 				: x(elem).closest('.listrow').find('.price').text(),
+		};
+		// invoice_product_list.push( product );
+
+		// po_product_list[counter++] = product;
+		// console.log( JSON.stringify(po_product_list) );
+
+		togglePopup();
+		clear_results();
+		addToPO_field();
+	};
+</script>

@@ -1,0 +1,33 @@
+<?php 
+ee()->load->library('api');
+ee()->api->instantiate('channel_entries');
+ ?>
+
+{exp:channel:entries channel="product" entry_id="{segment_3}"}
+	<!-- #do save_entry to update PRODUCT'S ({segment_3}) in_stock 
+		#be sure to also include updates on "required fields"
+	-->
+	<?php 
+	$new_stock = {in_stock}+{segment_4};
+	echo "{title}: $new_stock";
+	$data = array(
+	    'title' 		=> "{title}",
+	    'field_id_7' 	=> "{product_name}",
+	    'field_id_8' 	=> "{product_code}",
+	    'field_id_9' 	=> "'"+$new_stock+"'",
+	    'field_id_39' 	=> "{um}",
+	    'field_id_10' 	=> "{critical_level}",
+	    'field_id_11' 	=> "{company_price}",
+	    'field_id_12' 	=> "{less}",
+	    'field_id_13' 	=> "{net_price}",
+	    'field_id_14' 	=> "{wholesale_rate}",
+	    'field_id_15' 	=> "{wholesale_price}",
+	    'field_id_16' 	=> "{retail_rate}",
+	    'field_id_17' 	=> "{retail_price}",
+	    'field_id_38' 	=> "{availability_status}",
+	);
+	?>
+	<?php 
+	ee()->api_channel_entries->save_entry($data, 4, {segment_3}, FALSE); //4 - PRODUCT channel_id
+	 ?>
+{/exp:channel:entries}
