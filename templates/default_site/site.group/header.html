@@ -26,8 +26,12 @@
         <![endif]-->
 
         <?php $ctr = 0; ?>
-        {exp:channel:entries channel="product" dynamic="no"}
-            <?php if( {in_stock} <= {critical_level} ){$ctr++;} ?> 
+        <!-- category="not 10"  - meaning the product is not on "ORDERED" category 
+        and it neeeds to be on PO first -->
+        {exp:channel:entries channel="product" category_group="not 3" dynamic="no"}
+            <?php if( {in_stock} <= {critical_level} ){ 
+              $ctr++;
+            } ?> 
         {/exp:channel:entries}
         <?php if( $ctr > 0 ): ?>
             

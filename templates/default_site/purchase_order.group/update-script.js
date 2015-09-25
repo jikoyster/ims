@@ -1,6 +1,17 @@
+$ = jQuery.noConflict();
+
 jQuery('#publishForm').submit(function(){
-	update_products();
-	return false;
+	
+	po_status = $("select[name=po_status]").val();
+	switch( po_status ){
+		case "PENDING":
+			return true;
+			break;
+		case "RECEIVED":
+			update_products();
+			return false;
+			break;
+	}
 });
 
 
@@ -9,7 +20,7 @@ var validate_required_fields = function(){
 		};
 
 var update_products = function(){
-			$ = jQuery.noConflict();
+			
 			prod_count = $('.listrow').length;
 			
 			for(var i=0; i<prod_count; i++){

@@ -11,22 +11,36 @@
 
 <h1 class="pagetitle cellpad">Update Purchase Order</h1>
 
-<div class="row">
-	<div class="span12"><div class="cellpad">
-		<h3>Company Name</h3>
-		<div>Address</div>
-	</div></div>
+
+<div class="cellpad">
+	<div class="row">
+		<div class="span8">
+			<h3>Company Name</h3>
+			<div>Address</div>
+		</div>
+		<div class="span3">
+			PO status <br>
+			{field:po_status}
+		</div>
+	</div>
 </div>
 
+<hr>
+
 <div class="row"> 	
-		<div class="span4"><div class="cellpad">Purchase from:<br>{field:delivered_to}</div></div>
-		<div class="span4"><div class="cellpad">Deliver To:<br>{field:ordered_by}</div></div>
+		<div class="span4"><div class="cellpad">To:<br>{field:po_supplier}</div></div>
+		<div class="span4"><div class="cellpad">Deliver To:<br>{field:delivered_to}</div></div>
 		<div class="span4"><div class="cellpad">
-			<label for="Name">PO#</label>
-			<input type="text" value="{po_num}" readonly>
-			<br>
-			<label for="Date">Date</label> 
-			<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
+			<div>
+				PO# <br>
+				<input type="text" value="{po_num}" readonly>
+			</div>
+			
+			<div>
+				Date <br>
+				<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
+			</div>
+			
 		</div></div>		
 </div>
 <hr>
@@ -73,15 +87,6 @@
 
 	<hr>
 	<div class="cellpad">
-		
-		<p>
-			PO status <br>
-			{field:po_status}
-		</p>
-		
-
-		
-
 		<input type="submit" value="Submit" class="btn btn-danger">	
 	</div>
 
@@ -100,13 +105,15 @@
 		event.preventDefault();
 	});
 
-	jQuery('.WysiHat-editor').ready(function(){
-		rowlen = $('.listrow').length;
-		for(var i=0; i<rowlen; i++){
-			amounts.push( ($('.listrow:eq('+i+')').find('.amount').text()).replace(/\,/g,'') );
-		}
-		console.log( amounts );
-	});
+	// jQuery('.WysiHat-editor').ready(function(){
+	// 	rowlen = $('.listrow').length;
+	// 	for(var i=0; i<rowlen; i++){
+	// 		amounts.push( ($('.listrow:eq('+i+')').find('.amount').text()).replace(/\,/g,'') );
+	// 	}
+	// 	console.log( amounts );
+	// });
 </script>
+
 <script src="{path='purchase_order/update-script'}"></script>
+
 {embed="site/footer"}

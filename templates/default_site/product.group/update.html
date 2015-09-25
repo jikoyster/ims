@@ -49,7 +49,11 @@
 
 		<div class="cat_section">
 			<label for="Warehouse">Warehouse</label>
-			{field:warehouse}
+			<select name="Warehouse" id="2">
+				{categories show_group="2"}
+					<option value="{category_id}" {selected}>{category_name}</option>
+		        {/categories}
+	        </select>
 		</div>
 
 	</div></div>

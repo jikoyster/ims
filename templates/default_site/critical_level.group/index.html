@@ -19,23 +19,36 @@
     <th>Critical Level</th>
     <th>In Stock</th>
     <th>Company Price</th>
-    <th>Availability Status</th>
+    <th>Order Status</th>
   </thead>
   <tbody>
-    {exp:channel:entries channel="product"}
+    {exp:channel:entries channel="product" orderby="order_status" sort="asc"}
 
-      <?php if( {in_stock} <= {critical_level} ): ?>
-        <tr class="critical_level_row">
+      <?php if( {in_stock} <= {critical_level} ): 
+          $col_style = "";
+          $row_style = "";
+          
+          if("{order_status}" == "Ordered"):
+            $col_style="color: #f00; font-weight: 900;";
+            $row_style="background: #efefef;";
+          endif;
+
+      ?>
+        <tr class="critical_level_row" style="<?php echo $row_style; ?>" >
           <td class="checkbox">
-            <input type="checkbox" name="addToPO">
-            <input type="hidden" name="entry_id" value="{entry_id}">
+            <?php  if($row_style == ""): ?>
+              <input type="checkbox" name="addToPO">
+              <input type="hidden" name="entry_id" value="{entry_id}">
+            <?php endif; ?>
           </td>
           <td class="product_name alignLeft">{product_name}</td>
           <td class="product_code">{product_code}</td>
           <td class="critical_level">{critical_level}</td>
           <td class="in_stock">{in_stock}</td>
           <td class="company_price alignRight">{company_price}</td>
-          <td class="availability_status">{availability_status}</td>
+          <td class="availability_status">
+              <span style="<?php echo $col_style; ?>" >{order_status}</span>
+          </td>
         </tr>
       <?php endif; ?>
 
