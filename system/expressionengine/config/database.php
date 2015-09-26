@@ -3,7 +3,9 @@
 $active_group = 'expressionengine';
 $active_record = TRUE;
 
-$db['expressionengine']['hostname'] = '192.168.1.3';
+$server_ip = getHostByName(php_uname('n'));
+
+$db['expressionengine']['hostname'] = $server_ip;
 $db['expressionengine']['username'] = 'jake';
 $db['expressionengine']['password'] = 'password';
 $db['expressionengine']['database'] = 'ims';

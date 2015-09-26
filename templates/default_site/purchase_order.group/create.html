@@ -45,16 +45,24 @@ endif;
 
 <h1 class="pagetitle cellpad">New Purchase Order</h1>
 
-<div class="row">
-	<div class="span12"><div class="cellpad">
-		<h3>Company Name</h3>
-		<div>Address</div>
-	</div></div>
+<div class="cellpad">
+	<div class="row">
+		<div class="span8">
+			<h3>Company Name</h3>
+			<div>Address</div>
+		</div>
+		<div class="span3">
+			PO status <br>
+			{field:po_status}
+		</div>
+	</div>
 </div>
 
+<hr>
+
 <div class="row"> 	
-		<div class="span4"><div class="cellpad">Purchase from:<br>{field:delivered_to}</div></div>
-		<div class="span4"><div class="cellpad">Deliver To:<br>{field:ordered_by}</div></div>
+		<div class="span4"><div class="cellpad">To:<br>{field:po_supplier}</div></div>
+		<div class="span4"><div class="cellpad">Deliver To:<br>{field:delivered_to}</div></div>
 		<div class="span4"><div class="cellpad">
 			<label for="Name">PO#</label>
 			<input type="text" name="po_num" ng-model="po_num">
@@ -111,12 +119,6 @@ endif;
 
 	<hr>
 	<div class="cellpad">
-		
-		<p>
-			PO status <br>
-			{field:po_status}
-		</p>
-		
 		<input type="submit" value="Submit" class="btn btn-danger">	
 	</div>
 
@@ -158,6 +160,10 @@ endif;
 		}
 		$(".WysiHat-editor .bodylist").append( po_list );
 	});
+	jQuery('select[name=po_status] option').css({display: 'none'});
+	jQuery('select[name=po_status]').find('option[value=PENDING]')
+		.attr('selected', true)
+		.attr('style', 'display: block;');
 </script>
 
 

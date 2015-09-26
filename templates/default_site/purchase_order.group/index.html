@@ -16,6 +16,7 @@
     <tr>
       <th class="alignLeft">PO#</th>
       <th class="alignRight">Total Amount</th>
+      <th class="alignCenter">Ordered To</th>
       <th class="alignCenter">Date Filed</th>
       <th class="alignCenter">Status</th>
       <th class="widthSmall"></th>
@@ -26,6 +27,7 @@
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='purchase_order/update/{entry_id}'}">{title}</a></td>
       <td class="alignRight">{po_total_amount}</td>
+      <td class="alignCenter">{po_supplier:title}</td>
       <td class="alignCenter">{entry_date format="%M. %d, %Y"}</td>
       <td class="alignCenter">{po_status}</td>
       <td class="alignCenter widthSmall">
@@ -40,7 +42,7 @@
   </tbody>
   <tfoot class="note">
     <tr>
-      <td colspan='5'>
+      <td colspan='6'>
         Data deleted here are only set to trash (status = Closed).<br>
         Go to admin panel to recover/delete permanently those items.
       </td>

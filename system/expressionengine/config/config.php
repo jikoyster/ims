@@ -10,12 +10,15 @@
 | observed by ExpressionEngine, e.g. 'permitted_uri_chars'
 |
 */
+$server_ip = getHostByName(php_uname('n'));
+$config['site_url'] = "http://". $server_ip . "/ims/";
+$config['theme_folder_url'] = "http://". $server_ip . "/ims/themes/";
 
 $config['app_version'] = '2.10.1';
 $config['license_contact'] = '';
 $config['license_number'] = 'CORE LICENSE';
 $config['debug'] = '1';
-$config['cp_url'] = 'http://192.168.1.3/ims/admin.php';
+$config['cp_url'] = 'http://'. $server_ip .'/ims/admin.php';
 $config['doc_url'] = 'http://ellislab.com/expressionengine/user-guide/';
 $config['is_system_on'] = 'y';
 $config['allow_extensions'] = 'y';
