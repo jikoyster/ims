@@ -76,6 +76,8 @@ body.on-alert header{
 	font-size: 1.2em !important;	
 	font-weight: 100;
 }
+
+
 .container-inner{
 	background: white;
 	padding: 10px 0;
@@ -92,6 +94,9 @@ body.on-alert header{
 }
 .clear{
 	clear: both
+}
+.error{
+	background-color: #fcc !important;
 }
 a:active, a:focus{
 	text-decoration: none;

@@ -78,6 +78,9 @@ body.on-alert header {
 .clear {
   clear: both; }
 
+.error {
+  background-color: #fcc !important; }
+
 a:active, a:focus {
   text-decoration: none;
   color: #303d3f; }

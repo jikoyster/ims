@@ -1,3 +1,11 @@
+<html>
+	<head>
+		<title>Product Update</title>
+	</head>
+	<body style="font-family: Verdana; font-size: 1.1em;">
+		
+
+
 <?php 
 ee()->load->library('api');
 ee()->api->instantiate('channel_entries');
@@ -9,12 +17,11 @@ ee()->api->instantiate('channel_entries');
 	-->
 	<?php 
 	$new_stock = {in_stock}-{segment_4};
-	echo "{title}: $new_stock";
 	$data = array(
 	    'title' 		=> "{title}",
 	    'field_id_7' 	=> "{product_name}",
 	    'field_id_8' 	=> "{product_code}",
-	    'field_id_9' 	=> "'"+$new_stock+"'",
+	    'field_id_9' 	=> "'"+$new_stock+"'", //in_stock
 	    'field_id_39' 	=> "{um}",
 	    'field_id_10' 	=> "{critical_level}",
 	    'field_id_11' 	=> "{company_price}",
@@ -24,10 +31,18 @@ ee()->api->instantiate('channel_entries');
 	    'field_id_15' 	=> "{wholesale_price}",
 	    'field_id_16' 	=> "{retail_rate}",
 	    'field_id_17' 	=> "{retail_price}",
-	    'field_id_38' 	=> "{availability_status}",
+	    'field_id_34' 	=> "{warehouse}",
+	    'field_id_42' 	=> "{order_status}",
 	);
 	?>
+	<div>Product Name: {title}</div>
+	<div>In Stock: <?php echo $new_stock ?></div>
+	<div>Critical Level: {critical_level}</div>
 	<?php 
 	ee()->api_channel_entries->save_entry($data, 4, {segment_3}, FALSE); //4 - PRODUCT channel_id
 	 ?>
 {/exp:channel:entries}
+
+
+	</body>
+</html>
