@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="{path='purchase_order/style'}" media="all">
 <script src="{path='purchase_order/script'}"></script>
 
-<section ng-app="po">
+<section ng-app="po" id="PO">
+
 
 {if logged_in}
 
@@ -10,7 +11,6 @@
 <div>
 
 <h1 class="pagetitle cellpad">Update Purchase Order</h1>
-
 
 <div class="cellpad">
 	<div class="row">
@@ -28,19 +28,36 @@
 <hr>
 
 <div class="row"> 	
-		<div class="span4"><div class="cellpad">To:<br>{field:po_supplier}</div></div>
-		<div class="span4"><div class="cellpad">Deliver To:<br>{field:delivered_to}</div></div>
+		<div class="span4">
+			<div class="cellpad">
+				To:<br>{field:po_supplier}
+			</div>
+		</div>
+		<div class="span4">
+			<div class="cellpad">
+				Deliver To:<br><span class="delivered_to">{field:delivered_to}</span> <br>
+				{field:delivery_address}
+				<script>
+					$(".delivered_to select").on('change', function(){
+						delivered_to = $(this).val();
+						$.ajax({
+							url: "{path='purchase_order/create-delivery_address'}/"+ delivered_to
+						})
+						.done(function(result){
+							// alert(result);
+							$("textarea[name=delivery_address]").text( result );
+						});
+					});
+				</script>
+			</div>
+		</div>
 		<div class="span4"><div class="cellpad">
-			<div>
-				PO# <br>
-				<input type="text" value="{po_num}" readonly>
-			</div>
+			<label for="Name">PO#</label>
+			<input type="text" name="po_num" value="{po_num}" readonly>
 			
-			<div>
-				Date <br>
-				<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
-			</div>
-			
+			<br>
+			<label for="Date">Date</label> 
+			<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
 		</div></div>		
 </div>
 <hr>
@@ -59,25 +76,27 @@
 	</div></div>
 </div>
 
+
+
 <hr>
 <div class="row">
 	<div class="span12"><div class="cellpad floatRight">
 		
 		<div>
 			<label for="Subtotal">Subtotal</label>
-			<input type="text" name="po_subtotal" class="alignRight" value="{po_subtotal}" readonly>
+			<input type="text" name="po_subtotal" class="alignRight" value="0" readonly>
 		</div>
 		<div>
 			<label for="Tax Rate">Tax Rate <small>({instructions:po_tax_rate})</small> </label>
-			<input type="text" name="po_tax_rate" onkeyup="set_tax_amount(this)" class="alignRight" value="{po_tax_rate}">
+			<input type="text" name="po_tax_rate" onkeyup="set_tax_amount(this)" class="alignRight" value="0">
 		</div>
 		<div>
 			<label for="Tax Amount">Tax Amount</label>
-			<input type="text" name="po_tax_amount" class="alignRight" value="{po_tax_amount}" readonly>
+			<input type="text" name="po_tax_amount" class="alignRight" value="0" readonly>
 		</div>
 		<div>
 			<label for="Total Amount">Total Amount</label>
-			<input type="text" name="po_total_amount" class="alignRight" value="{po_total_amount}" readonly>
+			<input type="text" name="po_total_amount" class="alignRight" value="0" readonly>
 		</div>
 
 	</div></div>
@@ -100,20 +119,39 @@
 
 </section>
 
+
 <script>
 	jQuery('.preventDefault').bind("click", function(event){
 		event.preventDefault();
 	});
-
-	// jQuery('.WysiHat-editor').ready(function(){
-	// 	rowlen = $('.listrow').length;
-	// 	for(var i=0; i<rowlen; i++){
-	// 		amounts.push( ($('.listrow:eq('+i+')').find('.amount').text()).replace(/\,/g,'') );
-	// 	}
-	// 	console.log( amounts );
-	// });
+	jQuery('.WysiHat-editor').ready(function(){
+		po_list = "";
+		for(var i=0; i<products.length; i++){
+			po_list += 	'<div class="listrow" id="row-'+products[i].entry_id+'"' +
+						'style="'+ style.body.borderBottom+'">'+
+							'<b class="entry_id" style="display: none;">'+products[i].entry_id+'</b>'+
+							'<b class="product_name" style="'+ style.common.cellL +'">'+products[i].product_name+'</b>'+
+							'<b class="qty" style="'+ style.common.cellS +'">'+
+							'<input type="text" name="qty" onkeyup="set_amount(this)" value="0" style="'+ style.common.cellXS +'" />' +
+							'</b>'+
+							'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].price+'</b>'+
+							'<b class="amount" style="'+ style.common.cellM + style.common.alignRight +'">0.00</b>'+
+							'<b class="remove_product" style="'+ style.common.cellXS + style.common.alignCenter +'">'+
+								'<a href="#"><i class="fa fa-times-circle"' +
+									'onmouseover="shiftClasses(this)" onmouseout="shiftClasses(this)"'+
+									'onclick="remove_product(\'#row-'+products[i].entry_id+'\')"' +
+									'></i>' +
+								'</a>' +
+							'</b>' +
+						'</div>';
+		}
+		$(".WysiHat-editor .bodylist").append( po_list );
+	});
+	jQuery('select[name=po_status] option').css({display: 'none'});
+	jQuery('select[name=po_status]').find('option[value=PENDING]')
+		.attr('selected', true)
+		.attr('style', 'display: block;');
 </script>
 
-<script src="{path='purchase_order/update-script'}"></script>
 
 {embed="site/footer"}

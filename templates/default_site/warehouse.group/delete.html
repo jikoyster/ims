@@ -1,22 +1,12 @@
 <?php 
-ee()->load->library('api');
-ee()->api->instantiate('channel_entries');
- ?>
-
-{exp:channel:entries channel="warehouse" entry_id={segment_3} }
-<?php 
-
-$data = array(
-    'entry_id'		=> "{segment_3}",
-    'title' 		=> "{title}",
-    'url_title' 	=> "{url_title}",
-    'field_id_18' 	=> "{warehouse_address}",
-    'field_id_19' 	=> "{warehouse_contact}",
-    'status'		=> 'closed'
+ee()->db->update(
+    'channel_titles',
+    array(
+        'status'   => 'closed'
+    ),
+    array(
+        'entry_id'   => {segment_3}, 
+        'channel_id' => 5 //warehouse
+    )
 );
- ?>
-{/exp:channel:entries}
-
-<?php 
-ee()->api_channel_entries->save_entry($data, 5, {segment_3}, FALSE);
  ?>

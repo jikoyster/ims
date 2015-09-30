@@ -11,9 +11,16 @@
 		</div>
 		
 		<div class="span6">
-			{{hc.row2}}
+			{{hc.row2}} <br>
+			<button onclick="test()">Click me</button>
 		</div>
 	</div>
 </div>
+
+<script>
+	function test(){
+		window.open("{path='site/test'}", "", "top=100, height=600, width=800");
+	}
+</script>
 
 {embed ='site/footer'}

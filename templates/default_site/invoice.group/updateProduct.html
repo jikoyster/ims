@@ -1,8 +1,9 @@
 <html>
 	<head>
-		<title>Product Update</title>
+		<title>INVOICE: Product Update</title>
 	</head>
-	<body style="font-family: Verdana; font-size: 1.1em;">
+	<body style="font-family: Verdana; font-size: 1.1em;"
+		 onload="setTimeout(function(){ window.close(); }, 3000)"	>
 		
 
 
@@ -42,7 +43,6 @@ ee()->api->instantiate('channel_entries');
 	ee()->api_channel_entries->save_entry($data, 4, {segment_3}, FALSE); //4 - PRODUCT channel_id
 	 ?>
 {/exp:channel:entries}
-
 
 	</body>
 </html>

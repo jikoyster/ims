@@ -17,16 +17,18 @@
       <th class="alignLeft">Invoice Name</th>
       <th class="alignLeft">Type</th>
       <th class="alignLeft">Customer</th>
+      <th class="alignLeft">Date</th>
       <th class="alignRight">Total Amount</th>
       <th class="widthSmall"></th>
     </tr>
   </thead>
   <tbody ng-controller="invoiceController as ctrl">
-    {exp:channel:entries channel="invoice"}
+    {exp:channel:entries channel="invoice" orderby="date" sort="desc"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='invoice/update/{entry_id}'}">{title}</a></td>
       <td class="alignLeft">{invoice_type}</td>
       <td class="alignLeft">{customer:title}</td>
+      <td class="alignLeft">{entry_date format="%M. %d, %Y"}</td>
       <td class="alignRight">
         {if invoice_total_amount == ''} 
           {{0 | number:2 }} 
@@ -46,7 +48,7 @@
   </tbody>
   <tfoot class="note">
     <tr>
-      <td colspan='5'>
+      <td colspan='6'>
         Data deleted here are only set to trash (status = Closed).<br>
         Go to admin panel to recover/delete permanently those items.
       </td>

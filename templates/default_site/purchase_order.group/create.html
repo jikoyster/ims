@@ -61,8 +61,29 @@ endif;
 <hr>
 
 <div class="row"> 	
-		<div class="span4"><div class="cellpad">To:<br>{field:po_supplier}</div></div>
-		<div class="span4"><div class="cellpad">Deliver To:<br>{field:delivered_to}</div></div>
+		<div class="span4">
+			<div class="cellpad">
+				To:<br>{field:po_supplier}
+			</div>
+		</div>
+		<div class="span4">
+			<div class="cellpad">
+				Deliver To:<br><span class="delivered_to">{field:delivered_to}</span> <br>
+				{field:delivery_address}
+				<script>
+					$(".delivered_to select").on('change', function(){
+						delivered_to = $(this).val();
+						$.ajax({
+							url: "{path='purchase_order/create-delivery_address'}/"+ delivered_to
+						})
+						.done(function(result){
+							// alert(result);
+							$("textarea[name=delivery_address]").text( result );
+						});
+					});
+				</script>
+			</div>
+		</div>
 		<div class="span4"><div class="cellpad">
 			<label for="Name">PO#</label>
 			<input type="text" name="po_num" ng-model="po_num">
