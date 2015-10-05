@@ -1,0 +1,89 @@
+header{
+	background: $baseColor url(custom/img/green_fibers.png) repeat center;
+	padding: 10px;
+	color: white;
+
+	a{ 
+		color: white;
+	}
+	a:hover{ 
+		color: white; 
+		text-decoration: none; 
+	}
+	a:active, a:focus{
+		color: white;
+	}
+
+	#sitelogo{
+		font-size: 1.5em;
+		font-weight: bold;
+
+		a:hover{ 
+			color: #ccc;
+			text-decoration: none;
+			}
+	}
+
+	nav{
+		margin: 0;
+		padding: 10px;
+
+		ul{
+			margin: 0;
+			padding: 0;
+			transition: all 500ms;
+
+
+			li{
+				display: inline-block;
+				vertical-align: top;
+				margin-bottom: 15px;
+				
+				position: relative;
+
+				a{
+					text-transform: uppercase;
+					background: $secondaryColor;
+					padding: 5px;
+					border-radius: 5px;
+				}
+
+				ul{
+					position: absolute;
+					top: 24px;
+					visibility: hidden;
+					opacity: 0;
+
+					li{
+						margin-bottom: 0;
+						
+						a{
+							display: block;
+							width: 150px;
+							background: $secondaryColor-hover;
+							border-radius: 0;
+						}
+
+						ul{
+							top: 0;
+							left: 160px;
+						}
+					}//li:lvl2
+					li:hover > a{
+						background: $secondaryColor;
+					}
+				}//ul:lvl2
+			}//li
+			li:hover{
+				a{
+					background: $secondaryColor-hover;
+				}
+			}
+			li:hover > ul{
+				visibility: visible;
+				opacity: 1;
+			}
+		}//ul
+
+	}//nav
+}//header

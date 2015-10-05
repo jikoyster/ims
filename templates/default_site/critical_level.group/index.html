@@ -24,19 +24,19 @@
   <tbody>
     {exp:channel:entries channel="product" orderby="order_status" sort="asc"}
 
-      <?php if( {in_stock} <= {critical_level} ): 
+      <?php if( {in_stock} <= {critical_level} ){ 
           $col_style = "";
           $row_style = "";
           
-          if("{order_status}" == "Ordered"):
+          if("{order_status}" == "Ordered"){
             $col_style="color: #f00; font-weight: 900;";
             $row_style="background: #efefef;";
-          endif;
+          }
 
       ?>
         <tr class="critical_level_row" style="<?php echo $row_style; ?>" >
           <td class="checkbox">
-            <?php  if($row_style == ""): ?>
+            <?php  if("{order_status}" != "Ordered"): ?>
               <input type="checkbox" name="addToPO">
               <input type="hidden" name="entry_id" value="{entry_id}">
             <?php endif; ?>
@@ -50,7 +50,7 @@
               <span style="<?php echo $col_style; ?>" >{order_status}</span>
           </td>
         </tr>
-      <?php endif; ?>
+      <?php } ?>
 
     {/exp:channel:entries}
   </tbody>

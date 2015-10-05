@@ -4,6 +4,7 @@ $active_group = 'expressionengine';
 $active_record = TRUE;
 
 $server_ip = getHostByName(php_uname('n'));
+$server_ip = ( $server_ip )? $server_ip: "127.0.0.1";
 
 $db['expressionengine']['hostname'] = $server_ip;
 $db['expressionengine']['username'] = 'jake';

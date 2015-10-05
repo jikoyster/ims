@@ -112,8 +112,23 @@
 		for(var i=0; i<rowlen; i++){
 			amounts.push( ($('.listrow:eq('+i+')').find('.amount').text()).replace(/\,/g,'') );
 		}
+
+		jQuery(this).find("input[name=qty]").attr("readonly", true);
+		jQuery(this).find("input[name=qty]").on("click", function(){
+			var newQty = prompt("Input New Qty: ", "");
+			if (newQty != null) {
+		        jQuery(this).val(newQty);
+		        jQuery(this).attr('value', newQty);
+		        set_amount( jQuery(this) );
+		    }
+		});
+
+
 		console.log( amounts );
+
+
 	});
+	
 </script>
 
 <script src="{path='invoice/update-script'}"></script>

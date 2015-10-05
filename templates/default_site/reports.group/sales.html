@@ -1,0 +1,16 @@
+{embed ='site/header' curpage="reports"}
+
+<?php $ctr = 1; $total_amount = 0; ?>
+{exp:channel:entries channel='invoice'}
+	<div class="alignRight"><div class="alignLeft"><?php echo $ctr++ .": "; ?></div>{invoice_total_amount}</div>
+	<?php $total_amount += floatval(str_replace(",", "", "{invoice_total_amount}")) ?>
+{/exp:channel:entries}
+
+<br>
+<br>
+<br>
+
+<div class="alignRight">
+	COST OF GOODS SOLD: <?php echo number_format($total_amount, 2, '.', ','); ?>
+</div>
+{embed ='site/footer'}

@@ -1,0 +1,110 @@
+header{
+	background: $baseColor url(custom/img/green_fibers.png) repeat center;
+	padding: 0;
+	color: white;
+	border-bottom: 40px solid #fff;
+
+	a{ 
+		color: white;
+	}
+	a:hover{ 
+		color: white; 
+		text-decoration: none; 
+	}
+	a:active, a:focus{
+		color: white;
+	}
+
+	#sitelogo{
+		font-size: 1.5em;
+		font-weight: bold;
+
+		a:hover{ 
+			color: #ccc;
+			text-decoration: none;
+			}
+	}
+
+	nav{
+		margin: 60px 0 0 0;
+		padding: 0;
+
+		ul{
+			margin: 0;
+			padding: 0;
+
+			li{
+				list-style: none;
+				display: inline-block;
+				position: relative;
+				margin-right: 1px;
+				float: left;
+
+				a{
+					display: inline-block;
+					padding: 5px 10px;
+					color: #fff;
+				}
+
+				ul{
+					position: absolute;
+					display: none;
+					width: 500px;
+					text-align: left;
+					margin-top: 10px;
+					left: -200px;
+
+					li{
+						display: inline-block;
+						border-right: 1px solid #000;
+						padding-right: 10px;
+						margin-right: 10px;
+
+						a{
+							color: #f00;	
+							padding: 0;
+						}
+					}//li
+					li:last-child{
+						border-right: 0;
+					}
+				}//sub1-nav
+
+			}//parent li
+			li:hover{
+				background-color: #fff;
+				a{
+					color: black;
+				}
+				ul{ 
+					a{
+						color: #f00;
+					}
+				}
+			}
+			li:hover > ul{
+				display: block;
+			}
+			li.curpage{
+				background-color: #fff;
+				a{
+					color: #000;
+				}
+				ul{
+					display: block;
+					top: 30px;
+
+					li{
+						a{
+							color: #f00;
+						}
+						a:hover{
+							color: #000;
+						}
+					}
+				}
+			}//.warehouse
+		}//parent ul
+
+	}//nav
+}//header

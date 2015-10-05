@@ -11,6 +11,8 @@
 |
 */
 $server_ip = getHostByName(php_uname('n'));
+$server_ip = ( $server_ip )? $server_ip: "127.0.0.1";
+
 $config['site_url'] = "http://". $server_ip . "/ims/";
 $config['theme_folder_url'] = "http://". $server_ip . "/ims/themes/";
 

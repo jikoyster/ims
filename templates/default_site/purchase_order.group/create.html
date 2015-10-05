@@ -62,13 +62,13 @@ endif;
 
 <div class="row"> 	
 		<div class="span4">
-			<div class="cellpad">
+			<div class="cellpad po_supplier">
 				To:<br>{field:po_supplier}
 			</div>
 		</div>
 		<div class="span4">
-			<div class="cellpad">
-				Deliver To:<br><span class="delivered_to">{field:delivered_to}</span> <br>
+			<div class="cellpad delivered_to">
+				Deliver To:<br>{field:delivered_to} <br>
 				{field:delivery_address}
 				<script>
 					$(".delivered_to select").on('change', function(){
@@ -153,7 +153,7 @@ endif;
 
 </section>
 
-
+<script src="{path='purchase_order/validate'}"></script>
 <script>
 	jQuery('.preventDefault').bind("click", function(event){
 		event.preventDefault();

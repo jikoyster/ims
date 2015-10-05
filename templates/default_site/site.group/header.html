@@ -58,16 +58,17 @@
             <div class="span9">
                 <nav>
                     <ul>
-                        <li><a href="{path='warehouse'}">WAREHOUSE MANAGEMENT</a>
+                        <li class="{if embed:curpage == 'warehouse'} curpage {/if}"><a href="#">WAREHOUSE</a>
                             <ul>
+                                <li><a href="{path='warehouse'}">Warehouse Management</a>
                                 <li><a href="{path='product'}">Product</a></li>   
                                 <li><a href="{path='price_code'}">PRICE CODE</a></li>
                             </ul>
                         </li>
                         
-                        <li><a href="#">RECORDS</a>
+                        <li class="{if embed:curpage == 'records'} curpage {/if}"><a href="#">RECORDS</a>
                             <ul>
-                                <li><a href="{path='invoice'}">INVOICE</a></li>
+                                <li><a href="{path='invoice'}">Invoice</a></li>
                                 <li><a href="{path='purchase_order'}">Purchase Order</a>
                                     <ul>
                                         <li><a href="{path='purchase_order/receive'}">Receive</a></li>
@@ -76,10 +77,10 @@
                             </ul>
                         </li>
 
-                        <li><a href="#">Reports</a>
+                        <li class="{if embed:curpage == 'reports'} curpage {/if}"><a href="#">REPORTS</a>
                             <ul>
-                                <li><a href="#">Sales Report</a></li>
-                                <li><a href="#">Inventory</a>
+                                <li><a href="{path='reports/sales'}">Sales Report</a></li>
+                                <li><a href="{path='reports/inventory'}">Inventory</a>
                                     <ul>
                                         <li><a href="#">Individual Product</a></li>
                                         <li><a href="#">Monthly</a></li>
@@ -90,7 +91,7 @@
                             </ul>
                         </li>
 
-                        <li><a href="#">Accounts</a>
+                        <li class="{if embed:curpage == 'accounts'} curpage {/if}"><a href="#">ACCOUNTS</a>
                             <ul>
                                 <li><a href="{path='supplier'}">Supplier</a></li>
                                 <li><a href="{path='customer'}">Customer</a></li>                                
