@@ -4,7 +4,6 @@
   var delbuttonOff = "fa-times-circle";
   var delbuttonOn  = "fa-times-circle-o";
 </script>
-
 <section class="cellpad" ng-app="po">
   
 {if logged_in}
@@ -23,7 +22,7 @@
     </tr>
   </thead>
   <tbody ng-controller="poController as ctrl">
-    {exp:channel:entries channel="purchase_order" search:po_status='PENDING'}
+    {exp:channel:entries channel="purchase_order" search:po_status='RECEIVED'}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='purchase_order/update/{entry_id}'}">{title}</a></td>
       <td class="alignRight">{po_total_amount}</td>

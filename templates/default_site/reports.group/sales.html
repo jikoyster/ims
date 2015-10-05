@@ -1,16 +1,40 @@
 {embed ='site/header' curpage="reports"}
 
 <?php $ctr = 1; $total_amount = 0; ?>
-{exp:channel:entries channel='invoice'}
-	<div class="alignRight"><div class="alignLeft"><?php echo $ctr++ .": "; ?></div>{invoice_total_amount}</div>
-	<?php $total_amount += floatval(str_replace(",", "", "{invoice_total_amount}")) ?>
-{/exp:channel:entries}
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Invoice Name</th>
+      <th class="alignLeft">Type</th>
+      <th class="alignLeft">Customer</th>
+      <th class="alignLeft">Date</th>
+      <th class="alignRight">Total Amount</th>
+    </tr>
+  </thead>
+  <tbody ng-controller="invoiceController as ctrl">
+    {exp:channel:entries channel="invoice" year="<?php echo date('Y') ?>" orderby="date" sort="desc"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='invoice/update/{entry_id}'}">{title}</a></td>
+      <td class="alignLeft">{invoice_type}</td>
+      <td class="alignLeft">{customer:title}</td>
+      <td class="alignLeft">{entry_date format="%M. %d, %Y"}</td>
+      <td class="alignRight">
+        {invoice_total_amount}
 
-<br>
-<br>
-<br>
+        <?php $total_amount += floatval(str_replace(",", "", "{invoice_total_amount}")) ?>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='6'>
+        <h3>COST OF GOODS SOLD: <?php echo number_format($total_amount, 2, '.', ','); ?></h3>
+      </td>
+    </tr>
+  </tfoot>
+</table>
 
-<div class="alignRight">
-	COST OF GOODS SOLD: <?php echo number_format($total_amount, 2, '.', ','); ?>
-</div>
+
+
 {embed ='site/footer'}
