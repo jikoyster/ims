@@ -1,0 +1,23 @@
+{embed ='site/header' curpage="salesman"}
+
+<div class="cellpad">
+	{exp:channel:form channel="salesman" return="{segment_1}"}
+		<div>
+			<label for="Fullname">Fullname: </label>
+			{field:fullname}
+		</div>
+		<div>
+			<label for="Contact">Contact: </label>
+			{field:contact}
+		</div>
+		<div>
+			<label for="Commission Rate">Commission Rate: </label>
+			{field:commission_rate}
+		</div>
+		<div>
+			{field:transaction}
+		</div>
+	{/exp:channel:form}
+</div>
+
+{embed ='site/footer'}

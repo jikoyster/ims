@@ -1,0 +1,40 @@
+{embed ='site/header' curpage="reports"}
+
+<!-- get beginning inventory of this product {segment_3} -->
+{exp:channel:entries channel="product" category="{exp:cat2:id category_url_title='C1'}}
+	<div class="cellpad">
+		<h3><label for="Name">Product Name: </label> {product_name}</h3>
+
+		<div>
+			<label for="code">Product Code: </label>
+			{product_code}
+		</div>
+
+		<div>
+			<label for="um">UM (unit of measure): </label>
+			{um}
+		</div>
+
+		<div>
+			<label for="stock">Stock in hand: </label>
+			{in_stock}
+		</div>
+	</div>
+{/exp:channel:entries}
+
+<!-- get purchases of this product with the date of purchase -->
+<!-- goods available for sale 
+	all (wsale/retail): beg.inv. + purchases = total goods available for sale
+-->
+
+<!-- get the current in_stock -->
+
+
+
+<!-- wholesale purchases of this item & total
+		total qty * wholesale_price 
+-->
+<!-- retail purchases of this item & total -->
+
+
+{embed ='site/footer'}

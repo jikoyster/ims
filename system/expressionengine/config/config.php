@@ -10,6 +10,7 @@
 | observed by ExpressionEngine, e.g. 'permitted_uri_chars'
 |
 */
+//$config['require_ip_for_login'] = "n";
 $server_ip = getHostByName(php_uname('n'));
 $server_ip = ( $server_ip )? $server_ip: "127.0.0.1";
 

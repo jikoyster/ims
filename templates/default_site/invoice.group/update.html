@@ -113,18 +113,18 @@
 			amounts.push( ($('.listrow:eq('+i+')').find('.amount').text()).replace(/\,/g,'') );
 		}
 
-		jQuery(this).find("input[name=qty]").attr("readonly", true);
-		jQuery(this).find("input[name=qty]").on("click", function(){
-			var newQty = prompt("Input New Qty: ", "");
-			if (newQty != null) {
-		        jQuery(this).val(newQty);
-		        jQuery(this).attr('value', newQty);
-		        set_amount( jQuery(this) );
-		    }
-		});
+		// jQuery(this).find("input[name=qty]").attr("readonly", true);
+		// jQuery(this).find("input[name=qty]").on("click", function(){
+		// 	var newQty = prompt("Input New Qty: ", "");
+		// 	if (newQty != null) {
+		//         jQuery(this).val(newQty);
+		//         jQuery(this).attr('value', newQty);
+		//         set_amount( jQuery(this) );
+		//     }
+		// });
 
 
-		console.log( amounts );
+		// console.log( amounts );
 
 
 	});

@@ -47,60 +47,40 @@
 
         
 		<header>
-        <div class="container">
+        <div>
 
-        <div class="row">
-            <div class="span3">
-                <div id="sitelogo">
-                    <a href="{path='site_index'}">Inventory Management<br>System</a>
+        <div>
+            <div id="sitelogo">
+                <a href="{path='site_index'}">
+                    <img src="{path='custom/img/images/logo.png'}" alt="">
+                </a>
+            </div>
+            
+            
+            <nav>
+                <div class="big">
+                    <a href="#">Warehouse Management</a>
                 </div>
-            </div>
-            <div class="span9">
-                <nav>
-                    <ul>
-                        <li class="{if embed:curpage == 'warehouse'} curpage {/if}"><a href="#">WAREHOUSE</a>
-                            <ul>
-                                <li><a href="{path='warehouse'}">Warehouse Management</a>
-                                <li><a href="{path='product'}">Product</a></li>   
-                                <li><a href="{path='price_code'}">PRICE CODE</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="{if embed:curpage == 'records'} curpage {/if}"><a href="#">RECORDS</a>
-                            <ul>
-                                <li><a href="{path='invoice'}">Invoice</a></li>
-                                <li><a href="{path='purchase_order'}">Purchase Order</a>
-                                    <ul>
-                                        <li><a href="{path='purchase_order/received'}">Received</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="{if embed:curpage == 'reports'} curpage {/if}"><a href="#">REPORTS</a>
-                            <ul>
-                                <li><a href="{path='reports/sales'}">Sales Report</a></li>
-                                <li><a href="{path='reports/inventory'}">Inventory</a>
-                                    <ul>
-                                        <li><a href="#">Individual Product</a></li>
-                                        <li><a href="#">Monthly</a></li>
-                                        <li><a href="#">Quarterly</a></li>
-                                        <li><a href="#">Annual</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="{if embed:curpage == 'accounts'} curpage {/if}"><a href="#">ACCOUNTS</a>
-                            <ul>
-                                <li><a href="{path='supplier'}">Supplier</a></li>
-                                <li><a href="{path='customer'}">Customer</a></li>                                
-                            </ul>
-                        </li>
-                        
-                    </ul>
-                </nav>
-            </div>
+                
+                <div class="small">
+                    <a href="#">Purchase<br/> Order</a>
+                    <a href="#">Stock<br/> Management</a>
+                </div>
+                
+                <div class="big">
+                    <a href="{path='invoice/index'}">Sales<br/> Encoding</a> <!-- INVOICE -->
+                </div>
+                <div class="big">
+                    <a href="#">Collection / Customer Payment</a>
+                </div>
+                <div class="big">
+                    <a href="#">Accounts Payable</a>
+                </div>
+                <div class="big">
+                    <a href="#">Reports</a>
+                </div>
+            </nav>
+            
         </div>
         
         <div class="clear"></div>
@@ -108,5 +88,5 @@
 	
         </header>
         
-        <div class="container">
+        <div xclass="container">
             <div class="container-inner">

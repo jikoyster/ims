@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<script type="text/javascript" src="{path='custom/js/jquery.min.js'}"></script>
+        <script type="text/javascript" src="{path='custom/js/angular.min.js'}"></script>
+
+		<link rel="stylesheet" type="text/css" href="{path='custom/css/bootstrap.min.css'}" media="all">
+
+        <link rel="stylesheet" type="text/css" href="{stylesheet='site/style'}" media="all">
+        <link rel="stylesheet" href="{path='custom/css/font-awesome.min.css'}" media="all">
+    </head>
+    <body onload="self">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <?php $ctr = 0; ?>
+        <!-- category="not 10"  - meaning the product is not on "ORDERED" category 
+        and it neeeds to be on PO first -->
+        {exp:channel:entries channel="product" category_group="not 3" dynamic="no"}
+            <?php if( {in_stock} <= {critical_level} ){ 
+              $ctr++;
+            } ?> 
+        {/exp:channel:entries}
+        <?php if( $ctr > 0 ): ?>
+            
+            <body class="on-alert">
+
+            <div class="alertmsg">
+                <i class="fa fa-exclamation-triangle"></i> 
+                Critical Level Products : <?php echo $ctr; ?> items
+                <a class="btn" href="{path='critical_level'}">more details &raquo;</a>
+            </div>
+        <?php else: ?>
+            <body class="off-alert">
+        <?php endif; ?>
+
+        
+		<header>
+        <div>
+
+        <div class="row">
+            <div class="span3">
+                <div id="sitelogo">
+                    <a href="{path='site_index'}">
+                        <img src="{path='custom/img/images/logo.png'}" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="span9">
+                <nav>
+                    <ul>
+                        <li class="{if embed:curpage == 'warehouse'} curpage {/if}"><a href="#">WAREHOUSE</a>
+                            <ul>
+                                <li><a href="{path='warehouse'}">Warehouse Management</a>
+                                <li><a href="{path='product'}">Product</a></li>   
+                                <li><a href="{path='price_code'}">PRICE CODE</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="{if embed:curpage == 'records'} curpage {/if}"><a href="#">RECORDS</a>
+                            <ul>
+                                <li><a href="{path='invoice'}">Invoice</a></li>
+                                <li><a href="{path='purchase_order'}">Purchase Order</a>
+                                    <ul>
+                                        <li><a href="{path='purchase_order/received'}">Received</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="{if embed:curpage == 'reports'} curpage {/if}"><a href="#">REPORTS</a>
+                            <ul>
+                                <li><a href="{path='reports/sales'}">Sales Report</a></li>
+                                <li><a href="{path='reports/inventory'}">Inventory</a>
+                                    <ul>
+                                        <li><a href="#">Monthly</a></li>
+                                        <li><a href="#">Quarterly</a></li>
+                                        <li><a href="#">Annual</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="{if embed:curpage == 'accounts'} curpage {/if}"><a href="#">ACCOUNTS</a>
+                            <ul>
+                                <li><a href="{path='supplier'}">Supplier</a></li>
+                                <li><a href="{path='customer'}">Customer</a></li>                                
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
+        <div class="clear"></div>
+        </div> <!-- container -->
+	
+        </header>
+        
+        <div xclass="container">
+            <div class="container-inner">

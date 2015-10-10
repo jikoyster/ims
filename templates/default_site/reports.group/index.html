@@ -1,3 +1,24 @@
 {embed ='site/header' curpage="reports"}
 
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Product</th>
+      <th class="widthMedium alignCenter">Product Code</th>
+      <th class="widthMedium"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {exp:channel:entries channel="product"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="#">{title}</a></td>
+      <td class="widthMedium alignCenter">{product_code}</td>
+      <td class="alignCenter widthMedium">
+        <a href="{path='reports/inventory-product'}/{entry_id}">View Inventory &raquo;</a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+</table>
+
 {embed ='site/footer'}

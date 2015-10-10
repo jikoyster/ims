@@ -1,0 +1,37 @@
+{embed ='site/header' curpage="reports"}
+
+<!-- INVENTORY TYPE MUST INCLUDE: WHOLESALE OR RETAIL -->
+
+
+<!-- 
+# get total purchases for last year
+ -->
+<?php $total_purchases_beg = 1; ?>
+{exp:channel:entries channel="purchase_order" year="2014"}
+	<?php $total_purchases_beg += str_replace(",", "", "{po_total_amount}"); ?>
+{/exp:channel:entries}
+
+
+<!-- 
+# get total purchases for this year
+ -->
+<?php $total_purchases = 0; ?>
+{exp:channel:entries channel="purchase_order" year="2015"}
+	<?php $total_purchases += str_replace(",", "", "{po_total_amount}"); ?>
+{/exp:channel:entries}
+
+<!-- 
+# 
+ -->
+
+<h1>2015 Inventory</h1>
+
+<div><?php echo "Beg. Inv.: ".number_format($total_purchases_beg, 2, ".", ",");  ?></div>
+<div><?php echo "Total Purchases: ".number_format($total_purchases, 2, ".", ","); ?></div>
+<?php $available4sale = $total_purchases_beg + $total_purchases; ?>
+<div><?php echo "Total goods available for sale: ". number_format($available4sale, 2, ".", ","); ?></div>
+<!-- #naa pa ni dapat $less ??? computation of current in_stock of product * its wholesale_price / retail_price 
+# depending on the inventory type  -->
+<?php $cogs = $available4sale - $total_purchases; ?>
+<div><?php echo "Cost Of Goods Sold: ". number_format($cogs, 2, ".", ",") ?></div>
+{embed ='site/footer'}

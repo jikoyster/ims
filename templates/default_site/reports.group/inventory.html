@@ -1,3 +1,8 @@
 {embed ='site/header' curpage="reports"}
 
+{exp:channel:categories}
+    <a href="{site_url}reports/inventory-product/{category_id}">{category_name}</a>
+    {if category_description}{category_description}{/if}
+{/exp:channel:categories}
+
 {embed ='site/footer'}
