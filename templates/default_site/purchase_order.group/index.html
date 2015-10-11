@@ -1,4 +1,9 @@
 {embed ='site/header'}
+<div class="cellpad">
+  <a href="{path='purchase_order/pending'}" class="btn btn-warning">PENDING</a>
+  <a href="{path='purchase_order/received'}" class="btn btn-success">RECEIVED</a>
+</div>
+
 <script src="{path='purchase_order/data-del'}"></script>
 <script>
   var delbuttonOff = "fa-times-circle";
@@ -23,7 +28,7 @@
     </tr>
   </thead>
   <tbody ng-controller="poController as ctrl">
-    {exp:channel:entries channel="purchase_order" search:po_status='PENDING'}
+    {exp:channel:entries channel="purchase_order"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='purchase_order/update/{entry_id}'}">{title}</a></td>
       <td class="alignRight">{po_total_amount}</td>
