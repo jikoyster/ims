@@ -6,7 +6,7 @@
 
 {if logged_in}
 
-{exp:channel:form channel="product" return="{segment_1}" entry_id="{segment_3}"}
+{exp:channel:form channel="product" return="{segment_1}"}
 <div>
 
 <h1 class="pagetitle cellpad">New Product</h1>
@@ -15,8 +15,8 @@
 	<div class="span6"><div class="cellpad">
 		<div>
 			<label for="Name">Product Name</label>
-			<input type="text" name="product_name" value="{product_name}">
-			<input type="hidden" name="title" value="{title}">
+			<input type="text" name="product_name" ng-model="p_name">
+			<input type="hidden" name="title" value="{{p_name}}">
 		</div>
 
 		<div>
@@ -49,11 +49,7 @@
 
 		<div class="cat_section">
 			<label for="Warehouse">Warehouse</label>
-			<select name="Warehouse" id="2">
-				{categories show_group="2"}
-					<option value="{category_id}" {selected}>{category_name}</option>
-		        {/categories}
-	        </select>
+			{field:warehouse}
 		</div>
 
 	</div></div>
@@ -70,46 +66,40 @@
 			<input type="text" name="company_price" 
 				ng-keyup="priceCtrl.set_prices()"
 				ng-click="priceCtrl.checkDefault('company_price')"
-				value="{company_price}">
+				value="{{priceCtrl.company_price | number:2}}">
 		</div>
 		<div>
 			<label for="Less">Less <small>({instructions:less})</small> </label>
-			<input type="text" name="less" 
-				ng-keyup="priceCtrl.set_net_price()"
-				value="{less}">
+			<input type="text" name="less" ng-keyup="priceCtrl.set_net_price()">
 		</div>
 		<div>
 			<label for="Wholesale Rate">Wholesale Rate <small>({instructions:wholesale_rate})</small></label>
-			<input type="text" name="wholesale_rate" 
-				ng-keyup="priceCtrl.set_wholesale_price()"
-				value="{wholesale_rate}">
+			<input type="text" name="wholesale_rate" ng-keyup="priceCtrl.set_wholesale_price()">
 		</div>
 		<div>
 			<label for="Retail Rate">Retail Rate <small>({instructions:retail_rate})</small></label>
-			<input type="text" name="retail_rate" 
-				ng-keyup="priceCtrl.set_retail_price()"
-				value="{retail_rate}">
+			<input type="text" name="retail_rate" ng-keyup="priceCtrl.set_retail_price()">
 		</div>
 
 	</div></div>
 	<!-- col1 -->
 	<div class="span6"><div class="cellpad">
-
+		
 		<div> <br><br> </div>
-		<div ng-init="priceCtrl.net_price = ('{net_price}'  | num )">
+		<div>
 			<label for="Net Price">Net Price</label>
 			<input type="text" name="net_price" 
-				ng-value="(priceCtrl.net_price | number:2)">
-		</div> 
-		<div ng-init="priceCtrl.wholesale_price = ('{wholesale_price}' | num)">
+				value="{{priceCtrl.net_price | number:2}}">
+		</div>
+		<div>
 			<label for="Wholesale Price">Wholesale Price</label>
 			<input type="text" name="wholesale_price" 
-				ng-value="(priceCtrl.wholesale_price | number:2)">
+				value="{{priceCtrl.wholesale_price | number:2}}">
 		</div>
-		<div ng-init="priceCtrl.retail_price = ('{retail_price}' | num)">
+		<div>
 			<label for="Retail Price">Retail Price</label>
 			<input type="text" name="retail_price" 
-				ng-value="(priceCtrl.retail_price | number:2)">
+				value="{{priceCtrl.retail_price | number:2}}">
 		</div>
 
 	</div></div>
@@ -130,10 +120,9 @@
 		</p>
 		{/status_menu}
 
-		<p>
-			Order Status <br>
-			{field:order_status}
-		</p>
+		
+
+		<input type="hidden" name="order_status" value="Not Ordered">
 
 		<input type="submit" value="Submit" class="btn btn-danger">	
 	</div>
