@@ -63,7 +63,9 @@ body.on-alert header {
 
 .container-inner {
   background: white;
-  padding: 10px; }
+  padding: 10px;
+  width: 95%;
+  margin: 0 auto; }
 
 .pagetitle {
   font-size: 2em;
@@ -153,21 +155,24 @@ body {
   min-width: 1000px; }
 
 header {
-  width: 1000px;
+  min-width: 1024px;
+  width: 96%;
+  margin: 0 auto;
   padding: 10px; }
   header #sitelogo {
     float: left;
-    width: 20%;
+    width: 190px;
     margin-right: 10px; }
   header nav .big, header nav .small {
     float: left;
     margin-right: 2px;
     margin-bottom: 2px;
-    width: 12%;
+    width: 13%;
     display: table; }
   header nav .big a, header nav .small a {
     display: table-cell;
-    vertical-align: middle; }
+    vertical-align: middle;
+    font-weight: 900; }
   header nav .big {
     text-align: center;
     height: 100px;
@@ -187,7 +192,7 @@ header {
   header nav a:hover {
     color: #fff;
     text-decoration: none;
-    outline: 2px inset #f00; }
+    opacity: .7; }
   header nav .tab--warehouse {
     background: #333333; }
   header nav .tab--po {
@@ -204,6 +209,7 @@ header {
     background: #209009; }
 
 footer {
+  width: 96%;
   margin: 10px auto; }
   footer .footer--text {
     text-align: center; }
@@ -257,5 +263,13 @@ section label {
 
 #CriticalLevel tr {
   cursor: pointer; }
+
+.homecol .col {
+  float: left;
+  width: 30%;
+  margin-right: 10px; }
+  .homecol .col .col-title {
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,12 +1,12 @@
 {embed="site/header"}
-<script src="{path='product/script'}"></script>
-<link rel="stylesheet" href="{path='product/style'}">
+<script src="{path='stocks/script'}"></script>
+<link rel="stylesheet" href="{path='stocks/style'}">
 
 <section ng-app="product">
 
 {if logged_in}
 
-{exp:channel:form channel="product" return="{segment_1}"}
+{exp:channel:form channel="stocks" return="{segment_1}"}
 <div>
 
 <h1 class="pagetitle cellpad">New Product</h1>
@@ -28,7 +28,7 @@
 			{field:um}
 		</div>
 		<div>
-			<label for="In Stock">In Stock</label>
+			<label for="In Stock">Stock on Hand</label>
 			{field:in_stock}
 		</div>
 		<div>

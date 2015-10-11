@@ -15,7 +15,7 @@
 							$('#row-'+entry_id).hide(500, function(){ $(this).remove(); });
 								
 							$.ajax({
-								url: "{path='product/delete'}/" + entry_id
+								url: "{path='stocks/delete'}/" + entry_id
 							})
 							.done(function(result){
 								alert("Data is disabled successfully.");									

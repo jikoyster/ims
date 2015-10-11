@@ -3,17 +3,42 @@
 <script src="{path='site/script'}"></script>
 
 <div ng-app="home">
-	<div class="row" ng-controller="homeController as hc">
+	<div class="homecol" ng-controller="homeController as hc">
 		
-		<div class="span6">
-			{{hc.row1}}
-			<?php echo "<br>IPv4: ". getHostByName(php_uname('n')); ?>
+		<div class="col col1">
+			<h3 class="col-title">Recent Purchase Orders &raquo;</h3>
+			{exp:channel:entries channel="purchase_order" limit="10"}
+				<ul>
+					<li>
+						<b><a href="{path='purchase_order/update'}/{entry_id}">{title}</a></b>
+						- {entry_date format='%M. %d, %Y'}
+					</li>
+				</ul>
+			{/exp:channel:entries}
+			<div class="alignRight"><a href="{path='purchase_order'}">view all &raquo;</a></div>
+		</div>
+
+		<div class="col col2">
+			<h3 class="col-title">Recent Invoices &raquo;</h3>
+			{exp:channel:entries channel="invoice" limit="10"}
+				<ul>
+					<li>
+						<b><a href="{path='invoice/update'}/{entry_id}">{title}</a></b>
+						- {entry_date format='%M. %d, %Y'}
+					</li>
+				</ul>
+			{/exp:channel:entries}
+			<div class="alignRight"><a href="{path='invoice'}">view all &raquo;</a></div>
+		</div>
+
+		<div class="col col3">
+			<h3 class="col-title">Recent &raquo;</h3>
+			<p>Luptatum eu ad augue, dolor dolore qui iusto, consequat consequat vel feugiat augue facilisis lorem veniam esse at et te adipiscing, nulla. Enim, blandit eum facilisi feugiat, commodo feugait volutpat autem tation nibh et, dignissim ut, in sit consequat velit. Accumsan, ad at autem nulla ad dolor nisl laoreet iriure tation eros esse iriure eu vel quis quis autem. Accumsan eros nostrud vulputate delenit erat in nisl et. Dolore in, magna, ut tation dignissim iriure consectetuer ad dignissim exerci te facilisis sed ex. Ut, ut molestie ut aliquam praesent, praesent consectetuer diam quis luptatum lobortis. </p>
+			<p>
+				Et nostrud te, wisi hendrerit at, ea, veniam aliquip, tincidunt dolore adipiscing, enim sed tincidunt ullamcorper. Iusto duis consequat, ut feugait zzril qui feugiat odio dignissim. Euismod eros illum duis dolor eum eum luptatum consectetuer iusto ullamcorper minim. Qui praesent nulla volutpat vero ut odio consequat feugiat ea dolore minim ea feugait eum nulla ut enim suscipit. 
+			</p>
 		</div>
 		
-		<div class="span6">
-			{{hc.row2}} <br>
-			<button onclick="test()">Click me</button>
-		</div>
 	</div>
 </div>
 

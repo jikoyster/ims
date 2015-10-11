@@ -1,5 +1,5 @@
 {embed ='site/header' curpage="warehouse"}
-<script src="{path='product/script'}"></script>
+<script src="{path='stocks/script'}"></script>
 <script>
   var delbuttonOff = "fa-times-circle";
   var delbuttonOn  = "fa-times-circle-o";
@@ -8,7 +8,7 @@
 <section class="cellpad" ng-app="product">
   
 {if logged_in}
-<a class="btn btn-new" href="{path='product/create'}">Add New Product</a>
+<a class="btn btn-new" href="{path='stocks/create'}">Add New Product</a>
 {/if}
 
 <table border='1' class="tbl_display">
@@ -23,9 +23,9 @@
     </tr>
   </thead>
   <tbody ng-controller="productController as sc">
-    {exp:channel:entries channel="product"}
+    {exp:channel:entries channel="stocks"}
     <tr id="row-{entry_id}">
-      <td class="alignLeft"><a href="{path='product/update/{entry_id}'}">{title}</a></td>
+      <td class="alignLeft"><a href="{path='stocks/update/{entry_id}'}">{title}</a></td>
       <td class="alignLeft widthMedium">{product_code}</td>
       <td class="alignLeft widthMedium"><a href="{path='warehouse/update/{warehouse:entry_id}'}">{warehouse:title}</a></td>
       <td class="alignLeft widthSmall">{in_stock}</td>
