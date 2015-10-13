@@ -268,10 +268,11 @@ section label {
 
 .col-wrapper .col {
   float: left;
-  width: 30%;
   margin-right: 10px; }
   .col-wrapper .col .col-title {
     font-size: 1.2em;
     border-bottom: 1px solid #ccc; }
+.col-wrapper .col-3 {
+  width: 31%; }
 
 /*# sourceMappingURL=style.css.map */

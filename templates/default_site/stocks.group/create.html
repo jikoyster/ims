@@ -58,8 +58,8 @@
 <!--  end of first block -->
 
 <hr>
-<div class="row" ng-controller="priceController as priceCtrl">
-	<div class="span6"><div class="cellpad">
+<div class="col-wrapper" ng-controller="priceController as priceCtrl">
+	<div class="col col-3"><div class="cellpad">
 		
 		<div>
 			<label for="Company Price">Company Price</label>
@@ -83,7 +83,7 @@
 
 	</div></div>
 	<!-- col1 -->
-	<div class="span6"><div class="cellpad">
+	<div class="col col-3"><div class="cellpad">
 		
 		<div> <br><br> </div>
 		<div>
@@ -104,10 +104,23 @@
 
 	</div></div>
 	<!-- col2 -->
+	<div class="col col-3"><div class="cellpad">
+		<div> <br><br> </div>
+		<div> <br><br> </div>
+		<div>
+			<label for="Wholesale Price Code">Wholesale Price Code</label>
+			{field:wholesale_price_code}
+		</div>
+		<div>
+			<label for="Retail Price">Retail Price</label>
+			{field:retail_price_code}
+		</div>
+	</div></div>
+	<!-- col3 -->
 </div>
 <!-- end of 2nd block -->
 
-	<hr>
+	<hr class="clear">
 	<div class="cellpad">
 		
 		<p>Date <br> <input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25"></p>
@@ -123,7 +136,6 @@
 		
 
 		<input type="hidden" name="order_status" value="Not Ordered">
-
 		<input type="submit" value="Submit" class="btn btn-danger">	
 	</div>
 

@@ -1,12 +1,12 @@
 {embed="site/header"}
-<script src="{path='product/script'}"></script>
-<link rel="stylesheet" href="{path='product/style'}">
+<script src="{path='stocks/script'}"></script>
+<link rel="stylesheet" href="{path='stocks/style'}">
 
 <section ng-app="product">
 
 {if logged_in}
 
-{exp:channel:form channel="product" return="{segment_1}" entry_id="{segment_3}"}
+{exp:channel:form channel="stocks" return="{segment_1}" entry_id="{segment_3}"}
 <div>
 
 <h1 class="pagetitle cellpad">New Product</h1>
@@ -58,8 +58,8 @@
 <!--  end of first block -->
 
 <hr>
-<div class="row" ng-controller="priceController as priceCtrl">
-	<div class="span6"><div class="cellpad">
+<div class="col-wrapper" ng-controller="priceController as priceCtrl">
+	<div class="col col-3"><div class="cellpad">
 		
 		<div>
 			<label for="Company Price">Company Price</label>
@@ -89,7 +89,7 @@
 
 	</div></div>
 	<!-- col1 -->
-	<div class="span6"><div class="cellpad">
+	<div class="col col-3"><div class="cellpad">
 
 		<div> <br><br> </div>
 		<div ng-init="priceCtrl.net_price = ('{net_price}'  | num )">
@@ -110,10 +110,23 @@
 
 	</div></div>
 	<!-- col2 -->
+	<div class="col col-3"><div class="cellpad">
+		<div> <br><br> </div>
+		<div> <br><br> </div>
+		<div>
+			<label for="Wholesale Price Code">Wholesale Price Code</label>
+			{field:wholesale_price_code}
+		</div>
+		<div>
+			<label for="Retail Price">Retail Price</label>
+			{field:retail_price_code}
+		</div>
+	</div></div>
+	<!-- col3 -->
 </div>
 <!-- end of 2nd block -->
 
-	<hr>
+	<hr class="clear">
 	<div class="cellpad">
 		
 		<p>Date <br> <input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25"></p>
