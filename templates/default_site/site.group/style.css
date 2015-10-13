@@ -202,12 +202,16 @@ header {
   header nav .tab--encoding {
     background: #690011; }
   header nav .tab--collection {
+    background: #492100; }
+  header nav .tab--salesman {
+    background: #040C32; }
+  header nav .tab--supplier {
     background: #09154c; }
-  header nav .tab--payable {
-    background: #6f3100; }
+  header nav .tab--salesman, header nav .tab--supplier {
+    line-height: 40px; }
   header nav .tab--reports {
     background: #209009; }
-  header nav .tab--accounts {
+  header nav .tab--customer {
     background: #7356CF; }
 
 footer {

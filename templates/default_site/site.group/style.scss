@@ -245,15 +245,21 @@ header{
 			background: #690011;
 		}
 		.tab--collection{
+			background: #492100;
+		}
+		.tab--salesman{
+			background: #040C32;
+		}
+		.tab--supplier{
 			background: #09154c;
 		}
-		.tab--payable{
-			background: #6f3100;
-		}
+			.tab--salesman, .tab--supplier{
+				line-height: 40px;
+			}
 		.tab--reports{
 			background: #209009;
 		}
-		.tab--accounts{
+		.tab--customer{
 			background: #7356CF;
 		}
 
