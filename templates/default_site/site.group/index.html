@@ -2,6 +2,18 @@
 
 <script src="{path='site/script'}"></script>
 
+<button id="test-btn" data-url="{path='site/test'}">click me</button>
+<script>
+	$('body').on('click', '#test-btn' ,function(){
+	    var self = $(this);
+	    var current = window;
+
+	    var win = window.open(self.attr('data-url'), "_blank", 'modal=yes');
+	    // setTimeout(function(){ win.close(); }, 3000);
+	    current.focus();
+	});
+</script>
+
 <div ng-app="home">
 	<div class="col-wrapper" ng-controller="homeController as hc">
 		
