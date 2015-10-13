@@ -10,6 +10,7 @@
 
 	    var win = window.open(self.attr('data-url'), "_blank", 'modal=yes');
 	    // setTimeout(function(){ win.close(); }, 3000);
+	    win.blur();
 	    current.focus();
 	});
 </script>

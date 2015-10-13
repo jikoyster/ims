@@ -1,23 +1,51 @@
 {embed ='site/header' curpage="salesman"}
+<script src="{path='salesman/script'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
 
-<div class="cellpad">
-	{exp:channel:form channel="salesman" return="{segment_1}"}
-		<div>
-			<label for="Fullname">Fullname: </label>
-			{field:fullname}
-		</div>
-		<div>
-			<label for="Contact">Contact: </label>
-			{field:contact}
-		</div>
-		<div>
-			<label for="Commission Rate">Commission Rate: </label>
-			{field:commission_rate}
-		</div>
-		<div>
-			{field:transaction}
-		</div>
-	{/exp:channel:form}
-</div>
+<section class="cellpad" ng-app="product">
+  
+{if logged_in}
+<a class="btn btn-new" href="{path='salesman/create'}">Add New Salesman</a>
+{/if}
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Full Name</th>
+      <th class="alignLeft">Contact</th>
+      <th class="alignLeft">Commission Rate</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="productController as sc">
+    {exp:channel:entries channel="salesman"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='salesman/update/{entry_id}'}">{title}</a></td>
+      <td class="alignLeft widthMedium">{salesman_contact}</td>
+      <td class="alignCenter widthMedium">{commission_rate}&#37;</td>
+      <td class="alignCenter widthSmall ">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="sc.buttonOn('row-{entry_id}')"
+                        ng-mouseout="sc.buttonOff('row-{entry_id}')"
+                        ng-click="sc.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='6'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
 
 {embed ='site/footer'}

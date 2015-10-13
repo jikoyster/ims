@@ -1,0 +1,32 @@
+{embed="site/header"}
+
+<section ng-app="">
+	
+<h1 class="pagetitle cellpad">New Salesman</h1>
+
+{exp:channel:form channel="salesman" return="{segment_1}" entry_id="{segment_3}"}
+	<div>
+		<label for="Name">Full Name</label>
+		<input type="text" name="title" value="{title}">
+	</div>
+	<div>
+		<label for="Contact">{label:salesman_contact}</label>
+		{field:salesman_contact}
+	</div>
+	<div>
+		<label for="Commission Rate">{label:commission_rate} <br><small>{instructions:commission_rate}</small></label>
+		{field:commission_rate}
+		
+	</div>
+	<div class="clear">
+		{label:assigned_customers} <br>
+		{field:assigned_customers}
+	</div>
+	
+	<br><br>
+	<input type="submit" value="Submit" class="btn btn-danger">	
+{/exp:channel:form}
+
+</section>
+
+{embed="site/footer"}

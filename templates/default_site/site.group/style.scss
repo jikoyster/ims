@@ -345,6 +345,10 @@ section label{
 	text-align: right;
 	line-height: 13px;
 }
+section .multiselect label{
+	float: none;
+	text-align: left;
+}
 
 #CriticalLevel tr{
 	cursor: pointer;
