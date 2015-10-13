@@ -167,7 +167,7 @@ header {
     float: left;
     margin-right: 2px;
     margin-bottom: 2px;
-    width: 12%;
+    width: 10.5%;
     display: table; }
   header nav .big a, header nav .small a {
     display: table-cell;
@@ -201,6 +201,8 @@ header {
     background: #003300; }
   header nav .tab--encoding {
     background: #690011; }
+  header nav .tab--price_code {
+    background: #00473B; }
   header nav .tab--collection {
     background: #492100; }
   header nav .tab--salesman {
