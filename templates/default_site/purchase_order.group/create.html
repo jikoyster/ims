@@ -46,27 +46,21 @@ endif;
 <h1 class="pagetitle cellpad">New Purchase Order</h1>
 
 <div class="cellpad">
-	<div class="row">
-		<div class="span8">
-			<h3>Company Name</h3>
-			<div>Address</div>
-		</div>
-		<div class="span3">
-			PO status <br>
-			{field:po_status}
-		</div>
+	<div class="">
+		<label for="PO status">PO status: </label>
+		{field:po_status}
 	</div>
 </div>
 
 <hr>
 
-<div class="row"> 	
-		<div class="span4">
+<div class="col-wrapper"> 	
+		<div class="col">
 			<div class="cellpad po_supplier">
 				To:<br>{field:po_supplier}
 			</div>
 		</div>
-		<div class="span4">
+		<div class="col">
 			<div class="cellpad delivered_to">
 				Deliver To:<br>{field:delivered_to} <br>
 				{field:delivery_address}
@@ -84,7 +78,7 @@ endif;
 				</script>
 			</div>
 		</div>
-		<div class="span4"><div class="cellpad">
+		<div class="col"><div class="cellpad">
 			<label for="Name">PO#</label>
 			<input type="text" name="po_num" ng-model="po_num">
 			<input type="hidden" name="title" value="{{+po_num}}">
@@ -94,9 +88,9 @@ endif;
 			<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
 		</div></div>		
 </div>
-<hr>
-<div class="row">
-	<div class="span12"><div class="cellpadd">
+<hr class="clear">
+<div class="">
+	<div class=""><div class="cellpadd">
 		<?php //if($noprod): ?>
 		{embed="purchase_order/popup-main"}
 		<div class="alignRight">
@@ -113,8 +107,8 @@ endif;
 
 
 <hr>
-<div class="row">
-	<div class="span12"><div class="cellpad floatRight">
+<div class=" ">
+	<div class=" "><div class="cellpad floatRight">
 		
 		<div>
 			<label for="Subtotal">Subtotal</label>

@@ -80,7 +80,6 @@ var update_products = function(order_status){
 
 /* place order */
 var place_order = function(order_status){
-			
 			if(validate_fields()){
 				prod_count = $('.listrow').length;
 				for(var i=0; i<prod_count; i++){

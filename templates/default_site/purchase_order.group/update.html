@@ -8,6 +8,7 @@
 {if logged_in}
 
 {exp:channel:form channel="purchase_order" return="{segment_1}" entry_id="{segment_3}"}
+<script>var po_entry_id = {entry_id};</script>
 <div>
 
 <h1 class="pagetitle cellpad">Update Purchase Order</h1>
@@ -21,6 +22,12 @@
 		<div class="span3">
 			PO status <br>
 			{field:po_status}
+			
+			<div class="date_received">
+				Date Received <br>
+				{field:date_received}
+			</div>
+
 		</div>
 	</div>
 </div>

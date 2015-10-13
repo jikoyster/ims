@@ -41,4 +41,7 @@ a {
   .popup_close a:hover {
     color: #666; }
 
+.date_received select {
+  visibility: hidden; }
+
 /*# sourceMappingURL=style.css.map */

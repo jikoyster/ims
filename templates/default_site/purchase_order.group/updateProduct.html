@@ -6,29 +6,47 @@
 		 onload="setTimeout(function(){ window.close(); }, 3000)"	>
 
 
-{exp:channel:entries channel="product" entry_id="{segment_3}"}
+{exp:channel:entries channel="stocks" entry_id="{segment_3}"}
 
-this is it:  {segment_4}
 	<?php 
 	$ordered = floatval(str_replace(',', '', '{segment_4}')); //qty
 
 	$qty = ( $ordered == null)? 0 : $ordered;
-	echo "<br/>new : ". $qty;
+	
+	$new_stock = {in_stock} + $qty;
+	$order_status = $_GET['order_status'];
 
-	// if($qty > 0):
-		$new_stock = {in_stock} + $qty;
-		ee()->db->update(
-		    'channel_data',
-		    array(
-		    	'field_id_9'  	=> $new_stock,
-		        'field_id_42'   => $_GET['order_status']
-		    ),
-		    array(
-		        'entry_id'   => {segment_3}, 
-		        'channel_id' => 4 //product
-		    )
-		);
-	// endif;
+	echo "Updated {title} qty : ". $new_stock;
+
+	echo "<br>";
+
+	$date_received = date('M d, Y');
+	echo "Date Received: ". $date_received;
+
+	//updating product for qty
+	ee()->db->update(
+	    'channel_data',
+	    array(
+	    	'field_id_9'  	=> $new_stock,
+	        'field_id_42'   => $order_status,
+	    ),
+	    array(
+	        'entry_id'   => {segment_3}, 
+	        'channel_id' => 4 //stocks
+	    )
+	);
+
+	// updating PO for date received
+	ee()->db->update(
+	    'channel_data',
+	    array(
+	    	'field_id_9'  	=> $date_received,
+	    ),
+	    array(
+	        'entry_id'   => {segment_3}, 
+	        'channel_id' => 7 //stocks
+	    )
+	);
 	 ?>
 
 	<div>Order is placed!</div>

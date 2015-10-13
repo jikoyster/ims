@@ -22,7 +22,7 @@
     <th>Order Status</th>
   </thead>
   <tbody>
-    {exp:channel:entries channel="product" orderby="order_status" sort="asc"}
+    {exp:channel:entries channel="stocks" orderby="order_status" sort="asc"}
 
       <?php if( {in_stock} <= {critical_level} ){ 
           $col_style = "";

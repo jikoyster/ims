@@ -62,7 +62,7 @@ body.on-alert header {
   font-weight: 100; }
 
 .container-inner {
-  background: white;
+  background: #fff;
   padding: 10px;
   width: 95%;
   margin: 0 auto; }
@@ -167,7 +167,7 @@ header {
     float: left;
     margin-right: 2px;
     margin-bottom: 2px;
-    width: 13%;
+    width: 12%;
     display: table; }
   header nav .big a, header nav .small a {
     display: table-cell;
@@ -184,7 +184,7 @@ header {
     height: 44px;
     display: inline-block;
     padding-top: 5px; }
-  header nav .small a:first-child {
+  header nav .small div:first-child {
     margin-bottom: 2px; }
   header nav a {
     color: #fff;
@@ -207,6 +207,8 @@ header {
     background: #6f3100; }
   header nav .tab--reports {
     background: #209009; }
+  header nav .tab--accounts {
+    background: #7356CF; }
 
 footer {
   width: 96%;
@@ -264,11 +266,11 @@ section label {
 #CriticalLevel tr {
   cursor: pointer; }
 
-.homecol .col {
+.col-wrapper .col {
   float: left;
   width: 30%;
   margin-right: 10px; }
-  .homecol .col .col-title {
+  .col-wrapper .col .col-title {
     font-size: 1.2em;
     border-bottom: 1px solid #ccc; }
 

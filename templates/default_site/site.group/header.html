@@ -6,6 +6,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +30,7 @@
         <?php $ctr = 0; ?>
         <!-- category="not 10"  - meaning the product is not on "ORDERED" category 
         and it neeeds to be on PO first -->
-        {exp:channel:entries channel="product" category_group="not 3" dynamic="no"}
+        {exp:channel:entries channel="stocks" category_group="not 3" dynamic="no"}
             <?php if( {in_stock} <= {critical_level} ){ 
               $ctr++;
             } ?> 
@@ -63,21 +66,25 @@
                 </div>
                 
                 <div class="small">
-                    <a class="tab--po" href="{path='purchase_order'}">Purchase<br/> Order</a>
-                    <a class="tab--stocks" href="{path='stocks'}">Stock<br/> Management</a>
+                    <div class="tab--po"><a href="{path='purchase_order'}">Purchase<br/> Order</a></div>
+                    <div class="tab--stocks"><a href="{path='stocks'}">Stock<br/> Management</a></div>
                 </div>
                 
                 <div class="big">
                     <a class="tab--encoding" href="{path='invoice/index'}">Sales<br/> Encoding</a> <!-- INVOICE -->
                 </div>
                 <div class="big">
-                    <a class="tab--collection" href="#">Collection / Customer Payment</a>
+                    <a class="tab--collection" href="{path='customer'}">Collection / Customer Payment</a>
                 </div>
-                <div class="big">
-                    <a class="tab--payable" href="#">Accounts Payable</a>
+                <div class="small">
+                    <div class="tab--payable"><a href="#" title="Accounts Payable">Salesman</a></div>
+                    <div class="tab--payable"><a href="#" title="Accounts Payable">Supplier</a></div>
                 </div>
                 <div class="big">
                     <a class="tab--reports" href="#">Reports</a>
+                </div>
+                <div class="big">
+                    <a class="tab--accounts" href="#">Accounts</a>
                 </div>
             </nav>
             

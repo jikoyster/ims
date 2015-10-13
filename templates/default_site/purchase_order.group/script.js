@@ -20,8 +20,6 @@
 	};
 
 
-	
-	
 	var init_list = function(){
 			po_list = 	'<div class="headlist" style="'+ style.head.borderBottom + style.head.fontWeight +'">' +
 							'<b style="'+ style.common.cellL +'">Product Name</b>' +
