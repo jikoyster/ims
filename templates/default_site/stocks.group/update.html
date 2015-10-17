@@ -27,14 +27,7 @@
 			<label for="UM">UM (<small>{instructions:um}</small>)</label>
 			{field:um}
 		</div>
-		<div>
-			<label for="In Stock">In Stock</label>
-			{field:in_stock}
-		</div>
-		<div>
-			<label for="Critical Level">Critical Level</label>
-			{field:critical_level}
-		</div>
+		
 	</div></div>
 	<!-- col1 -->
 	<div class="span6 category_option"><div class="cellpad">
@@ -47,15 +40,43 @@
 	        {/categories}
 		</div>
 
-		<div class="cat_section">
-			<label for="Warehouse">Warehouse</label>
-			{field:warehouse}
-		</div>
+		
 
 	</div></div>
 	<!-- col2 -->
 </div>
 <!--  end of first block -->
+
+<hr>
+<div class="row">
+	<div class="span6">
+		<div class="cat_section">
+			<label for="Warehouse">Warehouse</label>
+			{field:warehouse}
+		</div>
+		<div>
+			<label for="Stocks on hand">Stocks on hand</label>
+			{field:in_stock}
+		</div>
+		<div>
+			<label for="Critical Level">Critical Level</label>
+			{field:critical_level}
+		</div>
+	</div>
+	<div class="span6">
+		<div style="height: 40px">
+			Transfer stocks to store
+		</div>
+		<div>
+			<label for="Stocks on hand">Stocks on hand</label>
+			{field:store_in_stock}
+		</div>
+		<div>
+			<label for="Critical Level">Critical Level</label>
+			{field:store_critical_level}
+		</div>
+	</div>
+</div>
 
 <hr>
 <div class="col-wrapper" ng-controller="priceController as priceCtrl">
