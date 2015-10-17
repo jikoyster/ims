@@ -31,7 +31,7 @@
         <!-- category="not 10"  - meaning the product is not on "ORDERED" category 
         and it neeeds to be on PO first -->
         {exp:channel:entries channel="stocks" category_group="not 3" dynamic="no"}
-            <?php if( {in_stock} <= {critical_level} ){ 
+            <?php if( {in_stock} <= {critical_level} || {store_in_stock} <= {store_critical_level}){ 
               $ctr++;
             } ?> 
         {/exp:channel:entries}
@@ -62,7 +62,7 @@
             
             <nav>
                 <div class="big">
-                    <a class="tab--warehouse" href="{path='warehouse/index'}">Warehouse Management</a>
+                    <a class="tab--warehouse" href="{path='warehouse/index'}">Warehouse<br/> Management</a>
                 </div>
                 
                 <div class="small">
@@ -76,7 +76,10 @@
                 <div class="big">
                     <a class="tab--price_code" href="{path='price_code'}">Price Coding</a>
                 </div>
-                <div class="big">
+
+                
+
+                <div class="big clear">
                     <a class="tab--collection" href="{path='customer'}">Collection / Customer Payment</a>
                 </div>
                 <div class="small">
@@ -84,7 +87,13 @@
                     <div class="tab--supplier"><a href="{path='supplier'}" title="Accounts Payable">Supplier</a></div>
                 </div>
                 <div class="big">
+                    <a class="tab--returns" href="{path='returns'}">Returns</a>
+                </div>
+                <div class="big">
                     <a class="tab--reports" href="#">Reports</a>
+                </div>
+                <div class="big">
+                    <a class="tab--printable" href="#">Printable</a>
                 </div>
                 <div class="big">
                     <a class="tab--customer" href="{path='customer'}">Customer</a>

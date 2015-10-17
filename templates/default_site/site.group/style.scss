@@ -189,13 +189,14 @@ header{
 		float: left;
 		width: 190px;
 		margin-right: 10px;
+		height: 105px;
 	}
 	nav{
 		.big, .small{
 			float: left;
 			margin-right: 2px;
 			margin-bottom: 2px;
-			width: 10.5%;
+			width: 15%;
 			display: table;
 		}
 		.big a, .small a{
@@ -205,9 +206,7 @@ header{
 		}
 		.big{
 			text-align: center;
-			
 			height: 100px;
-			background: #fff;
 		}
 		.small{
 			text-align: center;
@@ -232,6 +231,9 @@ header{
 			opacity: .7;
 		}
 
+		.tab--store{
+			background: #209009;
+		}
 		.tab--warehouse{
 			background: #333333;
 		}
@@ -259,9 +261,15 @@ header{
 			.tab--salesman, .tab--supplier{
 				line-height: 40px;
 			}
+		.tab--returns{
+			background: #ac0d2e;
+		}
 		.tab--reports{
 			background: #209009;
 		}
+		.tab--printable{
+			background: #690066;
+		}			
 		.tab--customer{
 			background: #7356CF;
 		}
@@ -370,5 +378,36 @@ section .multiselect label{
 	}
 	.col-3{
 		width: 31%;
-	}
-}
+
+		.col-head{
+			margin: 0;
+			padding: 0;
+			font-size: 1.3em;
+			border-bottom: 3px solid #000;
+			line-height: 15px;
+			margin-bottom: 10px;
+			font-style: italic;
+		}//col-head
+
+		ul{
+			margin: 0;
+			padding: 0;
+
+			li{
+				clear: both;
+				list-style: none;
+				border-bottom: 1px solid #ccc;
+				padding: 5px 0;
+
+				.item{
+					font-weight: 900;
+				}
+				.subitem{
+					font-size: .9em;
+					text-indent: 30px;
+				}
+			}//li
+		}//ul
+	}//col-3
+
+}//col-wrapper

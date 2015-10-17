@@ -162,12 +162,13 @@ header {
   header #sitelogo {
     float: left;
     width: 190px;
-    margin-right: 10px; }
+    margin-right: 10px;
+    height: 105px; }
   header nav .big, header nav .small {
     float: left;
     margin-right: 2px;
     margin-bottom: 2px;
-    width: 10.5%;
+    width: 15%;
     display: table; }
   header nav .big a, header nav .small a {
     display: table-cell;
@@ -175,8 +176,7 @@ header {
     font-weight: 900; }
   header nav .big {
     text-align: center;
-    height: 100px;
-    background: #fff; }
+    height: 100px; }
   header nav .small {
     text-align: center; }
   header nav .small a {
@@ -193,6 +193,8 @@ header {
     color: #fff;
     text-decoration: none;
     opacity: .7; }
+  header nav .tab--store {
+    background: #209009; }
   header nav .tab--warehouse {
     background: #333333; }
   header nav .tab--po {
@@ -211,8 +213,12 @@ header {
     background: #09154c; }
   header nav .tab--salesman, header nav .tab--supplier {
     line-height: 40px; }
+  header nav .tab--returns {
+    background: #ac0d2e; }
   header nav .tab--reports {
     background: #209009; }
+  header nav .tab--printable {
+    background: #690066; }
   header nav .tab--customer {
     background: #7356CF; }
 
@@ -284,5 +290,26 @@ section .multiselect label {
     border-bottom: 1px solid #ccc; }
 .col-wrapper .col-3 {
   width: 31%; }
+  .col-wrapper .col-3 .col-head {
+    margin: 0;
+    padding: 0;
+    font-size: 1.3em;
+    border-bottom: 3px solid #000;
+    line-height: 15px;
+    margin-bottom: 10px;
+    font-style: italic; }
+  .col-wrapper .col-3 ul {
+    margin: 0;
+    padding: 0; }
+    .col-wrapper .col-3 ul li {
+      clear: both;
+      list-style: none;
+      border-bottom: 1px solid #ccc;
+      padding: 5px 0; }
+      .col-wrapper .col-3 ul li .item {
+        font-weight: 900; }
+      .col-wrapper .col-3 ul li .subitem {
+        font-size: .9em;
+        text-indent: 30px; }
 
 /*# sourceMappingURL=style.css.map */
