@@ -30,7 +30,7 @@ countItemsResult = countItems(item);
 var disp = [];
 var date = new Date();
 for(var i=0; i<countItemsResult[0].length; i++){
-	disp.push( countItemsResult[1][i] +" time(s) sold - "+ countItemsResult[0][i] +" this year("+ date.getFullYear() +")");
+	disp.push( countItemsResult[1][i] +"x SOLD - "+ countItemsResult[0][i]);
 }
 disp.sort().reverse();
 $('.displayHere').append( listSaleable(disp) );
