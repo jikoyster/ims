@@ -62,7 +62,7 @@ body.on-alert header {
   font-weight: 100; }
 
 .container-inner {
-  background: #fff;
+  background: rgba(250, 250, 250, 0.8);
   padding: 10px;
   width: 95%;
   margin: 0 auto; }
@@ -113,18 +113,22 @@ input[type=radio] {
   text-align: center; }
 
 .widthBig {
+  display: inline-block;
   width: 300px;
   min-width: 300px; }
 
 .widthMedium {
+  display: inline-block;
   width: 150px;
   min-width: 150px; }
 
 .widthSmall {
+  display: inline-block;
   width: 100px;
   min-width: 100px; }
 
 .widthTiny {
+  display: inline-block;
   width: 50px;
   min-width: 50px; }
 
@@ -156,24 +160,41 @@ body {
 
 header {
   min-width: 1024px;
-  width: 96%;
+  width: 96.4%;
   margin: 0 auto;
   padding: 10px; }
   header #sitelogo {
     float: left;
     width: 190px;
     margin-right: 10px;
-    height: 105px; }
+    height: 105px;
+    display: none; }
   header nav .big, header nav .small {
     float: left;
     margin-right: 2px;
     margin-bottom: 2px;
-    width: 15%;
+    width: 18.5%;
     display: table; }
+    header nav .big span, header nav .small span {
+      float: left;
+      display: inline-block; }
+    header nav .big .icon, header nav .small .icon {
+      width: 30%;
+      text-align: right;
+      padding-right: 10px; }
+      header nav .big .icon i, header nav .small .icon i {
+        font-size: 40px; }
+    header nav .big .word, header nav .small .word {
+      width: 50%;
+      text-align: left; }
+  header nav .small i {
+    padding-top: 5px;
+    font-size: 30px !important; }
   header nav .big a, header nav .small a {
     display: table-cell;
     vertical-align: middle;
-    font-weight: 900; }
+    font-weight: 900;
+    font-size: 16px; }
   header nav .big {
     text-align: center;
     height: 100px; }
@@ -211,8 +232,6 @@ header {
     background: #040C32; }
   header nav .tab--supplier {
     background: #09154c; }
-  header nav .tab--salesman, header nav .tab--supplier {
-    line-height: 40px; }
   header nav .tab--returns {
     background: #ac0d2e; }
   header nav .tab--reports {
@@ -221,6 +240,10 @@ header {
     background: #690066; }
   header nav .tab--customer {
     background: #7356CF; }
+  header nav .tab--receivable {
+    background: #02165D; }
+  header nav .lhmid {
+    line-height: 40px; }
 
 footer {
   width: 96%;
@@ -237,6 +260,8 @@ table.tbl_display {
   table.tbl_display input[type=checkbox] {
     float: none;
     margin: 0; }
+  table.tbl_display th, table.tbl_display td {
+    display: table-cell !important; }
   table.tbl_display thead th {
     padding: 10px;
     border-color: #efefef; }
@@ -251,6 +276,14 @@ table.tbl_display {
     table.tbl_display tbody tr td .remove-icon {
       font-size: 1.2em !important;
       color: red; }
+    table.tbl_display tbody tr td .print-icon {
+      font-size: 1.2em !important;
+      color: #00f; }
+    table.tbl_display tbody tr td .partial-icon {
+      font-size: 1.2em !important;
+      color: #00F; }
+    table.tbl_display tbody tr td .print-icon:hover {
+      color: #000; }
   table.tbl_display tbody tr td.checkbox {
     width: 30px; }
   table.tbl_display tbody tr td.product_name {
@@ -288,6 +321,8 @@ section .multiselect label {
   .col-wrapper .col .col-title {
     font-size: 1.2em;
     border-bottom: 1px solid #ccc; }
+.col-wrapper .col-2 {
+  width: 50%; }
 .col-wrapper .col-3 {
   width: 31%; }
   .col-wrapper .col-3 .col-head {

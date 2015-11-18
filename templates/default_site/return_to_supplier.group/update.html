@@ -1,0 +1,27 @@
+{embed="site/header" curpage="return_to_supplier"}
+
+{exp:channel:form channel="return_to_supplier" return="{segment_1}" entry_id="{segment_3}"}
+	<input type="hidden" name="title" value="{title}">
+
+	<div class="field_po">
+		<label for="{label:ret_po_num}">{label:ret_po_num}</label>
+		{field:ret_po_num}
+	</div>
+
+	<div>
+		<label for="{label:rs_returned_items}">{label:rs_returned_items}</label>
+		{field:rs_returned_items}
+	</div>
+<br>
+	<input type="submit" value="Submit" class="btn btn-danger">	
+{/exp:channel:form}
+
+<script>
+	$('.field_po select').on("change", function(){
+		po = $(".field_po select :selected").text();
+
+		$('input[name="title"]').attr('value', 'RS-'+po);
+	});
+</script>
+
+{embed="site/footer"}

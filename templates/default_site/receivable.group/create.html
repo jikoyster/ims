@@ -1,0 +1,82 @@
+{embed="site/header" curpage="receivable"}
+
+<style>
+	.due_date select{
+		display: none;
+	}
+</style>
+
+<h1 class="pagetitle">New Accounts Receivable</h1>
+
+{exp:channel:form channel="accounts_receivable" return="{segment_1}"}
+	<input type="hidden" name="title">	
+
+	<div class="field_invoice">
+		<label for="{label:invoice}">{label:invoice}</label>
+		{field:invoice}
+	</div>
+
+	<div class="customer">
+		<label for="{label:ar_customer}">{label:ar_customer}</label>
+		{field:ar_customer}
+	</div>
+
+	<div class="salesman">
+		<label for="{label:ar_salesman}">{label:ar_salesman}</label>
+		{field:ar_salesman}
+	</div>
+
+	<div>
+		<label for="{label:partial_payment}">{label:partial_payment}</label>
+		<input type="text" name="partial_payment" onkeyup="compute_amount_recivable(this.value)">
+	</div>
+
+	<div>
+		<label for="{label:amount_receivable}">{label:amount_receivable}</label>
+		{field:amount_receivable}
+	</div>
+
+	<div class="due_date">
+		<label for="{label:due_date}">{label:due_date}</label>
+		{field:due_date}
+	</div>
+
+	<input type="submit" value="Submit" class="btn btn-danger">	
+{/exp:channel:form}
+
+
+<script src="{path='site/addCommaScript'}"></script>
+<script>
+	$('.field_invoice select').on("change", function(){
+		var invoice = $(".field_invoice select :selected").text();
+		var inv_id	= $(".field_invoice select :selected").val();
+
+		$.ajax({
+			url: 	"{path='receivable/inv-data'}"+"/"+inv_id,
+		})
+		.done(function(result){
+			customer = $(result).filter("#customer").text();
+			salesman = $(result).filter("#salesman").text();
+
+			$(".customer select option[value="+customer+"]").attr('selected', 'selected');
+			$(".salesman select option[value="+salesman+"]").attr('selected', 'selected');
+		});
+		
+
+		$('input[name="title"]').attr('value', 'AR-'+invoice);
+	});
+
+	{if segment_3 != null}
+		{exp:channel:entries channel="invoice" entry_id="{segment_3}"}
+			$('input[name="title"]').attr('value', 'AR-'+'{title}');
+			$('.field_invoice select > option[value={segment_3}]').attr('selected','selected');
+
+			var compute_amount_recivable = function(partial_payment){
+				amount_receivable = ('{invoice_total_amount}').replace(/\,/g,'') - partial_payment;
+				$('input[name=amount_receivable]').attr('value', addCommas((amount_receivable).toFixed(2)));
+			};
+		{/exp:channel:entries}
+	{/if}
+</script>
+
+{embed="site/footer"}

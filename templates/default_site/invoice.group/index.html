@@ -1,11 +1,12 @@
 {embed ='site/header' curpage="records"}
+<link rel="stylesheet" href="{path='invoice/style'}" />
 <script src="{path='invoice/data-del'}"></script>
 <script>
   var delbuttonOff = "fa-times-circle";
   var delbuttonOn  = "fa-times-circle-o";
 </script>
 
-<section class="cellpad" ng-app="invoice">
+<section id="IndexInvoice" class="cellpad" ng-app="invoice">
 	
 {if logged_in}
 <a class="btn btn-new" href="{path='invoice/create'}">Add New Invoice</a>
@@ -42,6 +43,9 @@
                         ng-mouseout="ctrl.buttonOff('row-{entry_id}')"
                         ng-click="ctrl.removeData('{entry_id}')"
                       ></i></a>
+        <a href="#" class="preventDefault" title="Add Partial Payment"
+            onclick="window.open('{path='receivable/create/{entry_id}'}', '_blank', 'fullscreen=yes')"
+        ><i class="fa fa-money partial-icon"></i></a>
       </td>
     </tr>
     {/exp:channel:entries}
@@ -57,5 +61,11 @@
 </table>
 
 </section>
+
+<script>
+  jQuery('.preventDefault').bind("click", function(event){
+    event.preventDefault();
+  });
+</script>
 
 {embed ='site/footer'}

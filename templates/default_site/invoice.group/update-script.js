@@ -1,6 +1,5 @@
 jQuery('#publishForm').submit(function(){
 	update_products();
-	return false;
 });
 
 
@@ -20,9 +19,6 @@ var update_products = function(){
 					//subtract in_stock using 'qty'
 					
 					url: "{path='invoice/updateProduct'}/"+ entry_id +"/"+ qty 
-				})
-				.done(function(result){
-					alert(result);
 				});
 			}//for-loop
 		};

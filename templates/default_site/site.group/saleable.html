@@ -1,0 +1,64 @@
+<script type="text/javascript" src="{path='custom/js/jquery.min.js'}"></script>
+
+<div class="displayHere" style="font-size: 16px"></div>
+
+<script>
+	var item = [];
+	var saleable = [];
+</script>
+
+<script>var index = 0;</script>
+<!-- ========================================================= -->
+{exp:channel:entries channel="invoice" dynamic="no" start_on="January {current_time format='%Y'}" limit="15"}
+
+	<div class="inv-{entry_id}" style="display: none">{invoice_product_list}</div>
+	<script>
+		listrows = $(".inv-{entry_id} .listrow").length;
+
+		for(var i=0; i<listrows; i++){
+			prod_id = $(".inv-{entry_id} .listrow:eq("+i+") .entry_id").text();
+			name	= $(".inv-{entry_id} .listrow:eq("+i+") .product_name").text();
+			prod = name;
+			item.push(prod);
+		}		
+	</script>
+{/exp:channel:entries}
+<!-- ========================================================= -->
+<script>
+
+countItemsResult = countItems(item);
+var disp = [];
+var date = new Date();
+for(var i=0; i<countItemsResult[0].length; i++){
+	disp.push( countItemsResult[1][i] +" time(s) sold - "+ countItemsResult[0][i] +" this year("+ date.getFullYear() +")");
+}
+disp.sort().reverse();
+$('.displayHere').append( listSaleable(disp) );
+
+// ====================================================== additional functions here
+function listSaleable(arr){
+	list_saleable = '<ul>';
+	for(var i=0; i<arr.length; i++){
+		list_saleable += "<li>"+ arr[i] +"</li>";
+	}
+	list_saleable += '</ul>';
+	return list_saleable;
+}
+
+function countItems(arr) {
+    var a = [], b = [], prev;
+    
+    arr.sort();
+    for ( var i = 0; i < arr.length; i++ ) {
+        if ( arr[i] !== prev ) {
+            a.push(arr[i]);
+            b.push(1);
+        } else {
+            b[b.length-1]++;
+        }
+        prev = arr[i];
+    }
+    
+    return [a, b];
+}
+</script>

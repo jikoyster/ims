@@ -1,11 +1,10 @@
 {embed="site/header"}
 
 <link rel="stylesheet" href="{path='invoice/style'}" media="all">
-
 <script type="text/javascript" src="{path='invoice/script'}"></script>
 
 
-<section id="UpdateInvoice" ng-app>
+<section id="UpdateInvoice" ng-app="invoice">
 
 {if logged_in}
 
@@ -22,13 +21,28 @@
 
 	<div>
 		<label for="Name">Invoice Number</label>
-		<input type="text" name="title" value="{title}" class="required">
+		<input type="text" name="title" value="{title}">
+		<input type="hidden" name="url_title" value="{url_title}">
+
+		<!-- <input type="text" name="dummy_title" 
+		ng-init="inv_num='{title}'"
+		ng-model="inv_num"
+		value="{title}" 
+		class="required">
+		<input type="hidden" name="title" value="{{'INV_'+inv_num}}">
+		<input type="hidden" name="url_title" value="{{'inv_'+inv_num}}"> -->
 	</div>
 
 	<div>
 		<label for="Customer">Customer</label>
 		<span class="required">{field:customer}</span>
 	</div>
+
+	<div class="salesman">
+		<label for="Salesman">Salesman</label>
+		{field:invoice_salesman}
+	</div>
+	
 	<div class="cellpad">
 		{embed="invoice/popup-main"}
 		<div class="alignRight">
@@ -46,7 +60,7 @@
 
 <hr>
 <div class="row">
-	<div class="span12"><div class="cellpad floatRight">
+	<div xclass="span12"><div class="cellpad floatRight">
 		
 		<div>
 			<label for="Subtotal">Subtotal</label>
@@ -68,9 +82,16 @@
 	</div></div>
 	<!-- col1 -->
 </div>
+
+<div class="floatRight">
+	<button class="preventDefault btn" 
+		onclick="window.open('{path='receivable/create/{entry_id}'}', '_blank', 'fullscreen=yes')"
+	>Add Partial Payment</button>
+</div>
+
 <!-- end of 2nd block -->
 
-<hr>
+<hr class="clear">
 
 <div class="cellpad">
 	

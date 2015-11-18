@@ -1,7 +1,10 @@
 {embed ='site/header'}
+<link rel="stylesheet" href="{path='purchase_order/style'}" />
+
 <div class="cellpad">
   <a href="{path='purchase_order/pending'}" class="btn btn-warning">PENDING</a>
   <a href="{path='purchase_order/received'}" class="btn btn-success">RECEIVED</a>
+  <a href="{path='purchase_order/incomplete'}" class="btn">INCOMPLETE</a>
 </div>
 
 <script src="{path='purchase_order/data-del'}"></script>
@@ -10,7 +13,7 @@
   var delbuttonOn  = "fa-times-circle-o";
 </script>
 
-<section class="cellpad" ng-app="po">
+<section id="IndexPO" class="cellpad" ng-app="po">
   
 {if logged_in}
 <a class="btn btn-new" href="{path='purchase_order/create'}">Add New PO</a>
@@ -43,6 +46,9 @@
                         ng-mouseout="ctrl.buttonOff('row-{entry_id}')"
                         ng-click="ctrl.removeData('{entry_id}')"
                       ></i></a>
+        <a href="{path='printable/po'}/{entry_id}"
+            title="Printable Version"
+        ><i class="fa fa-print print-icon"></i></a>
       </td>
     </tr>
     {/exp:channel:entries}

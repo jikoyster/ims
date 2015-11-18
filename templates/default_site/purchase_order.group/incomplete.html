@@ -1,0 +1,61 @@
+{embed ='site/header'}
+<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+<div class="cellpad">
+  <a href="{path='purchase_order/pending'}" class="btn btn-warning">PENDING</a>
+  <a href="{path='purchase_order/received'}" class="btn btn-success">RECEIVED</a>
+  <a href="{path='purchase_order/incomplete'}" class="btn">INCOMPLETE</a>
+</div>
+
+<script src="{path='purchase_order/data-del'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
+<section class="cellpad" ng-app="po">
+  
+{if logged_in}
+<a class="btn btn-new" href="{path='purchase_order/create'}">Add New PO</a>
+{/if}
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">PO#</th>
+      <th class="alignRight">Total Amount</th>
+      <th class="alignCenter">Ordered To</th>
+      <th class="alignCenter">Date Filed</th>
+      <th class="alignCenter">Status</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="poController as ctrl">
+    {exp:channel:entries channel="purchase_order" search:po_status='INCOMPLETE'}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='purchase_order/update/{entry_id}'}">{title}</a></td>
+      <td class="alignRight">{po_total_amount}</td>
+      <td class="alignCenter">{po_supplier:title}</td>
+      <td class="alignCenter">{entry_date format="%M. %d, %Y"}</td>
+      <td class="alignCenter">{po_status}</td>
+      <td class="alignCenter widthSmall">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="ctrl.buttonOn('row-{entry_id}')"
+                        ng-mouseout="ctrl.buttonOff('row-{entry_id}')"
+                        ng-click="ctrl.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='6'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+
+{embed ='site/footer'}

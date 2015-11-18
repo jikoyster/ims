@@ -1,0 +1,48 @@
+{embed ='site/header' curpage="reports"}
+
+<section ng-app="">
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Transaction Ref#</th>
+      <th class="alignLeft">Type</th>
+      <th class="alignLeft">Date</th>
+      <th class="alignRight">Total Amount</th>
+    </tr>
+  </thead>
+  <tbody ng-controller="invoiceController as ctrl">
+    {exp:channel:entries channel="purchase_order | invoice" orderby="date" sort="desc"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft">
+      	{if channel_title == "Invoice"}
+      		<a href="{path='invoice/update/{entry_id}'}">{title}</a>
+      	{if:else}
+      		<a href="{path='purchase_order/update/{entry_id}'}">{title}</a>
+      	{/if}
+      </td>
+      <td class="alignLeft">{channel_title}</td>
+      <td class="alignLeft">{entry_date format="%F %d, %Y"}</td>
+      <td class="alignRight">
+      	{if channel_title == "Invoice"}
+        	{invoice_total_amount}
+        {if:else}
+        	{po_total_amount}
+        {/if}
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='6'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+
+{embed ='site/footer'}

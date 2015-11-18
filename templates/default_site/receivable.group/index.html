@@ -1,0 +1,72 @@
+{embed="site/header" curpage="receivable"}
+<script src="{path='receivable/data-del'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
+
+<section class="cellpad" ng-app="rec">
+
+{if logged_in}
+<a class="btn btn-new" href="{path='receivable/create'}">Add New Receivable</a>
+{/if}
+
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Referrence#</th>
+      <th class="alignCenter">Customer</th>
+      <th class="alignCenter">Salesman InCharge</th>
+      <th class="alignCenter">Date Filed</th>
+      <th class="alignCenter">Due Date</th>
+      <th class="alignRight">Amount Receivable</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="recController as ctrl">
+
+    {exp:channel:entries channel="accounts_receivable"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='receivable/update/{entry_id}'}">{title}</a></td>
+      
+      <td class="alignCenter widthMedium">
+        {ar_customer require_entry="yes"}
+          {ar_customer:title}
+          {if ar_customer:no_results} - {/if}
+        {/ar_customer}
+      </td>
+      <td class="alignCenter widthMedium">
+        {ar_salesman require_entry="yes"}
+          {ar_salesman:title}
+          {if ar_salesman:no_results} - {/if}
+        {/ar_salesman}
+      </td>
+      
+      <td class="alignCenter widthMedium">{entry_date format="%M. %d, %Y"}</td>
+      <td class="alignCenter widthMedium">{due_date format="%M. %d, %Y"}</td>
+      <td class="alignRight widthMedium">{amount_receivable}</td>
+      <td class="alignCenter widthSmall">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="ctrl.buttonOn('row-{entry_id}')"
+                        ng-mouseout="ctrl.buttonOff('row-{entry_id}')"
+                        ng-click="ctrl.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='7'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+
+{embed="site/footer"}

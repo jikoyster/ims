@@ -1,0 +1,12 @@
+<?php 
+ee()->db->update(
+    'channel_titles',
+    array(
+        'status'   => 'closed'
+    ),
+    array(
+        'entry_id'   => {segment_3}, 
+        'channel_id' => 14 //payable
+    )
+);
+?>

@@ -1,0 +1,31 @@
+{embed='site/header' curpage='printable'}
+
+<script type="text/javascript" src="{path='custom/js'}/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+tinymce.init({
+    selector: "#TypeHere",
+    content_css : "custom/js/tinymce/css/content.css",
+	theme_advanced_font_sizes: "10px,12px,13px,14px,16px,18px,20px",
+	font_size_style_values : "10px,12px,13px,14px,16px,18px,20px",
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern imagetools"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview | forecolor backcolor"
+});
+
+</script>
+
+
+<textarea id="TypeHere" name="printable" id="" cols="30" rows="20"></textarea>
+
+
+<script>
+    $(document).ready(function(){
+        $('mce-content-body').text('ola');
+    });
+</script>
+
+{embed='site/footer'}

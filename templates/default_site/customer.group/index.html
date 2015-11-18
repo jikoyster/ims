@@ -17,7 +17,6 @@
       <th class="alignLeft">Customer Name</th>
       <th class="alignLeft">Address</th>
       <th class="alignLeft">Contact</th>
-      <th class="alignRight">Total Purchases</th>
       <th class="widthSmall"></th>
     </tr>
   </thead>
@@ -25,17 +24,10 @@
     {exp:channel:entries channel="customer"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='customer/update/{entry_id}'}">{title}</a></td>
-      <td class="alignLeft">{customer_address}</td>
-      <td class="alignLeft">{customer_contact}</td>
-      <td class="alignRight">
-        {if total_purchases == ''} 
-          {{0 | currency:cc.currencySymbol }} 
-        {if:else} 
-          {{ {total_purchases} | number:2}} 
-        {/if}
-      </td>
+      <td class="alignLeft widthBig">{customer_address}</td>
+      <td class="alignLeft widthBig">{customer_contact}</td>
       <td class="alignCenter widthSmall ">
-        <a href="#"> <i class="fa fa-times-circle remove-icon"
+        <a href="#"><i class="fa fa-times-circle remove-icon"
                         ng-mouseover="cc.buttonOn('row-{entry_id}')"
                         ng-mouseout="cc.buttonOff('row-{entry_id}')"
                         ng-click="cc.removeData('{entry_id}')"

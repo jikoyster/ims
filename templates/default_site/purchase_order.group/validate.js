@@ -9,6 +9,9 @@ $("#publishForm").submit(function(){
 		case "RECEIVED": //update product's order_status -> 'Not Ordered'
 			return update_products("Not Ordered"); 
 			break;
+		case "INCOMPLETE":
+			return update_products("Ordered"); 
+			break;
 	}
 });
 

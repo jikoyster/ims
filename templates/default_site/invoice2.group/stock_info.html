@@ -1,0 +1,12 @@
+{exp:channel:entries channel="stocks" entry_id="{segment_4}"}
+	<?php switch("{segment_3}"){
+		case "Wholesale" :
+				echo "<div id='price'>{wholesale_price}</div>";
+				break;
+		case "Retail":
+				echo "<div id='price'>{retail_price}</div>";
+				break;
+		default: break;
+	} ?>
+	<div id="um">{um}</div>
+{/exp:channel:entries}

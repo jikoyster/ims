@@ -41,4 +41,7 @@ a {
   .popup_close a:hover {
     color: #666; }
 
+#IndexInvoice table th, #IndexInvoice table td {
+  display: table-cell !important; }
+
 /*# sourceMappingURL=style.css.map */

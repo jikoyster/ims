@@ -1,0 +1,87 @@
+<html>
+<head>
+	<title>Purchase Order</title>
+	<link rel="stylesheet" href="{path='printable/po_style'}">
+
+	<script type="text/javascript" src="{path='custom/js/jquery.min.js'}"></script>
+</head>
+<body>
+<div class="page_wrapper"><br>
+	
+{exp:channel:entries channel="purchase_order" entry_id="{segment_3}"}
+	<h3 class="po_num">Purchase Order Number: {po_num}</h3>
+{/exp:channel:entries}
+
+<div class="col-wrapper header">
+	<div class="col col-2">
+		<div class="channel_store">
+			{exp:channel:entries channel="store" entry_id="153"}
+				<h1 class="name">{title}</h1>
+				<h3 class="address"><?php echo nl2br("{store_address}"); ?></h3>
+				<h3 class="contact">{store_contact}</h3>
+			{/exp:channel:entries}
+		</div>
+	</div>
+	
+	<div class="col col-2">
+		<div class="date"><?php echo date('F d, Y');?></div>
+	</div>
+</div>
+
+
+
+{exp:channel:entries channel="purchase_order" entry_id="{segment_3}"}
+	
+	<div class="col-wrapper delivery_info clear">
+		<div class="col col-2">
+			<h3 class="head">To Supplier</h3>
+			<div class="info">
+				<b>{po_supplier:title}</b> <br>
+				<?php echo nl2br("{po_supplier:supplier_address}"); ?> <br>
+			</div>
+			<div class="contact">{po_supplier:supplier_contact}</div>
+		</div>
+
+		<div class="col col-2">
+			<h3 class="head">Delivery Address</h3>
+			<div class="info">
+				<b>{delivered_to:title}</b> <br>
+				<?php echo nl2br("{delivered_to:warehouse_address}"); ?> <br>
+			</div>
+			<div class="contact">{delivered_to:warehouse_contact}</div>
+		</div>
+
+		<div class="clear"></div>
+	</div>
+	
+	<div class="product_list">
+		{po_product_list}
+	</div>
+
+	
+	<div class="total_amount">Total Amount: {po_total_amount}</div>
+{/exp:channel:entries}
+
+<br><br><hr class="clear">
+
+<div class="additional_notes">
+	<small>Additional Notes: </small> <br>
+	<textarea name="additional_notes" id="" cols="100" rows="10"></textarea>
+</div>
+
+<br>
+</div>
+
+<script>
+	$(".product_list .bodylist input[name=qty]")
+		.attr("disabled", "disabled")
+		.css({
+			fontSize		: '16px', 
+			fontWeight		: "900",
+			border			: "0", 
+			backgroundColor	: "#fff", 
+			color 			: "#000",
+		});
+</script>
+</body>
+</html>

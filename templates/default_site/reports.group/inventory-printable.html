@@ -1,0 +1,191 @@
+<section id="Inventory_Report">
+	<link rel="stylesheet" type="text/css" href="{stylesheet='site/style'}" media="all">
+	<link rel="stylesheet" href="{path='reports/style'}">
+	<script type="text/javascript" src="{path='custom/js/jquery.min.js'}"></script>
+
+	<div class="pagetitle">
+			<div class="floatRight">
+				<input type="submit" class="btn btn-danger" value="Save This Inventory">
+			</div>
+
+
+			{exp:channel:entries channel="stocks" entry_id="{segment_3}"}
+				Inventory Report: {title} [CODE: {product_code}]
+			{/exp:channel:entries}
+		</div>
+
+	<table>
+		
+		<tbody>
+			<tr>
+				<script>var total_goods_available_for_sale = 0;</script>
+				<td><b>Beginning Inventory</b> <?php echo "<b>("; echo date("Y")-1; echo "): </b>"; ?></td>
+				<td class="alignRight">
+					{exp:channel:entries channel="stocks" entry_id="{segment_3}"}
+						<input type="hidden" name="beginning_inventory" value="{beginning_stocks}">
+						<b>{beginning_stocks}</b>
+						<script>
+							total_goods_available_for_sale += parseInt( {beginning_stocks} );
+						</script>
+					{/exp:channel:entries}
+				</td>
+			</tr>
+			<tr><td class="bar" colspan="2"> </td></tr>
+
+
+			<!-- ################ 	PURCHASES -->
+			<tr>
+				<td class="alignLeft" colspan="2">Purchases for the year <?php echo date('Y') ?></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<table style="width: 100%" class="displayItemOrders"></table>
+					
+					{exp:channel:entries channel="purchase_order" dynamic="no" start_on="January {current_time format='%Y'}" search:po_status="RECEIVED"}
+
+					<div class="hidden-{entry_id}" style="display: none">{po_product_list}</div>
+					<div class="hidden-{entry_id}-entry_date" style="display: none">{entry_date format="%m/%d/%Y"}</div>
+					
+
+					<script>
+						prod_list = $(".hidden-{entry_id}").html();
+
+						if( prod_list.indexOf({segment_3}) != -1){
+
+							qty 		= $(".hidden-{entry_id} #row-{segment_3} .qty input").attr("value");
+							entry_date	= $(".hidden-{entry_id}-entry_date").text();
+							total_goods_available_for_sale += parseInt( qty );
+
+							row 	= "\
+								<tr>\
+									<td class='alignLeft' style='padding: 5px 0;'>("+entry_date+") <b>{title}</b></td>\
+									<td class='alignRight' style='padding: 5px 0;'>"+qty+"</td>\
+								</tr>\
+							";
+							$('.displayItemOrders').append(row);
+						}
+					</script>
+					
+				{/exp:channel:entries}
+
+				<script>
+					if( $(".displayItemOrders").html() == '' ){
+						$(".displayItemOrders").html("\
+							<tr>\
+								<td class='alignLeft' colspan='2'> \
+									<i>No Purchases Made for this Year</i> \
+								</td>\
+							</tr>");
+					}
+				</script>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="bar"><hr></td>
+			</tr>
+			<tr>
+				<td class="alignLeft"><h3>Total Goods Available For Sale</h3></td>
+				<td class="alignRight">
+					<span class="total_goods_available_for_sale"></span>
+					<script>
+						if(!total_goods_available_for_sale)
+							total_goods_available_for_sale = 0;
+						$(".total_goods_available_for_sale").html( "<h3>"+total_goods_available_for_sale+"</h3>" );
+					</script>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="interval" colspan="2"><hr></td>
+			</tr>
+
+
+		
+			<!-- ################ 	INVOICES -->
+			<tr>
+				<td class="alignLeft" colspan="2"><i><b>Less:</b> Sales Made from January <?php echo date('Y') ." &mdash; ". date('F d, Y'); ?></i></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<table style="width: 100%" class="displayItemSales"></table>
+					<script>var total_sold_items = 0;</script>
+					{exp:channel:entries channel="invoice" dynamic="no" start_on="January {current_time format='%Y'}"}
+
+					<div class="hidden-{entry_id}" style="display: none">{invoice_product_list}</div>
+					<div class="hidden-{entry_id}-entry_date" style="display: none">{entry_date format="%m/%d/%Y"}</div>
+					
+
+					<script>
+						prod_list = $(".hidden-{entry_id}").html();
+
+						if( prod_list.indexOf({segment_3}) != -1){
+
+							qty 		= $(".hidden-{entry_id} #row-{segment_3} .qty input").attr("value");
+							entry_date	= $(".hidden-{entry_id}-entry_date").text();
+							total_sold_items += parseInt(qty);
+
+							row 	= "\
+								<tr>\
+									<td class='alignLeft' style='padding: 5px 0;'>("+entry_date+") <b>{title}</b></td>\
+									<td class='alignRight' style='padding: 5px 0;'>"+qty+"</td>\
+								</tr>\
+							";
+							$('.displayItemSales').append(row);
+						}
+					</script>
+					
+				{/exp:channel:entries}
+				
+				<script>
+					if( $(".displayItemSales").html() == '' ){
+						$(".displayItemSales").html("\
+							<tr>\
+								<td class='alignLeft' colspan='2'> \
+									<i>No Sales Made for this Year</i> \
+								</td>\
+							</tr>");
+					}
+				</script>
+
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="bar"><hr></td>
+			</tr>
+			<tr>
+				<td class="alignLeft"><h3>Total Sold Items</h3></td>
+				<td class="alignRight">
+					<span class="total_sold_items"></span>
+					<script>
+						if(!total_sold_items)
+							total_sold_items = 0;
+						else
+							total_sold_items_text = "- "+total_sold_items;
+						$(".total_sold_items").html( "<h3>"+total_sold_items_text+"</h3>" );
+					</script>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="interval" colspan="2"><hr></td>
+			</tr>
+
+			
+			<tr>
+				<td class="alignLeft"><h3>Ending Inventory</h3></td>
+				<td class="alignRight">
+					<input type="text" name="ending_inventory" class="alignRight ending_inventory">
+					<script>
+						ending_inventory = total_goods_available_for_sale - total_sold_items;
+						$("input[name=ending_inventory]").attr('value', ending_inventory);
+					</script>
+				</td>
+			</tr>
+		</tbody>
+		
+	</table>
+</section>

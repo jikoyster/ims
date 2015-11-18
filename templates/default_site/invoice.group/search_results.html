@@ -2,35 +2,49 @@
 
 <script>
 	priceHead = invoice_type + " Price";
-	po_head = 	'<div class="headlist" style="'+ style.head.borderBottom + style.head.fontWeight +'">' +
+	inv_head = 	'<div class="headlist" style="'+ style.head.borderBottom + style.head.fontWeight +'">' +
 					'<b style="'+ style.common.cellL +'">Product Name</b>' +
 					'<b style="'+ style.common.cellM +'">Product Code</b>' +
-					'<b style="'+ style.common.cellS +'">Stock on hand</b>' +
-					'<b style="'+ style.common.cellS +'">Critical Level</b>' +
+					'<b style="'+ style.common.cellS +'">UM (unit of Measure)</b>' +
 					'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+priceHead+'</b>' +
 					'<b style="'+ style.common.cellXS +'">&nbsp;</b>' +
 					'<b class="clear"></b>'
 				'</div>';
-	jQuery('.result--head').html( po_head );
+	jQuery('.result--head').html( inv_head );
+
+	function currencyFormat( number ){
+		numberParsed = (parseFloat(number)).toFixed(2);
+		numberStr = numberParsed.split(".");
+		
+		return (parseFloat(numberStr[0])).toLocaleString() +"."+ numberStr[1];
+		// return number.toLocaleString();
+	}
 </script>
 
 <div class="result--body" ng-show="popup">
 {exp:channel:entries channel="stocks" search:product_name="{segment_3}"}
-	<div id="listrow-{entry_id}" class="listrow cellpad clear <?php if( {in_stock} <= {critical_level} ){ ?> red <?php } ?>" >
+	<div id="listrow-{entry_id}" class="listrow cellpad clear 
+				<?php if( {in_stock} <= {critical_level} || 
+						  {store_in_stock} <= {store_critical_level} )
+						  { echo 'red'; } ?>" 
+				><!-- closing div -->
 		
 		<span class="entry_id" style="display: none;">{entry_id}</span>
 		<span class="product_name"><b>{product_name}</b></span>
 		<span class="product_code"><b>{product_code}</b></span>
-		<span class="in_stock">{in_stock}</span>
-		<span class="critical_level">{critical_level}</span>
+		<span class="in_stock">{um}</span>
 		<span class="price"></span>
 		<script>
 			switch( invoice_type ){
 				case 'Retail':
-					jQuery('#listrow-{entry_id} .price').text("{retail_price}");
+					jQuery('#listrow-{entry_id} .price')
+						.text( currencyFormat( ("{retail_price_code:actual_price}").replace(",","") ) );
 					break;
 				case 'Wholesale':
-					jQuery('#listrow-{entry_id} .price').text("{wholesale_price}");
+					// alert( currencyFormat( ("{wholesale_price_code:actual_price}").replace(",","") ) );
+
+					jQuery('#listrow-{entry_id} .price')
+						.text( currencyFormat( ("{wholesale_price_code:actual_price}").replace(",","") ) );
 					break;
 			}
 		</script>

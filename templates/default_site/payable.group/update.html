@@ -1,0 +1,30 @@
+{embed="site/header" curpage="payable"}
+
+{exp:channel:form channel="accounts_payable" return="{segment_1}" entry_id="{segment_3}"}
+	<div>
+		<label for="title">Title</label>
+		<input type="text" name="title" value="{title}">
+	</div>
+
+	<div class="field_po">
+		<label for="{label:purchase_order}">{label:purchase_order}</label>
+		{field:purchase_order}
+	</div>
+
+	<div>
+		<label for="{label:amount_payable}">{label:amount_payable}</label>
+		{field:amount_payable}
+	</div>
+
+	<input type="submit" value="Submit" class="btn btn-danger">	
+{/exp:channel:form}
+
+<script>
+	$('.field_po select').on("change", function(){
+		po = $(".field_po select :selected").text();
+
+		$('input[name="title"]').attr('value', 'AP-'+po);
+	});
+</script>
+
+{embed="site/footer"}

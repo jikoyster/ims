@@ -57,3 +57,11 @@ a{ cursor: pointer; }
 		visibility: hidden;
 	}
 }
+
+#IndexPO{
+	table{
+		th, td{
+			display: table-cell !important;
+		}
+	}
+}

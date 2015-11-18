@@ -1,0 +1,40 @@
+{embed="site/header" curpage="return_to_supplier"}
+
+<script>
+	getPO = function(){
+		po = $(".field_po select :selected").text();
+		return po;
+	};
+</script>
+
+
+{exp:channel:form channel="return_to_supplier" return="{segment_1}"}
+	<input type="hidden" name="title">
+
+	<div class="field_po">
+		<label for="{label:ret_po_num}">{label:ret_po_num}</label>
+		{field:ret_po_num}
+
+		{if "{segment_3}" != "" }
+			<script>
+				$(".field_po select").find("option[value={segment_3}]").attr("selected", "selected");
+				$('input[name="title"]').attr('value', 'RS-'+getPO());
+			</script>
+		{/if}
+	</div>
+
+	<div>
+		<label for="{label:rs_returned_items}">{label:rs_returned_items}</label>
+		{field:rs_returned_items}
+	</div>
+<br>
+	<input type="submit" value="Submit" class="btn btn-danger">	
+{/exp:channel:form}
+
+<script>
+	$('.field_po select').on("change", function(){
+		$('input[name="title"]').attr('value', 'RS-'+getPO());
+	});
+</script>
+
+{embed="site/footer"}

@@ -44,4 +44,7 @@ a {
 .date_received select {
   visibility: hidden; }
 
+#IndexPO table th, #IndexPO table td {
+  display: table-cell !important; }
+
 /*# sourceMappingURL=style.css.map */

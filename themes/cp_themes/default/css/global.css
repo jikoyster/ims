@@ -3031,6 +3031,7 @@ html.js .publish_hidden {
 }
 
 #accessoriesDiv {
+		display: 		none;
 	clear:				both;
 	padding-top:		14px;
 }
@@ -3652,6 +3653,7 @@ table.mainTable a.less_important_link:link {
 /* Footer */
 #footer {
 	clear:				both;
+		display:  			none;
 	text-align:			center;
 	font-size:			11px;
 	color:				#8F9A9C;
@@ -4163,6 +4165,7 @@ div.pageContents,
 }
 
 .nanner{
+		display: none;
 	background-color: #3E4C54;
 	border: solid #000000;
 	border-width: 1px 0;

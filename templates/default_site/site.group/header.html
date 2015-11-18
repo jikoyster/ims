@@ -9,7 +9,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title></title>
+        <title>{embed:curpage}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,7 +22,7 @@
         <link rel="stylesheet" type="text/css" href="{stylesheet='site/style'}" media="all">
         <link rel="stylesheet" href="{path='custom/css/font-awesome.min.css'}" media="all">
     </head>
-    <body onload="self">
+    
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -37,7 +37,7 @@
         {/exp:channel:entries}
         <?php if( $ctr > 0 ): ?>
             
-            <body class="on-alert">
+            <body class="on-alert" onload="self">
 
             <div class="alertmsg">
                 <i class="fa fa-exclamation-triangle"></i> 
@@ -45,7 +45,7 @@
                 <a class="btn" href="{path='critical_level'}">more details &raquo;</a>
             </div>
         <?php else: ?>
-            <body class="off-alert">
+            <body class="off-alert" onload="self">
         <?php endif; ?>
 
         
@@ -61,43 +61,115 @@
             
             
             <nav>
-                <div class="big">
-                    <a class="tab--warehouse" href="{path='warehouse/index'}">Warehouse<br/> Management</a>
-                </div>
+                {if member_group != '7'}
+                    <div class="big">
+                        <a class="tab--warehouse" href="{path='warehouse/index'}">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="word">Warehouse<br/> Management</span>
+                        </a>
+                    </div>
+                    <div class="big">
+                        <a class="tab--stocks" href="{path='stocks'}">
+                            <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                            <span class="word">Stock<br/> Management</span>
+                        </a>
+                    </div>
+                    
+                    <div class="small">
+                        <div class="tab--po">
+                            <a href="{path='purchase_order'}">
+                                <span class="icon"><i class="fa fa-file-text"></i></span>
+                                <span class="word">Purchase<br/> Order</span>
+                            </a>
+                        </div>
+                        <div class="tab--receivable">
+                            <a href="{path='payable'}">
+                                <span class="icon"><i class="fa fa-money"></i></span>
+                                <span class="word">Accounts<br/> Payable</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="big">
+                        <a class="tab--price_code" href="{path='price_code'}">
+                            <span class="icon"><i class="fa fa-barcode"></i></span>
+                            <span class="word lhmid">Price Coding</span>
+                        </a>
+                    </div>
+                {/if}
                 
-                <div class="small">
-                    <div class="tab--po"><a href="{path='purchase_order'}">Purchase<br/> Order</a></div>
-                    <div class="tab--stocks"><a href="{path='stocks'}">Stock<br/> Management</a></div>
-                </div>
-                
-                <div class="big">
-                    <a class="tab--encoding" href="{path='invoice/index'}">Sales<br/> Encoding</a> <!-- INVOICE -->
-                </div>
-                <div class="big">
-                    <a class="tab--price_code" href="{path='price_code'}">Price Coding</a>
+                <div class=" {if member_group == '7'}  big {if:else} small {/if}">
+                    {if member_group == '7'}
+                        <a class="tab--encoding" href="{path='invoice/index'}">
+                            <span class="icon"><i class="fa fa-file-text"></i></span>
+                            <span class="word">Sales<br/> Encoding</span>
+                        </a>
+                    {if:else} 
+                        <div class="tab--encoding">
+                            <a class="tab--encoding" href="{path='invoice/index'}">
+                                <span class="icon"><i class="fa fa-file-text"></i></span>
+                                <span class="word">Sales<br/> Encoding</span>
+                            </a>
+                        </div>
+                        <div class="tab--receivable">
+                            <a href="{path='receivable/index'}">
+                                <span class="icon"><i class="fa fa-money"></i></span>
+                                <span class="word">Accounts<br/> Receivable</span>
+                            </a>
+                        </div>
+                    {/if}
                 </div>
 
-                
+                {if member_group != '7'}
+                    <div class="big">
+                        <a class="tab--salesman" href="{path='salesman'}">
+                            <span class="icon"><i class="fa fa-street-view"></i></span>
+                            <span class="word lhmid">Salesman</span>
+                        </a>
+                    </div>
+                    <div class="small">
+                        <div class="tab--customer lhmid">
+                            <a href="{path='customer'}">
+                                <span class="icon"><i class="fa fa-user"></i></span>
+                                <span class="word">Customer</span>
+                            </a>
+                        </div>
+                        <div class="tab--supplier lhmid">
+                            <a href="{path='supplier'}">
+                                <span class="icon"><i class="fa fa-briefcase"></i></span>
+                                <span class="word">Supplier</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="big">
+                        <a class="tab--supplier" href="{path='return_to_supplier'}">
+                            <span class="icon"><i class="fa fa-reply-all"></i></span>
+                            <span class="word">Return to <br> Supplier</span>
+                        </a>
+                    </div>
+                    <div class="big">
+                        <a class="tab--customer" href="{path='returns_from_customer'}">
+                            <span class="icon"><i class="fa fa-repeat"></i></span>
+                            <span class="word">Returns from <br> Customer</span>
+                        </a>
+                    </div>
+                    <div class="small">
+                        <div class="tab--reports lhmid">
+                            <a href="{path='reports'}">
+                                <span class="icon"><i class="fa fa-files-o"></i></span>
+                                <span class="word">Reports</span>
+                            </a>
+                        </div>
+                        <div class="tab--printable lhmid">
+                            <a href="{path='printable'}">
+                                <span class="icon"><i class="fa fa-print"></i></span>
+                                <span class="word">Printable</span>
+                            </a>
+                        </div>
+                    </div>
+                {/if}
 
-                <div class="big clear">
-                    <a class="tab--collection" href="{path='customer'}">Collection / Customer Payment</a>
-                </div>
-                <div class="small">
-                    <div class="tab--salesman"><a href="{path='salesman'}" title="Accounts Payable">Salesman</a></div>
-                    <div class="tab--supplier"><a href="{path='supplier'}" title="Accounts Payable">Supplier</a></div>
-                </div>
-                <div class="big">
-                    <a class="tab--returns" href="{path='returns'}">Returns</a>
-                </div>
-                <div class="big">
-                    <a class="tab--reports" href="#">Reports</a>
-                </div>
-                <div class="big">
-                    <a class="tab--printable" href="#">Printable</a>
-                </div>
-                <div class="big">
-                    <a class="tab--customer" href="{path='customer'}">Customer</a>
-                </div>
+                <div class="clear"></div>
             </nav>
             
         </div>

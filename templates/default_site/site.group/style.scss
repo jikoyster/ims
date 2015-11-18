@@ -8,6 +8,28 @@ $lightColor: #efefef;
 $minWidth: 1024px;
 $headFootWidth: 96%;
 
+$navColor1: #132156;
+	$navColor1-1: #020922;
+	$navColor1-2: #06123C;
+	$navColor1-3: #43528A;
+	$navColor1-4: #283770;
+$navColor2: #7F350E;
+	$navColor2-1: #321200;
+	$navColor2-2: #581F00;
+	$navColor2-3: #A6572D;
+	$navColor2-4: #CB7E54;
+$navColor3: #09543D;
+	$navColor3-1: #002117;
+	$navColor3-2: #003A28;
+	$navColor3-3: #1E6D55;
+	$navColor3-4: #38866E;
+$navColor4: #7F5D0E;
+	$navColor4-1: #322300;
+	$navColor4-2: #583D00;
+	$navColor4-3: #A6812D;
+	$navColor4-4: #CBA754;
+
+
 body.off-alert header{
 	margin-top: 0;
 }
@@ -82,7 +104,7 @@ body.on-alert header{
 
 
 .container-inner{
-	background: #fff;
+	background: rgba(250,250,250,.8);
 	padding: 10px;
 	width: $headFootWidth - 1;
 	margin: 0 auto;
@@ -133,18 +155,22 @@ input[type=radio]{
 	text-align: center;
 }
 .widthBig{
+	display: inline-block;
 	width: 300px;
 	min-width: 300px;
 }
 .widthMedium{
+	display: inline-block;
 	width: 150px;
 	min-width: 150px;
 }
 .widthSmall{
+	display: inline-block;
 	width: 100px;
 	min-width: 100px;
 }
 .widthTiny{
+	display: inline-block;
 	width: 50px;
 	min-width: 50px;
 }
@@ -181,7 +207,7 @@ body{
 }
 header{
 	min-width: $minWidth;
-	width: $headFootWidth;
+	width: $headFootWidth + .4;
 	margin: 0 auto;
 	padding: 10px;
 
@@ -190,19 +216,43 @@ header{
 		width: 190px;
 		margin-right: 10px;
 		height: 105px;
+			display: none;
 	}
 	nav{
 		.big, .small{
 			float: left;
 			margin-right: 2px;
 			margin-bottom: 2px;
-			width: 15%;
+			width: 18.5%;
 			display: table;
+
+			span{
+				float: left;
+			    display: inline-block;
+			}
+			.icon{
+				width: 30%;
+				text-align: right;
+				padding-right: 10px;
+
+				i{
+					font-size: 40px;
+				}
+			}
+			.word{
+				width: 50%;
+				text-align: left;
+			}
+		}
+		.small i{
+			padding-top: 5px;
+			font-size: 30px !important;
 		}
 		.big a, .small a{
 			display: table-cell;
 			vertical-align: middle;
 			font-weight: 900;
+			font-size: 16px;
 		}
 		.big{
 			text-align: center;
@@ -258,9 +308,6 @@ header{
 		.tab--supplier{
 			background: #09154c;
 		}
-			.tab--salesman, .tab--supplier{
-				line-height: 40px;
-			}
 		.tab--returns{
 			background: #ac0d2e;
 		}
@@ -272,6 +319,13 @@ header{
 		}			
 		.tab--customer{
 			background: #7356CF;
+		}
+		.tab--receivable{
+			background: #02165D;
+		}
+
+		.lhmid{
+			line-height: 40px;
 		}
 
 	}//nav
@@ -298,6 +352,9 @@ table.tbl_display{
 		float: none;
 		margin: 0;
 	}
+	th, td{
+		display: table-cell !important;
+	}
 
 	thead{
 		th{
@@ -322,6 +379,17 @@ table.tbl_display{
 				.remove-icon{
 					font-size: 1.2em !important;
 					color: red;
+				}
+				.print-icon{
+					font-size: 1.2em !important;
+					color: #00f;
+				}
+				.partial-icon{
+					font-size: 1.2em !important;
+					color: #00F;
+				}
+				.print-icon:hover{
+					color: #000;
 				}
 			}
 			td.checkbox{
@@ -375,6 +443,9 @@ section .multiselect label{
 			font-size: 1.2em;
 			border-bottom: 1px solid #ccc;
 		}
+	}
+	.col-2{
+		width: 50%;
 	}
 	.col-3{
 		width: 31%;

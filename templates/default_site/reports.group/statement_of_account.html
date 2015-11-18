@@ -1,0 +1,28 @@
+{embed ='site/header' curpage="reports"}
+<link rel="stylesheet" href="{path='reports/style'}">
+
+<section id="statement_of_account">
+
+	<h1 class="pagehead">Statement Of Account</h1>
+	<table border='1' class="tbl_display">
+		<thead>
+	    <tr>
+	      <th class="alignLeft">Customer's Name</th>
+	      <th class="alignLeft">Date Added</th>
+	    </tr>
+		</thead>
+		<tbody>
+		{exp:channel:entries channel="customer" orderby="date" sort="desc"}
+			<tr>
+				<td class="alignLeft">
+					<a href="{path='reports/statement_of_account_customer/{entry_id}'}">{title}</a>
+				</td>
+				<td class="alignLeft">{entry_date format="%F %d, %Y"}</td>
+			</tr>
+		{/exp:channel:entries}
+		</tbody>	
+	</table>
+
+</section>
+
+{embed ='site/footer'}

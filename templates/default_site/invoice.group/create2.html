@@ -1,0 +1,55 @@
+{embed="site/header"}
+
+<link rel="stylesheet" href="{path='invoice/style'}" media="all">
+<script type="text/javascript" src="{path='invoice/script'}"></script>
+
+<section id="CreateInvoice" ng-app="invoice">
+
+{if logged_in}
+
+{exp:channel:form channel="sample1" return="{segment_1}"}
+<div>
+	<h1 class="pagetitle cellpad">New Invoice</h1>
+	
+	<div>
+		{field:inv_type}
+	</div>
+
+	<div>
+		<label for="title">Invoice#</label>
+		<input type="text" name="title">
+	</div>
+
+	<div>
+		<label for="{label:inv_customer}">{label:inv_customer}</label>
+		{field:inv_customer}
+	</div>
+
+	<div>
+		<label for="{label:inv_salesman}">{label:inv_salesman}</label>
+		{field:inv_salesman}
+	</div>
+
+	<div>
+		<label for="{label:inv_product_list}">{label:inv_product_list}</label> <br>
+		{field:inv_product_list}
+	</div>
+
+</div>
+{/exp:channel:form}
+
+
+{if:else}
+	{embed='site/not_logged'}
+{/if}
+
+</section>
+
+<script src="{path='invoice/validate'}"></script>
+<script>
+	jQuery('.preventDefault').bind("click", function(event){
+		event.preventDefault();
+	});
+	init_list();
+</script>
+{embed="site/footer"}

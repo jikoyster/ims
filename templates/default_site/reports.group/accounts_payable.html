@@ -1,0 +1,52 @@
+{embed ='site/header' curpage="reports"}
+
+<script src="{path='reports/data-del'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
+
+<section ng-app="report">
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Transaction Ref#</th>
+      <th class="alignLeft">Date</th>
+      <th class="alignRight">Amount Payable</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="reportController as ctrl">
+    {exp:channel:entries channel="accounts_payable" orderby="date" sort="desc"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft">
+      	{purchase_order}
+      		{purchase_order:po_supplier:title}
+      	{/purchase_order}
+      </td>
+      <td class="alignLeft">{entry_date format="%F %d, %Y | %h:%m %a"}</td>
+      <td class="alignRight">{amount_payable}</td>
+      <td class="alignCenter widthSmall">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="ctrl.buttonOn('row-{entry_id}')"
+                        ng-mouseout="ctrl.buttonOff('row-{entry_id}')"
+                        ng-click="ctrl.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='6'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+
+{embed ='site/footer'}

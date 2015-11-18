@@ -17,8 +17,10 @@
       <th class="alignLeft">Product Name</th>
       <th class="alignLeft">Product Code</th>
       <th class="alignLeft">Warehouse</th>
-      <th class="alignLeft">Stock on hand</th>
-      <th class="alignLeft">Critical Level</th>
+      <th class="alignLeft">Stock on hand (Warehouse)</th>
+      <th class="alignLeft">Critical Level (Warehouse)</th>
+      <th class="alignLeft">Stock on hand (Store)</th>
+      <th class="alignLeft">Critical Level (Store)</th>
       <th class="widthSmall"></th>
     </tr>
   </thead>
@@ -28,8 +30,12 @@
       <td class="alignLeft"><a href="{path='stocks/update/{entry_id}'}">{title}</a></td>
       <td class="alignLeft widthMedium">{product_code}</td>
       <td class="alignLeft widthMedium"><a href="{path='warehouse/update/{warehouse:entry_id}'}">{warehouse:title}</a></td>
+
       <td class="alignLeft widthSmall">{in_stock}</td>
       <td class="alignLeft widthSmall">{critical_level}</td>
+      <td class="alignLeft widthSmall">{store_in_stock}</td>
+      <td class="alignLeft widthSmall">{store_critical_level}</td>
+
       <td class="alignCenter widthSmall ">
         <a href="#"> <i class="fa fa-times-circle remove-icon"
                         ng-mouseover="sc.buttonOn('row-{entry_id}')"
@@ -42,7 +48,7 @@
   </tbody>
   <tfoot class="note">
     <tr>
-      <td colspan='6'>
+      <td colspan='8'>
         Data deleted here are only set to trash (status = Closed).<br>
         Go to admin panel to recover/delete permanently those items.
       </td>

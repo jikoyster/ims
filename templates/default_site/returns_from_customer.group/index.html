@@ -1,0 +1,54 @@
+{embed='site/header' curpage="returns_from_customer"}
+<script src="{path='returns_from_customer/data-del'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
+
+<section class="cellpad" ng-app="rc">
+
+{if logged_in}
+<a class="btn btn-new" href="{path='returns_from_customer/create'}">Add New</a>
+{/if}
+
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Referrence#</th>
+      <th class="alignRight">Customer</th>
+      <th class="alignCenter">Date Filed</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="rcController as ctrl">
+    {exp:channel:entries channel="returns_from_customer"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='returns_from_customer/update/{entry_id}'}">{title}</a></td>
+      {ret_invoice}
+      <td class="alignRight">{ret_invoice:customer:title}</td>
+      {/ret_invoice}
+      <td class="alignCenter">{entry_date format="%M. %d, %Y"}</td>
+      
+      <td class="alignCenter widthSmall">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="ctrl.buttonOn('row-{entry_id}')"
+                        ng-mouseout="ctrl.buttonOff('row-{entry_id}')"
+                        ng-click="ctrl.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='7'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+{embed='site/footer'}

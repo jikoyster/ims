@@ -1,0 +1,85 @@
+{embed ='site/header' curpage="invoice"}
+<style>
+	input[type=text]{
+		font-size: 1.2em !important;
+	}
+</style>
+<section ng-app="">
+	{exp:channel:form channel="invoice2"}
+		<div>
+			<label for="Invoice#">Invoice#</label>
+			<input type="text" name="title" ng-model="invoice_num">
+			<input type="hidden" name="url_title" value="{{'inv_'+invoice_num}}">
+		</div>
+
+		<div class="invoice_type">
+			<label for="{label:invoice2_type}">&nbsp;</label>
+			{field:invoice2_type}
+		</div>
+		<div>
+			<label for="{label:invoice2_customer}">{label:invoice2_customer}</label>
+			{field:invoice2_customer}
+		</div>
+		<div class="product_list">
+			<label for="{label:invoice2_product_list}">{label:invoice2_product_list}</label>
+			{field:invoice2_product_list}
+		</div>
+		<div>
+			<label for="{label:invoice2_salesman}">{label:invoice2_salesman}</label>
+			{field:invoice2_salesman}
+		</div>
+		<hr>
+		<div class="alignRight floatRight">
+			<label for="{label:invoice2_total_amount}">
+				<button class="btn preventDefault" onclick="countItems()">Compute Total Amount</button>
+			</label>
+			{field:invoice2_total_amount}
+		</div>
+
+		<input type="submit" class="btn">
+	{/exp:channel:form}
+</section>
+
+{embed ='site/footer'}
+
+<script>
+	//setting invoice's default type
+	$(".invoice_type input[value='Retail']").attr("checked", "true");
+	$(".invoice_type input[value='Retail']").prop("checked", "true");
+	var invoice2_type = $("input[name=invoice2_type]:checked").attr("value");
+
+	$('a.grid_button_add').on('click', function(){
+		$.getScript("{path='invoice2/stock_info_script'}");
+	});
+
+	//getting the price of the selected item
+	$.getScript("{path='invoice2/stock_info_script'}");
+
+	$(".preventDefault").click(function(event){
+		event.preventDefault();
+	});
+
+	var countItems = function(){
+		items = $("table tbody tr.grid_row > td.grid_handle").length;
+		// alert( items -1);
+		
+		total_amount = 0;
+		for( var i=1; i <= items-1; i++ ){
+			thisamount = parseFloat(($("tbody tr.grid_row:eq("+i+") td:last-child input").attr('value')).replace(",", ""));
+			// console.log(parseFloat(thisamount));
+
+			total_amount += thisamount;
+		}
+
+		$('input[name=invoice2_total_amount]').attr('value', localize(total_amount));
+	};
+
+	localize = function( amount ){
+		DecimalAmount 		= amount.toFixed(2);
+		DecimalAmountSplit 	= DecimalAmount.split(".");
+		WholeNumber			= parseInt(DecimalAmountSplit[0]).toLocaleString();
+		FinalAmount			= WholeNumber +"."+ DecimalAmountSplit[1];
+
+		return FinalAmount;
+	};
+</script>

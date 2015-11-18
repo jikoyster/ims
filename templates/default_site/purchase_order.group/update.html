@@ -14,12 +14,9 @@
 <h1 class="pagetitle cellpad">Update Purchase Order</h1>
 
 <div class="cellpad">
-	<div class="row">
-		<div class="span8">
-			<h3>Company Name</h3>
-			<div>Address</div>
-		</div>
-		<div class="span3">
+	<div class="">
+		
+
 			PO status <br>
 			{field:po_status}
 			
@@ -28,19 +25,19 @@
 				{field:date_received}
 			</div>
 
-		</div>
+		
 	</div>
 </div>
 
-<hr>
+<hr class="clear">
 
-<div class="row"> 	
-		<div class="span4">
+<div class="col-wrapper"> 	
+		<div class="col col-3">
 			<div class="cellpad">
 				To:<br>{field:po_supplier}
 			</div>
 		</div>
-		<div class="span4">
+		<div class="col col-3">
 			<div class="cellpad">
 				Deliver To:<br><span class="delivered_to">{field:delivered_to}</span> <br>
 				{field:delivery_address}
@@ -58,7 +55,7 @@
 				</script>
 			</div>
 		</div>
-		<div class="span4"><div class="cellpad">
+		<div class="col col-3"><div class="cellpad">
 			<label for="Name">PO#</label>
 			<input type="text" name="po_num" value="{po_num}" readonly>
 			
@@ -67,9 +64,9 @@
 			<input type="text" name="entry_date" value="{entry_date}" maxlength="23" size="25">
 		</div></div>		
 </div>
-<hr>
-<div class="row">
-	<div class="span12"><div class="cellpadd">
+<hr class="clear">
+<div class="">
+	<div class=""><div class="cellpadd">
 		<?php //if($noprod): ?>
 		{embed="purchase_order/popup-main"}
 		<div class="alignRight">
@@ -85,9 +82,9 @@
 
 
 
-<hr>
-<div class="row">
-	<div class="span12"><div class="cellpad floatRight">
+<hr class="clear">
+<div class="">
+	<div class="floatRight"><div class="cellpad ">
 		
 		<div>
 			<label for="Subtotal">Subtotal</label>
@@ -110,11 +107,32 @@
 	<!-- col1 -->
 </div>
 <!-- end of 2nd block -->
-
-	<hr>
-	<div class="cellpad">
-		<input type="submit" value="Submit" class="btn btn-danger">	
+<!-- 
+<hr class="clear">
+<div class="floatRight">
+	<div>
+		<label for="Partial Payment">Partial Payment</label>
+		<input type="text" name="partial_payment" onkeyup="set_unpaid_balance()" class="alignRight" value="{partial_payment}">
 	</div>
+	<div>
+		<label for="Unpaid Balance">Unpaid Balance</label>
+		<input type="text" name="unpaid_balance" class="alignRight" value="{unpaid_balance}" readonly>
+	</div>
+</div>
+ -->
+
+ <div class="clear floatRight">
+ 	<br><br>
+ 	<a href="#" 
+		onclick="window.open('{path='return_to_supplier/create/{entry_id}'}', '_blank', 'fullscreen=yes')"
+ 		class="btn btn-warning preventDefault">Create Returns</a>
+ </div>
+
+
+<hr class="clear">
+<div class="cellpad">
+	<input type="submit" value="Submit" class="btn btn-danger">	
+</div>
 
 </div>
 {/exp:channel:form}

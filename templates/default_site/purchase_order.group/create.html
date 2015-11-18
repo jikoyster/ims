@@ -16,6 +16,8 @@ if(isset($_POST['final_critical_products'])):
 	$final = json_decode($final);
 
 
+
+
 	// print_r($final[0]->product_code);
 	
 	foreach ($final as $product) {
@@ -27,8 +29,10 @@ if(isset($_POST['final_critical_products'])):
 						'entry_id			: '.$product->entry_id.','. 
 						'product_name		: "'.$product->product_name.'",'.
 						'price				: "'.$product->company_price.'",'.
+						'um					: "'.$product->um.'",'.
 						'};'.
 					'products.push(product);'.
+
 				'</script>';
 	}
 endif;
@@ -55,12 +59,12 @@ endif;
 <hr>
 
 <div class="col-wrapper"> 	
-		<div class="col">
+		<div class="col col-3">
 			<div class="cellpad po_supplier">
 				To:<br>{field:po_supplier}
 			</div>
 		</div>
-		<div class="col">
+		<div class="col col-3">
 			<div class="cellpad delivered_to">
 				Deliver To:<br>{field:delivered_to} <br>
 				{field:delivery_address}
@@ -78,10 +82,10 @@ endif;
 				</script>
 			</div>
 		</div>
-		<div class="col"><div class="cellpad">
+		<div class="col col-3"><div class="cellpad">
 			<label for="Name">PO#</label>
 			<input type="text" name="po_num" ng-model="po_num">
-			<input type="hidden" name="title" value="{{+po_num}}">
+			<input type="hidden" name="title" value="{{''+po_num}}">
 			<input type="hidden" name="url_title" value="{{'po_'+po_num}}">
 			<br>
 			<label for="Date">Date</label> 
@@ -131,11 +135,24 @@ endif;
 	<!-- col1 -->
 </div>
 <!-- end of 2nd block -->
-
-	<hr>
-	<div class="cellpad">
-		<input type="submit" value="Submit" class="btn btn-danger">	
+<!-- 
+<hr class="clear">
+<div class="floatRight">
+	<div>
+		<label for="Partial Payment">Partial Payment</label>
+		<input type="text" name="partial_payment" onkeyup="set_unpaid_balance()" class="alignRight" value="0">
 	</div>
+	<div>
+		<label for="Unpaid Balance">Unpaid Balance</label>
+		<input type="text" name="unpaid_balance" class="alignRight" value="0" readonly>
+	</div>
+</div>
+ -->
+
+<hr class="clear">
+<div class="cellpad">
+	<input type="submit" value="Submit" class="btn btn-danger">	
+</div>
 
 </div>
 {/exp:channel:form}
@@ -162,6 +179,7 @@ endif;
 							'<b class="qty" style="'+ style.common.cellS +'">'+
 							'<input type="text" name="qty" onkeyup="set_amount(this)" value="0" style="'+ style.common.cellXS +'" />' +
 							'</b>'+
+							'<b class="um" style="'+ style.common.cellS +'">'+products[i].um+'</b>'+
 							'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].price+'</b>'+
 							'<b class="amount" style="'+ style.common.cellM + style.common.alignRight +'">0.00</b>'+
 							'<b class="remove_product" style="'+ style.common.cellXS + style.common.alignCenter +'">'+

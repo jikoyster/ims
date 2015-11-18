@@ -1,0 +1,57 @@
+{embed="site/header" curpage="payable"}
+<script src="{path='payable/data-del'}"></script>
+<script>
+  var delbuttonOff = "fa-times-circle";
+  var delbuttonOn  = "fa-times-circle-o";
+</script>
+
+<section class="cellpad" ng-app="pay">
+
+{if logged_in}
+<a class="btn btn-new" href="{path='payable/create'}">Add New Payable</a>
+{/if}
+
+
+<table border='1' class="tbl_display">
+  <thead>
+    <tr>
+      <th class="alignLeft">Referrence#</th>
+      <th class="alignRight">Supplier</th>
+      <th class="alignCenter">Date Filed</th>
+      <th class="alignRight">Amount Payable</th>
+      <th class="widthSmall"></th>
+    </tr>
+  </thead>
+  <tbody ng-controller="payController as ctrl">
+    {exp:channel:entries channel="accounts_payable"}
+    <tr id="row-{entry_id}">
+      <td class="alignLeft"><a href="{path='payable/update/{entry_id}'}">{title}</a></td>
+      {purchase_order require_entry="yes"}
+          {if purchase_order:no_results } <td></td> {/if}
+  	      <td class="alignRight">{purchase_order:po_supplier:title}</td>
+      {/purchase_order}
+      <td class="alignCenter">{entry_date format="%M. %d, %Y"}</td>
+      <td class="alignRight">{amount_payable}</td>
+      <td class="alignCenter widthSmall">
+        <a href="#"> <i class="fa fa-times-circle remove-icon"
+                        ng-mouseover="ctrl.buttonOn('row-{entry_id}')"
+                        ng-mouseout="ctrl.buttonOff('row-{entry_id}')"
+                        ng-click="ctrl.removeData('{entry_id}')"
+                      ></i></a>
+      </td>
+    </tr>
+    {/exp:channel:entries}
+  </tbody>
+  <tfoot class="note">
+    <tr>
+      <td colspan='7'>
+        Data deleted here are only set to trash (status = Closed).<br>
+        Go to admin panel to recover/delete permanently those items.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+</section>
+
+{embed="site/footer"}

@@ -27,8 +27,9 @@
 
 	<div>
 		<label for="Name">Invoice Number</label>
-		<input type="text" name="title" ng-model="urlTitle">
-		<input type="hidden" name="url_title" value="{{'inv_'+urlTitle}}">
+		<input type="text" name="dummy_title" ng-model="inv_num">
+		<input type="hidden" name="title" value="{{inv_num}}">
+		<input type="hidden" name="url_title" value="{{'inv_'+inv_num}}">
 	</div>
 
 	<div class="customer">
@@ -78,7 +79,8 @@
 </div>
 <!-- end of 2nd block -->
 
-<hr>
+
+<hr class="clear">
 
 <div class="cellpad">
 	

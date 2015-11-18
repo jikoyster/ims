@@ -1,0 +1,143 @@
+{embed ='site/header' curpage="reports"}
+
+<link rel="stylesheet" href="{path='reports/style'}">
+
+<section id="statement_of_account">
+	<div class="floatRight date"><?php echo date('F d, Y'); ?></div>
+	
+{exp:channel:entries channel="customer" entry_id="{segment_3}"}
+	<h1 class="pagehead">Statement Of Account for {title}</h1>
+
+	<div class="customer_info">
+		<div class="name">{title}</div>
+		<div class="address"><?php echo nl2br("{customer_address}"); ?></div>
+		<div class="contact">{customer_contact}</div>
+	</div>
+{/exp:channel:entries}
+
+<div class="section">
+	<h3 class="head">Unpaid Balance</h3>
+	<table border="1" class="tbl_display">
+		<thead>
+			<th class="alignLeft widthMedium">DATE</th>
+			<th class="alignLeft">INVOICE</th>
+			<th class="alignRight">AMOUNT</th>
+		</thead>
+		<tbody>
+			<?php $total_previous_balance = 0; ?>
+			{exp:channel:entries channel="accounts_receivable" dynamic="no" orderby="date" sort="asc"}
+			{invoice}
+			{if {invoice:customer:entry_id} == {segment_3}}
+
+			<?php if( {due_date format='%Y'} < date("Y") ): ?>
+			<tr>
+				<td class="alignLeft widthMedium">{due_date format='%m/%d/%Y'}</td>
+				<td class="alignLeft">{invoice:title}</td>
+				<td class="alignRight">
+					{amount_receivable}
+					<?php $total_previous_balance += floatval( str_replace(",", "", "{amount_receivable}") ); ?>
+				</td>
+			</tr>
+			<?php endif; ?>
+
+			{/if}
+			{/invoice}
+			{/exp:channel:entries}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="2" class="alignRight">Total Previous Balance</td>
+				<td class="alignRight"><?php echo number_format($total_previous_balance, 2, ".", ","); ?></td>
+			</tr>
+		</tfoot>
+	</table>
+	<br>
+
+	<h3 class="head">Detailed Summary</h3>
+	<table border="1" class="tbl_display">
+		<thead>
+			<th class="widthMedium alignLeft">DATE</th>
+			<th class="widthLarge alignLeft">INVOICE</th>
+			<th class="alignRight">AMOUNT</th>
+			<th class="alignRight">PAID</th>
+		</thead>
+		<tbody>
+			<?php $invoice_total_amounts = 0; ?>
+			{exp:channel:entries channel="invoice" dynamic="no" orderby="date" sort="asc"}
+				{customer} 
+				<!-- getting invoices by this customer only -->
+				{if customer:entry_id == segment_3}
+				<tr>
+					<td class="widthMedium alignLeft">{entry_date format="%m/%d/%Y"}</td>
+					<td class="widthLarge alignLeft">{title}</td>
+					<td class="alignRight">{invoice_total_amount}</td>
+					<?php $invoice_total_amounts += floatval(str_replace(",", "", '{invoice_total_amount}')); ?>
+					<td class="alignRight">
+						&nbsp;
+					</td>
+				</tr>
+				{/if}
+				{/customer}
+			{/exp:channel:entries}
+
+			<?php $total_partial_payment = 0; ?>
+			{exp:channel:entries channel="accounts_receivable" dynamic="no" orderby="date" sort="asc"}
+				{invoice}
+				{if {invoice:customer:entry_id} == {segment_3}}
+
+				<?php if( {due_date format='%Y'} == date("Y") ): ?>
+				<tr>
+					<td class="widthMedium alignLeft">{invoice:entry_date format="%m/%d/%Y"}</td>
+					<td class="widthLarge alignLeft">{invoice:title}</td>
+					<td class="alignRight">&nbsp;</td>
+					<td class="alignRight">
+						<?php echo number_format( floatval( str_replace(",", "", "{partial_payment}") ) , 2, ".", ","); ?>
+						<?php $total_partial_payment += floatval(str_replace(",", "", '{partial_payment}')); ?>
+					</td>
+				</tr>
+				<?php endif; ?>
+
+				{/if}
+				{/invoice}
+			{/exp:channel:entries}
+		
+			<tr class="noborder">
+				<td colspan="2" class="alignRight">Amount Total:</td>
+				<td class="alignRight"><?php echo number_format($invoice_total_amounts, 2, ".", ","); ?></td>
+				<td></td>
+			</tr>
+			<tr class="noborder">
+				<td colspan="2" class="alignRight">Paid Total:</td>
+				<td></td>
+				<td class="alignRight"><?php echo "- ".number_format($total_partial_payment, 2, ".", ","); ?></td>
+			</tr>
+			<tr class="noborder">
+				<td colspan="2" class="alignRight">Account Balance:</td>
+				<td colspan="2" class="alignRight">
+					<?php $balance = $invoice_total_amounts - $total_partial_payment; 
+						echo number_format($balance, 2, ".", ",");
+					?>
+				</td>
+			</tr>
+		</tbody>
+		<tr>
+			<td colspan="4">&nbsp;</td>
+		</tr>
+		<tr id="TotalAccountBalance">
+			<td colspan="2" class="alignRight">Total Account Balance</td>
+			<td colspan="2" class="alignRight"><?php echo number_format($total_previous_balance + $balance, 2, ".", ","); ?></td>
+		</tr>
+	</table>
+
+	<table>
+
+	</table>
+	
+		
+	
+</div>
+
+
+</section>
+
+{embed ='site/footer'}

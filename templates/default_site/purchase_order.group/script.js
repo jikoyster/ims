@@ -24,6 +24,7 @@
 			po_list = 	'<div class="headlist" style="'+ style.head.borderBottom + style.head.fontWeight +'">' +
 							'<b style="'+ style.common.cellL +'">Product Name</b>' +
 							'<b style="'+ style.common.cellS +'">Qty</b>' +
+							'<b style="'+ style.common.cellS +'">UM</b>' +
 							'<b style="'+ style.common.cellM + style.common.alignRight +'">Price</b>' +
 							'<b style="'+ style.common.cellM + style.common.alignRight +'">Amount</b>' +
 							'<b style="'+ style.common.cellXS + style.common.alignCenter +'">&nbsp;</b>' +
@@ -88,11 +89,31 @@
 		total_amount = parseFloat(subtotal) + parseFloat(tax_amount);
 			total_amount_str = addCommas(total_amount.toFixed(2));
 		set_total_amount(total_amount_str);
+
+		set_unpaid_balance();
 	};
 
 	set_total_amount = function(total_amount){
 		jQuery('input[name=po_total_amount]').val(total_amount);
+
+		set_unpaid_balance();
 	};
+
+	get_total_amount = function(){
+		return jQuery('input[name=po_total_amount]').val();
+	}
+
+	set_unpaid_balance = function(){
+		total_amount = parseFloat( get_total_amount().replace(/\,/g,'') );
+		partial_payment = parseFloat( jQuery('input[name=partial_payment]').val() );
+		if( partial_payment!=0 && partial_payment<=total_amount ){
+			unpaid_balance = total_amount - partial_payment;
+		}else{
+			unpaid_balance = 0;
+		}
+
+		jQuery('input[name=unpaid_balance]').val( addCommas(unpaid_balance.toFixed(2)) );
+	}
 
 	togglePopup = function(){
 		jQuery(".popup-wrapper").toggleClass('show');
@@ -114,40 +135,49 @@
 
 	remove_product = function(thisRow){
 		jQuery(thisRow).fadeOut('fast', function(){ jQuery(this).remove(); });
+
+		index = $(thisRow).index();
+		amounts.splice(index, 1);
+
+		set_subtotal();
 	};
 
 	addToPO_field = function(){
 		$ = jQuery.noConflict();
-		products = po_product_list;
-		po_list = '';
-		for(var i=0; i<products.length; i++){
-			entry_id	= products[i].entry_id;
-			pname 		= products[i].product_name;
-			qty 		= products[i].qty;
-			price 		= products[i].price;
-			amount 		= products[i].amount;
 
-			po_list += 	'<div class="listrow" id="row-'+products[i].entry_id+'"' +
-						'style="'+ style.body.borderBottom+'">'+
-							'<b class="entry_id" style="display: none;">'+products[i].entry_id+'</b>'+
-							'<b class="product_name" style="'+ style.common.cellL +'">'+products[i].product_name+'</b>'+
-							'<b class="qty" style="'+ style.common.cellS +'">'+
-							'<input type="text" name="qty" onkeyup="set_amount(this)" style="'+ style.common.cellXS +'" />' +
-							'</b>'+
-							'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].price+'</b>'+
-							'<b class="amount" style="'+ style.common.cellM + style.common.alignRight +'">'+products[i].amount+'</b>'+
-							'<b class="remove_product" style="'+ style.common.cellXS + style.common.alignCenter +'">'+
-								'<a href="#"><i class="fa fa-times-circle"' +
-									'onmouseover="shiftClasses(this)" onmouseout="shiftClasses(this)"'+
-									'onclick="remove_product(\'#row-'+products[i].entry_id+'\')"' +
-									'></i>' +
-								'</a>' +
-							'</b>' +
-						'</div>';
-			
-			
-			$(".WysiHat-editor .bodylist").append(po_list);
-		}//for
+		// products = po_product_list;
+		po_list = '';
+		
+		entry_id		= product['entry_id'];
+		product_name	= product['product_name'];
+		qty 			= product['qty'];
+		um 				= product['um'];
+		price 			= product['price'];
+		amount 			= product['amount'];
+		
+
+		po_list += 	'<div class="listrow" id="row-'+entry_id+'"' +
+					'style="'+ style.body.borderBottom+'">'+
+						'<b class="entry_id" style="display: none;">'+entry_id+'</b>'+
+						'<b class="product_name" style="'+ style.common.cellL +'">'+product_name+'</b>'+
+						'<b class="qty" style="'+ style.common.cellS +'">'+
+						'<input type="text" name="qty" onkeyup="set_amount(this)" style="'+ style.common.cellXS +'" />' +
+						'</b>'+
+						'<b class="um" style="'+ style.common.cellS + style.common.alignLeft +'">'+um+'</b>'+
+						'<b class="price" style="'+ style.common.cellM + style.common.alignRight +'">'+price+'</b>'+
+						'<b class="amount" style="'+ style.common.cellM + style.common.alignRight +'">'+amount+'</b>'+
+						'<b class="remove_product" style="'+ style.common.cellXS + style.common.alignCenter +'">'+
+							'<a href="#"><i class="fa fa-times-circle"' +
+								'onmouseover="shiftClasses(this)" onmouseout="shiftClasses(this)"'+
+								'onclick="remove_product(\'#row-'+entry_id+'\')"' +
+								'></i>' +
+							'</a>' +
+						'</b>' +
+					'</div>';
+		
+		
+		$(".WysiHat-editor .bodylist").append(po_list);
+		
 	};
 		
 	

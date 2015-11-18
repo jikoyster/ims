@@ -1,0 +1,88 @@
+{embed ='site/header' curpage="reports"}
+
+<link rel="stylesheet" href="{path='reports/style'}">
+
+<section id="Accounts_Aging">
+	<h1 class="pagetitle">Accounts Aging by
+		{exp:channel:entries channel="customer" entry_id="{segment_3}"}
+			"{title}"
+		{/exp:channel:entries}
+	</h1>
+<?php if("{segment_3}" == ""){ ?>
+
+
+		<table border="1" class="tbl_display">
+			<thead>
+				<th class="alignLeft">Customer</th>
+				<th class="alignLeft">Invoice#</th>
+				<th class="alignLeft">Due Date</th>
+				<th class="alignRight">Amount Receivable</th>
+			</thead>
+			<tbody>
+				<?php $total_amount_receivable = 0; ?>
+				{exp:channel:entries channel="accounts_receivable" dynamic="no" orderby="date" sort="asc"}
+				<?php if( {due_date format='%m/%d/%Y'} < date("m/d/Y") ): ?>
+					<tr>
+						{invoice}
+						<td class="alignLeft">
+							<a href="{path='reports/accounts_aging/{invoice:customer:entry_id}'}">{invoice:customer:title}</a>
+						</td>
+						<td class="alignLeft">{invoice:title}</td>
+						{/invoice}
+						<td class="alignLeft">{due_date format="%F %d, %Y"}</td>
+						<td class="alignRight">
+							{amount_receivable}
+							<?php $total_amount_receivable += floatval( str_replace(",", "", "{amount_receivable}") ); ?>
+						</td>
+					</tr>
+				<?php endif; ?>
+				{/exp:channel:entries}
+				<tr class="total">
+					<td class="alignRight" colspan="3">Total Amount Receivable</td>
+					<td class="alignRight"><?php echo number_format($total_amount_receivable, 2, ".", ","); ?></td>
+				</tr>
+			</tbody>	
+		</table>
+
+
+<?php }else{ ?>
+
+		<table border="1" class="tbl_display">
+			<thead>
+				<th class="alignLeft">Invoices</th>
+				<th class="alignLeft">Due Date</th>
+				<th class="alignRight">Amount Receivable</th>
+			</thead>
+			<tbody>
+				<?php $total_amount_receivable = 0;?>
+				{exp:channel:entries channel="accounts_receivable" dynamic="no" orderby="date" sort="asc"}
+				
+
+				{invoice}
+				<?php 
+				if( {due_date format='%Y'} < date("Y") && "{invoice:customer:entry_id}" == "{segment_3}"): 
+					$customer_name = "{invoice:customer:title}";
+					$total_amount_receivable += floatval( str_replace(",", "", "{amount_receivable}") ); 
+				?>
+				<tr>
+					<td class="alignLeft">{invoice:title}</td>
+					<td class="alignLeft">{due_date format="%F %d, %Y"}</td>
+					<td class="alignRight">{amount_receivable}</td>
+				</tr>
+				<?php endif; ?>
+				{/invoice}
+				{/exp:channel:entries}
+				
+
+				<tr class="total">
+					<td class="alignRight" colspan="2">Total Amount Receivable</td>
+					<td class="alignRight"><?php echo number_format($total_amount_receivable, 2, ".", ","); ?></td>
+				</tr>
+			</tbody>	
+		</table>
+
+
+<?php } ?>	
+</section>
+
+{embed ='site/footer'}

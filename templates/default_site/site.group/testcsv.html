@@ -1,0 +1,15 @@
+<?php
+    header("Content-type: application/vnd.ms-excel");
+	header("Content-Disposition: attachment; filename=myFile.xls");
+	header("Pragma: no-cache");
+	header("Expires: 0");
+?>
+<table>
+<tbody>
+{exp:channel:entries channel='invoice'}
+    <tr>
+            <td>{title}</td>
+            <td>{entry_date format="%F %d, %Y"}</td>
+    </tr>
+{/exp:channel:entries}
+</tbody>
