@@ -281,48 +281,52 @@ header{
 			opacity: .7;
 		}
 
-		.tab--store{
-			background: #209009;
-		}
 		.tab--warehouse{
-			background: #333333;
+			background: $navColor1;
 		}
-		.tab--po{
-			background: #de0d2e;
+		.tab--store{
+			background: $navColor1-1;
 		}
 		.tab--stocks{
-			background: #003300;
+			background: $navColor1-1;
 		}
-		.tab--encoding{
-			background: #690011;
+		.tab--po{
+			background: $navColor2;
 		}
-		.tab--price_code{
-			background: #00473B;
-		}
-		.tab--collection{
-			background: #492100;
-		}
-		.tab--salesman{
-			background: #040C32;
-		}
-		.tab--supplier{
-			background: #09154c;
-		}
-		.tab--returns{
-			background: #ac0d2e;
-		}
-		.tab--reports{
-			background: #209009;
-		}
-		.tab--printable{
-			background: #690066;
-		}			
-		.tab--customer{
-			background: #7356CF;
+		.tab--payable{
+			background: $navColor2-1;
 		}
 		.tab--receivable{
-			background: #02165D;
+			background: $navColor2-1;
 		}
+		.tab--price_code{
+			background: $navColor3;
+		}
+		.tab--encoding{
+			background: $navColor2;
+		}
+		.tab--salesman{
+			background: $navColor3-2;
+		}
+		.tab--customer{
+			background: $navColor4;
+		}
+		.tab--supplier{
+			background: $navColor3;
+		}
+		.tab--return-supplier{
+			background: $navColor3-3;
+		}
+		.tab--return-customer{
+			background: $navColor4-3;
+		}
+		.tab--reports{
+			background: $navColor1-4;
+		}
+		.tab--printable{
+			background: $navColor1-1;
+		}			
+		
 
 		.lhmid{
 			line-height: 40px;

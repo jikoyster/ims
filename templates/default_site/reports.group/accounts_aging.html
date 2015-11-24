@@ -20,8 +20,10 @@
 			</thead>
 			<tbody>
 				<?php $total_amount_receivable = 0; ?>
-				{exp:channel:entries channel="accounts_receivable" dynamic="no" orderby="date" sort="asc"}
-				<?php if( {due_date format='%m/%d/%Y'} < date("m/d/Y") ): ?>
+				{exp:channel:entries channel="accounts_receivable" dynamic="no" 
+						orderby="date" sort="asc" limit="20" paginate="bottom"}
+				<?php if( {due_date format='%m/%d/%Y'} < date("m/d/Y") &&
+						"{received_date format='%m/%d/%Y'}" == ""	): ?>
 					<tr>
 						{invoice}
 						<td class="alignLeft">
@@ -36,6 +38,11 @@
 						</td>
 					</tr>
 				<?php endif; ?>
+				{paginate}
+			        <tr>
+			          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+			        </tr>
+			    {/paginate}
 				{/exp:channel:entries}
 				<tr class="total">
 					<td class="alignRight" colspan="3">Total Amount Receivable</td>

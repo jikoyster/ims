@@ -24,7 +24,7 @@
     </tr>
   </thead>
   <tbody ng-controller="invoiceController as ctrl">
-    {exp:channel:entries channel="invoice" orderby="date" sort="desc"}
+    {exp:channel:entries channel="invoice" orderby="date" sort="desc" limit="20" paginate="bottom"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='invoice/update/{entry_id}'}">{title}</a></td>
       <td class="alignLeft">{invoice_type}</td>
@@ -48,6 +48,11 @@
         ><i class="fa fa-money partial-icon"></i></a>
       </td>
     </tr>
+    {paginate}
+        <tr>
+          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+        </tr>
+    {/paginate}
     {/exp:channel:entries}
   </tbody>
   <tfoot class="note">

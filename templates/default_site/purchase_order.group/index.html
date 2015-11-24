@@ -32,7 +32,7 @@
     </tr>
   </thead>
   <tbody ng-controller="poController as ctrl">
-    {exp:channel:entries channel="purchase_order"}
+    {exp:channel:entries channel="purchase_order" orderby="date" sort="desc" limit="20" paginate="bottom"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='purchase_order/update/{entry_id}'}">{title}</a></td>
       <td class="alignRight">{po_total_amount}</td>
@@ -51,6 +51,11 @@
         ><i class="fa fa-print print-icon"></i></a>
       </td>
     </tr>
+    {paginate}
+        <tr>
+          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+        </tr>
+    {/paginate}
     {/exp:channel:entries}
   </tbody>
   <tfoot class="note">

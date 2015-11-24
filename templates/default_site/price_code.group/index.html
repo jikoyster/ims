@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody ng-controller="price_codeController as pc">
-    {exp:channel:entries channel="price_code"}
+    {exp:channel:entries channel="price_code" orderby="title" sort="asc" limit="20" paginate="bottom"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='price_code/update/{entry_id}'}">{title}</a></td>
       <td class="alignRight">{if actual_price == ''} 0 {if:else} {actual_price} {/if}</td>
@@ -32,6 +32,11 @@
                       ></i></a>
       </td>
     </tr>
+    {paginate}
+        <tr>
+          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+        </tr>
+    {/paginate}
     {/exp:channel:entries}
   </tbody>
   <tfoot class="note">

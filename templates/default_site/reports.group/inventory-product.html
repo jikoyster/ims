@@ -1,40 +1,52 @@
 {embed ='site/header' curpage="reports"}
 
-<!-- get beginning inventory of this product {segment_3} -->
-{exp:channel:entries channel="product" category="{exp:cat2:id category_url_title='C1'}}
-	<div class="cellpad">
-		<h3><label for="Name">Product Name: </label> {product_name}</h3>
-
-		<div>
-			<label for="code">Product Code: </label>
-			{product_code}
-		</div>
-
-		<div>
-			<label for="um">UM (unit of measure): </label>
-			{um}
-		</div>
-
-		<div>
-			<label for="stock">Stock in hand: </label>
-			{in_stock}
-		</div>
+<section ng-app="">
+	
+{exp:channel:form channel="inventory"}
+	<div>
+		<label for="title">Title</label>
+		<input type="text" name="title" ng-model='title'>
+		<input type="hidden" name="url_title" value="{{'inventory-'+title}}">
 	</div>
-{/exp:channel:entries}
-
-<!-- get purchases of this product with the date of purchase -->
-<!-- goods available for sale 
-	all (wsale/retail): beg.inv. + purchases = total goods available for sale
--->
-
-<!-- get the current in_stock -->
 
 
+	<div id="Inventory_Report">{field:inventory_report}</div>
 
-<!-- wholesale purchases of this item & total
-		total qty * wholesale_price 
--->
-<!-- retail purchases of this item & total -->
+	<br>
+	<input type="submit" value="Save Inventory" class="btn btn-danger">
+	<a href="#ViewPrintable" 
+	onclick="goPrintable()"
+	class="btn btn-warning preventDefault">View Printable Version</a>
+{/exp:channel:form}
+
+<script>
+	var report = '';
+
+	$.ajax({
+		url: "{path='reports/inventory-plaintext/{segment_3}'}"
+	})
+	.done(function(result){
+		// alert(result);
+		report = result;
+		$('#Inventory_Report .WysiHat-editor').html( result );
+	});
+
+	goPrintable = function(){
+		var printable = window.open("{path='reports/inventory-printable'}", "_blank", "fullscreen=yes");
+		var html = $('#Inventory_Report .WysiHat-editor').html();
+
+		printable.document.write(html);
+
+		return false;
+	};
+
+	$('.preventDefault').click(function(event){
+		event.preventDefault();
+	});
+</script>
+
+</section>
+
 
 
 {embed ='site/footer'}

@@ -4,6 +4,10 @@
  * ExpressionEngine Default Theme
  */
 
+ #ifr1{
+ 	visibility: 	hidden;
+ }
+
 /* For modern browsers */
 .cf:before,
 .cf:after {
@@ -1548,6 +1552,7 @@ h2 a:hover {
 
 /** Important Messages **/
 #ee_important_message {
+		display: 		none;
 	overflow:			hidden;
 	margin:				auto 3.3% 3.3% 3.3%;
 }

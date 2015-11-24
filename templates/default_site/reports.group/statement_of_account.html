@@ -12,13 +12,18 @@
 	    </tr>
 		</thead>
 		<tbody>
-		{exp:channel:entries channel="customer" orderby="date" sort="desc"}
+		{exp:channel:entries channel="customer" orderby="date" sort="desc" limit="20" paginate="bottom"}
 			<tr>
 				<td class="alignLeft">
 					<a href="{path='reports/statement_of_account_customer/{entry_id}'}">{title}</a>
 				</td>
 				<td class="alignLeft">{entry_date format="%F %d, %Y"}</td>
 			</tr>
+			{paginate}
+		        <tr>
+		          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+		        </tr>
+		    {/paginate}
 		{/exp:channel:entries}
 		</tbody>	
 	</table>

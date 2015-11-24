@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody ng-controller="rcController as ctrl">
-    {exp:channel:entries channel="returns_from_customer"}
+    {exp:channel:entries channel="returns_from_customer" orderby="date" sort="desc" limit="20" paginate="bottom"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='returns_from_customer/update/{entry_id}'}">{title}</a></td>
       {ret_invoice}
@@ -38,6 +38,11 @@
                       ></i></a>
       </td>
     </tr>
+    {paginate}
+        <tr>
+          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+        </tr>
+    {/paginate}
     {/exp:channel:entries}
   </tbody>
   <tfoot class="note">

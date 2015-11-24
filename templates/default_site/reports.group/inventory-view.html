@@ -1,0 +1,29 @@
+{embed ='site/header' curpage="reports:inventory"}
+<div class="floatRight">
+	<a href="#"
+		class="btn btn-warning preventDefault"
+		onclick="goPrintable()">View Printable Version</a>
+</div>
+	{exp:channel:entries channel="inventory" entry_id="{segment_3}"}
+		<div class="pagetitle">{title}</div>
+
+		<div id="Inventory_Report">
+			{inventory_report}
+		</div>
+	{/exp:channel:entries}
+
+<script>
+	goPrintable = function(){
+		var printable = window.open("", "_blank", "fullscreen=yes");
+		var html = $('#Inventory_Report').html();
+
+		printable.document.write(html);
+
+		return false;
+	};
+
+	$('.preventDefault').click(function(event){
+		event.preventDefault();
+	});
+</script>
+{embed ='site/footer'}

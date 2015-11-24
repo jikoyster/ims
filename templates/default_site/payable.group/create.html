@@ -1,5 +1,9 @@
 {embed="site/header" curpage="payable"}
-
+<style>
+	.date_paid select{
+		display: none;
+	}
+</style>
 {exp:channel:form channel="accounts_payable" return="{segment_1}"}
 	<div>
 		<label for="title">Title</label>
@@ -14,6 +18,16 @@
 	<div>
 		<label for="{label:amount_payable}">{label:amount_payable}</label>
 		{field:amount_payable}
+	</div>
+
+	<div class="date_paid">
+		<label for="{label:date_paid}">{label:date_paid}</label>
+		{field:date_paid}
+	</div>
+
+	<div>
+		<label for="{label:payable_status}">{label:payable_status}</label>
+		{field:payable_status}
 	</div>
 
 	<input type="submit" value="Submit" class="btn btn-danger">	

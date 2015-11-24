@@ -1,12 +1,20 @@
 {embed ='site/header' curpage="reports"}
 
-<ul>
-  <li><a href="{path='reports/transactions'}">Transactions</a></li>
-  <li><a href="{path='reports/sales'}">Sales</a></li>
-  <li><a href="{path='reports/statement_of_account'}">Statement of Account</a></li>
-  <li><a href="{path='reports/accounts_aging'}">Aging of Account</a></li>
-  <li><a href="{path='reports/inventory'}">Inventory</a></li>
-  <li><a href="{path='payable'}">Accounts Payable</a></li>
-</ul>
+<link rel="stylesheet" href="{path='reports/style'}" />
 
+<h1 class="pagetitle">Reports</h1>
+
+<div id="Reports_Nav">
+	<table class="tbl_display" border="1">
+		
+		 <tr> <td class="alignLeft"><a href="{path='reports/transactions'}">Transactions</a></tr></td>
+		 <tr> <td class="alignLeft"><a href="{path='reports/sales'}">Sales</a></tr></td>
+		 <tr> <td class="alignLeft"><a href="{path='reports/statement_of_account'}">Statement of Account</a></tr></td>
+		 <tr> <td class="alignLeft"><a href="{path='reports/accounts_aging'}">Aging of Account</a></tr></td>
+		 <tr> <td class="alignLeft"><a href="{path='reports/inventory'}">Inventory</a></tr></td>
+		 <tr> <td class="alignLeft"><a href="{path='payable'}">Accounts Payable</a></tr></td>
+		
+	</table>
+	
+</div>
 {embed ='site/footer'}

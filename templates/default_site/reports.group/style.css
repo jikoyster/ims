@@ -60,9 +60,11 @@
   width: 50%;
   margin: 0 auto;
   padding-top: 20px; }
-  #Inventory_Report table {
-    width: 100% !important; }
-  #Inventory_Report input[type=submit] {
-    display: none; }
+
+#Reports_Nav table tr td {
+  font-size: 16px; }
+  #Reports_Nav table tr td a {
+    display: block;
+    width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

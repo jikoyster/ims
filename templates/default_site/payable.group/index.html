@@ -19,11 +19,13 @@
       <th class="alignRight">Supplier</th>
       <th class="alignCenter">Date Filed</th>
       <th class="alignRight">Amount Payable</th>
+      <th class="alignCenter">Date Paid</th>
+      <th class="alignCenter">Payable Status</th>
       <th class="widthSmall"></th>
     </tr>
   </thead>
   <tbody ng-controller="payController as ctrl">
-    {exp:channel:entries channel="accounts_payable"}
+    {exp:channel:entries channel="accounts_payable" orderby="date" sort="desc" limit="20" paginate="bottom"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='payable/update/{entry_id}'}">{title}</a></td>
       {purchase_order require_entry="yes"}
@@ -32,6 +34,8 @@
       {/purchase_order}
       <td class="alignCenter">{entry_date format="%M. %d, %Y"}</td>
       <td class="alignRight">{amount_payable}</td>
+      <td class="alignCenter">{date_paid format="%M. %d, %Y"}</td>
+      <td class="alignCenter">{payable_status}</td>
       <td class="alignCenter widthSmall">
         <a href="#"> <i class="fa fa-times-circle remove-icon"
                         ng-mouseover="ctrl.buttonOn('row-{entry_id}')"
@@ -40,6 +44,11 @@
                       ></i></a>
       </td>
     </tr>
+    {paginate}
+        <tr>
+          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+        </tr>
+    {/paginate}
     {/exp:channel:entries}
   </tbody>
   <tfoot class="note">

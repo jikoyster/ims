@@ -105,12 +105,22 @@ $block_FZ: 1.3em;
 	margin: 0 auto;
 	padding-top: 20px;
 
-	table{
-		width: 100% !important;
-	}
 
-	input[type=submit]{
-		display: none;
+}
+
+#Reports_Nav{
+	table{
+
+		tr{
+			td{
+				font-size: 16px;
+
+				a{
+					display: block;
+					width: 100%;
+				}
+			}
+		}
 	}
 }
 // \#Inventory

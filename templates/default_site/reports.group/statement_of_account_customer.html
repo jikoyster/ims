@@ -52,8 +52,8 @@
 		</tfoot>
 	</table>
 	<br>
-
-	<h3 class="head">Detailed Summary</h3>
+	<?php $year = date('Y'); ?>
+	<h3 class="head">Detailed Summary <?php echo "(". $year .")"; ?></h3>
 	<table border="1" class="tbl_display">
 		<thead>
 			<th class="widthMedium alignLeft">DATE</th>
@@ -63,7 +63,7 @@
 		</thead>
 		<tbody>
 			<?php $invoice_total_amounts = 0; ?>
-			{exp:channel:entries channel="invoice" dynamic="no" orderby="date" sort="asc"}
+			{exp:channel:entries channel="invoice" dynamic="no" year="<?php echo $year; ?>" orderby="date" sort="asc"}
 				{customer} 
 				<!-- getting invoices by this customer only -->
 				{if customer:entry_id == segment_3}

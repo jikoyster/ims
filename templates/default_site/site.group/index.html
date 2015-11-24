@@ -4,6 +4,7 @@
 	<div>
 		<div class="col-wrapper">
 			
+			{if member_group != '7'}
 			<div class="col col1 col-3">
 				<h3 class="col-title">Recent Purchase Orders &raquo;</h3>
 				{exp:channel:entries channel="purchase_order" limit="10" start_on="January {current_time format='%Y'}"}
@@ -16,6 +17,7 @@
 				{/exp:channel:entries}
 				<div class="alignRight"><a href="{path='purchase_order'}">view all &raquo;</a></div>
 			</div>
+			{/if}
 
 			<div class="col col2 col-3">
 				<h3 class="col-title">Recent Invoices &raquo;</h3>
@@ -37,12 +39,6 @@
 			
 		</div>
 	</div>
-
-	<script>
-		function test(){
-			window.open("{path='site/test'}", "", "top=100, height=600, width=800");
-		}
-	</script>
 
 	<div class="clear"></div>
 </section>

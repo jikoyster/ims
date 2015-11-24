@@ -61,6 +61,11 @@
             
             
             <nav>
+                    <div class="big">
+                        <a href="{site_url}" class="tab--home">
+                            <img src="{path='custom/img/images/footer-logo.png'}" alt="Inventory Management System(IMS)">
+                        </a>
+                    </div>
                 {if member_group != '7'}
                     <div class="big">
                         <a class="tab--warehouse" href="{path='warehouse/index'}">
@@ -82,7 +87,7 @@
                                 <span class="word">Purchase<br/> Order</span>
                             </a>
                         </div>
-                        <div class="tab--receivable">
+                        <div class="tab--payable">
                             <a href="{path='payable'}">
                                 <span class="icon"><i class="fa fa-money"></i></span>
                                 <span class="word">Accounts<br/> Payable</span>
@@ -141,17 +146,19 @@
                             </a>
                         </div>
                     </div>
-                    <div class="big">
-                        <a class="tab--supplier" href="{path='return_to_supplier'}">
-                            <span class="icon"><i class="fa fa-reply-all"></i></span>
-                            <span class="word">Return to <br> Supplier</span>
-                        </a>
-                    </div>
-                    <div class="big">
-                        <a class="tab--customer" href="{path='returns_from_customer'}">
-                            <span class="icon"><i class="fa fa-repeat"></i></span>
-                            <span class="word">Returns from <br> Customer</span>
-                        </a>
+                    <div class="small">
+                        <div class="tab--return-customer">
+                            <a href="{path='returns_from_customer'}">
+                                <span class="icon"><i class="fa fa-repeat"></i></span>
+                                <span class="word">Returns from <br> Customer</span>
+                            </a>
+                        </div>
+                        <div class="tab--return-supplier">
+                            <a href="{path='return_to_supplier'}">
+                                <span class="icon"><i class="fa fa-reply-all"></i></span>
+                                <span class="word">Return to <br> Supplier</span>
+                            </a>
+                        </div>
                     </div>
                     <div class="small">
                         <div class="tab--reports lhmid">

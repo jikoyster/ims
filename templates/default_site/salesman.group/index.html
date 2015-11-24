@@ -16,16 +16,14 @@
     <tr>
       <th class="alignLeft">Full Name</th>
       <th class="alignLeft">Contact</th>
-      <th class="alignLeft">Commission Rate</th>
       <th class="widthSmall"></th>
     </tr>
   </thead>
   <tbody ng-controller="productController as sc">
-    {exp:channel:entries channel="salesman"}
+    {exp:channel:entries channel="salesman" orderby="title" sort="asc" limit="20" paginate="bottom"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='salesman/update/{entry_id}'}">{title}</a></td>
       <td class="alignLeft widthMedium">{salesman_contact}</td>
-      <td class="alignCenter widthMedium">{commission_rate}&#37;</td>
       <td class="alignCenter widthSmall ">
         <a href="#"> <i class="fa fa-times-circle remove-icon"
                         ng-mouseover="sc.buttonOn('row-{entry_id}')"
@@ -34,6 +32,11 @@
                       ></i></a>
       </td>
     </tr>
+    {paginate}
+        <tr>
+          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+        </tr>
+    {/paginate}
     {/exp:channel:entries}
   </tbody>
   <tfoot class="note">

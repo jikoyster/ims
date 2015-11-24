@@ -1,7 +1,7 @@
 {embed="site/header" curpage="receivable"}
 
 <style>
-	.due_date select{
+	.received_date select, .due_date select{
 		display: none;
 	}
 </style>
@@ -39,6 +39,11 @@
 	<div class="due_date">
 		<label for="{label:due_date}">{label:due_date}</label>
 		{field:due_date}
+	</div>
+
+	<div class="received_date">
+		<label for="{label:received_date}">{label:received_date}</label>
+		{field:received_date}
 	</div>
 
 	<input type="submit" value="Submit" class="btn btn-danger">	

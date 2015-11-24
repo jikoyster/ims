@@ -21,12 +21,13 @@
       <th class="alignCenter">Date Filed</th>
       <th class="alignCenter">Due Date</th>
       <th class="alignRight">Amount Receivable</th>
+      <th class="alignCenter">Received Date</th>
       <th class="widthSmall"></th>
     </tr>
   </thead>
   <tbody ng-controller="recController as ctrl">
 
-    {exp:channel:entries channel="accounts_receivable"}
+    {exp:channel:entries channel="accounts_receivable" orderby="received_date" sort="asc" limit="20" paginate="bottom"}
     <tr id="row-{entry_id}">
       <td class="alignLeft"><a href="{path='receivable/update/{entry_id}'}">{title}</a></td>
       
@@ -46,6 +47,7 @@
       <td class="alignCenter widthMedium">{entry_date format="%M. %d, %Y"}</td>
       <td class="alignCenter widthMedium">{due_date format="%M. %d, %Y"}</td>
       <td class="alignRight widthMedium">{amount_receivable}</td>
+      <td class="alignCenter widthMedium">{received_date format="%M. %d, %Y"}</td>
       <td class="alignCenter widthSmall">
         <a href="#"> <i class="fa fa-times-circle remove-icon"
                         ng-mouseover="ctrl.buttonOn('row-{entry_id}')"
@@ -54,12 +56,17 @@
                       ></i></a>
       </td>
     </tr>
+    {paginate}
+        <tr>
+          <td colspan="8" class="alignCenter">Page {current_page} of {total_pages} pages {pagination_links}</td>
+        </tr>
+    {/paginate}
     {/exp:channel:entries}
 
   </tbody>
   <tfoot class="note">
     <tr>
-      <td colspan='7'>
+      <td colspan='8'>
         Data deleted here are only set to trash (status = Closed).<br>
         Go to admin panel to recover/delete permanently those items.
       </td>
