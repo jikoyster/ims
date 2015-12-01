@@ -250,6 +250,13 @@ header {
 footer {
   width: 96%;
   margin: 10px auto; }
+  footer .footlink {
+    margin-top: 20px; }
+    footer .footlink li {
+      list-style: none;
+      float: left; }
+      footer .footlink li i {
+        font-size: 30px; }
   footer .footer--text {
     text-align: center; }
 

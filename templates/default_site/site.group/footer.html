@@ -3,6 +3,15 @@
 <!-- .container-inner -->
 
 <footer class="alignRight cellpad">
+	{if member_group == 1}
+	<ul class="footlink">
+		<li>
+			<a href="{site_url}/admin.php?/cp/homepage&S=<?php echo session_id() ?>" target="_blank" title="Control Panel" >
+				<i class="fa fa-cogs"></i>
+			</a>
+		</li>
+	</ul>
+	{/if}
     <a href="{path='site_index'}"><img src="{path='custom/img/images/footer-logo.png'}" alt=""></a>
 </footer>
 

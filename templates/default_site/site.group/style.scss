@@ -339,6 +339,19 @@ footer{
 	width: $headFootWidth;
 	margin: 10px auto;
 
+	.footlink{
+		margin-top: 20px;
+		
+		li{
+			list-style: none;
+			float: left;
+
+			i{
+				font-size: 30px;
+			}
+		}
+	}
+
 	.footer--text{
 		text-align: center;
 	}
