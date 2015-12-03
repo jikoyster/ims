@@ -4,25 +4,25 @@
 	</head>
 	<body style="font-family: Verdana; font-size: 1.1em;"
 		 onload="setTimeout(function(){ window.close(); }, 3000)"	>
-{exp:channel:entries channel="product" entry_id="{segment_3}"}
+{exp:channel:entries channel="stocks" entry_id="{segment_3}"}
 
 	<?php 
-	$new_stock = {in_stock} - {segment_4};
+	$new_stock = {store_in_stock} - {segment_4};
 
 	ee()->db->update(
 	    'channel_data',
 	    array(
-	        'field_id_9'   => $new_stock,
+	        'field_id_62'   => $new_stock,
 	        'field_id_42'   => 'Not Ordered'
 	    ),
 	    array(
 	        'entry_id'   => {segment_3}, 
-	        'channel_id' => 4 //product
+	        'channel_id' => 4 //channel stocks
 	    )
 	);
 	 ?>
 	<div>Product Name: {title}</div>
-	<div>In Stock: <?php echo $new_stock ?></div>
+	<div>Store stock on hand: <?php echo $new_stock; ?></div>
 	<div>Critical Level: {critical_level}</div>
 {/exp:channel:entries}
 

@@ -187,6 +187,9 @@ header {
     header nav .big .word, header nav .small .word {
       width: 50%;
       text-align: left; }
+  @media screen and (max-width: 1040px) {
+    header nav .big, header nav .small {
+      width: 19.5%; } }
   header nav .small i {
     padding-top: 5px;
     font-size: 30px !important; }
@@ -195,6 +198,9 @@ header {
     vertical-align: middle;
     font-weight: 900;
     font-size: 16px; }
+  @media screen and (max-width: 1300px) {
+    header nav .big a, header nav .small a {
+      font-size: 13px; } }
   header nav .big {
     text-align: center;
     height: 100px; }

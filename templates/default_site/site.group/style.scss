@@ -244,6 +244,11 @@ header{
 				text-align: left;
 			}
 		}
+		@media screen and (max-width: 1040px) {
+		    .big, .small{
+		        width: 19.5%;
+		    }
+		}
 		.small i{
 			padding-top: 5px;
 			font-size: 30px !important;
@@ -253,6 +258,11 @@ header{
 			vertical-align: middle;
 			font-weight: 900;
 			font-size: 16px;
+		}
+		@media screen and (max-width: 1300px) {
+		    .big a, .small a {
+		        font-size: 13px;
+		    }
 		}
 		.big{
 			text-align: center;
@@ -341,7 +351,7 @@ footer{
 
 	.footlink{
 		margin-top: 20px;
-		
+
 		li{
 			list-style: none;
 			float: left;

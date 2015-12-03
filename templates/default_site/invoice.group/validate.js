@@ -8,23 +8,24 @@ var validate_fields = function(){
 	fields = [];
 	/* start field validation */
 	elemi = 0;
-	invoiceNumElem = "input[name=title]";
+	invoiceNumElem = "input[name=dummy_title]";
 	if( $(invoiceNumElem).val() == ''){
 		make_error(invoiceNumElem);
 		fields[elemi++] = false;//not valid
 	}else{
-		rem_error("input[name=title]");
+		rem_error(invoiceNumElem);
 		fields[elemi++] = true;//valid
 	}
 
-	customerElem = ".customer select";
-	if( $(customerElem +" option:selected").val() == ''){
-		make_error(customerElem);
-		fields[elemi++] = false;//not valid
-	}else{
-		rem_error(customerElem);
-		fields[elemi++] = true;//valid
-	}
+	// customerElem = ".customer select";
+	// if( $(customerElem +" option:selected").val() == ''){
+	// 	make_error(customerElem);
+	// 	fields[elemi++] = false;//not valid
+	// }else{
+	// 	rem_error(customerElem);
+	// 	fields[elemi++] = true;//valid
+	// }
+	
 	/* end validation : return false if one of the fields is invalid/false else return true*/
 	if(jQuery.inArray(false, fields) == -1){
 		update_products();
